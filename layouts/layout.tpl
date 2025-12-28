@@ -5,12 +5,14 @@
         <link rel="dns-prefetch" href="{{ store_resource_hints }}" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://use.typekit.net" crossorigin />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{{ page_title }}</title>
         <meta name="description" content="{{ page_description }}" />
         <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest] | google_fonts_url('300, 400, 700') }}" />
+        <link rel="preload" as="style" href="https://use.typekit.net/hsg1eqr.css" />
         <link rel="preload" href="{{ 'css/style-colors.scss.tpl' | static_url }}" as="style" />
 
         {# Preload LCP home, category and product page elements #}
@@ -42,6 +44,10 @@
         {# Colors and fonts used from settings.txt and defined on theme customization #}
 
         {{ 'css/style-colors.scss.tpl' | static_url | static_inline }}
+
+        {# Adobe Typekit fonts #}
+
+        <link rel="stylesheet" href="https://use.typekit.net/hsg1eqr.css">
 
         {# Load async styling not mandatory for first meaningfull paint #}
 

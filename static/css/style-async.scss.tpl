@@ -65,7 +65,7 @@ style.css
 
 {# /* // Mixins */ #}
 
-{# This mixin adds browser prefixes to a CSS property #}
+{# /* This mixin adds browser prefixes to a CSS property */ #}
 
 @mixin prefix($property, $value, $prefixes: ()) {
   @each $prefix in $prefixes {

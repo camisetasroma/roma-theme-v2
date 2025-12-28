@@ -54,6 +54,7 @@ Tipo de letra
 		name = font_headings
 		description = Títulos de páginas y banners
 		values
+			"larken", sans-serif = Larken
 			"Almarai", sans-serif = Almarai
 			"Archivo", sans-serif = Archivo
 			"Archivo Black", sans-serif = Archivo Black
@@ -137,6 +138,7 @@ Tipo de letra
 		name = font_rest
 		description = Texto en el resto del sitio
 		values
+			"larken", sans-serif = Larken
 			"Almarai", sans-serif = Almarai
 			"Archivo", sans-serif = Archivo
 			"Archivo Black", sans-serif = Archivo Black
