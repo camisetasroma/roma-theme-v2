@@ -45,9 +45,10 @@
 
         {{ 'css/style-colors.scss.tpl' | static_url | static_inline }}
 
-        {# Adobe Typekit fonts #}
+        {# Adobe Typekit fonts - async loading #}
 
-        <link rel="stylesheet" href="https://use.typekit.net/hsg1eqr.css">
+        <link rel="preload" href="https://use.typekit.net/hsg1eqr.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://use.typekit.net/hsg1eqr.css"></noscript>
 
         {# Load async styling not mandatory for first meaningfull paint #}
 
@@ -183,6 +184,14 @@
         {# Store external codes added from admin #}
 
         {{ component('assorted-js', {}) }}
+
+        {# Lucide Icons - local file #}
+
+        {{ 'js/lucide.min.js' | static_url | script_tag }}
+
+        <script>
+            lucide.createIcons();
+        </script>
 
     </body>
 </html>
