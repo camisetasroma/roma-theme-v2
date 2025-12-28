@@ -2,24 +2,35 @@ Colores de tu marca
 	meta
 		icon = paint-brush
 		advanced = false
+	title
+		title = Colores principales
 	color
 		name = primary_color
-		description = Color principal
+		description = Color principal (Textos destaque)
 	subtitle
-		subtitle = <div class='js-color-description'>Aplica a los botones.</div>
+		subtitle = <div class='js-color-description'>Aplica a títulos, botones y elementos destacados.</div>
 	color
 		name = accent_color
-		description = Color de acento
+		description = Color de acento (Promocional)
 	subtitle
-		subtitle = <div class='js-color-description'>Aplica a promociones y a mensajes de descuento, envío gratis y cuotas sin interés.</div>
+		subtitle = <div class='js-color-description'>Aplica a promociones, mensajes de descuento, envío gratis y cuotas sin interés.</div>
 	title
-		title = Colores de contraste
-	color
-		name = background_color
-		description = Color de fondo
+		title = Colores de texto
 	color
 		name = text_color
-		description = Color de textos
+		description = Color de texto principal
+	subtitle
+		subtitle = <div class='js-color-description'>Color base para todo el contenido de texto.</div>
+	color
+		name = text_muted_color
+		description = Color de texto secundario
+	subtitle
+		subtitle = <div class='js-color-description'>Textos menos destacados, descripciones, etiquetas.</div>
+	title
+		title = Colores de fondo
+	color
+		name = background_color
+		description = Color de fondo principal
 	description
 		description = Para facilitar la lectura, asegurate de que los colores contrasten entre sí.
 	title
@@ -28,21 +39,30 @@ Colores de tu marca
 		description = Ideales para restablecer los colores por defecto del diseño.
 	palettes
 		palettes
+			palette_custom
+				primary_color = #CB2C30
+				accent_color = #2DCC57
+				text_color = #410911
+				text_muted_color = #80807B
+				background_color = #FFFFF6
 			palette_1
 				primary_color = #000000
-				background_color = #FFFFFF
-				text_color = #000000
 				accent_color = #808E25
+				text_color = #000000
+				text_muted_color = #666666
+				background_color = #FFFFFF
 			palette_2
 				primary_color = #F29466
-				background_color = #F9F9F9
-				text_color = #CC8563
 				accent_color = #F29466
+				text_color = #CC8563
+				text_muted_color = #999999
+				background_color = #F9F9F9
 			palette_3
 				primary_color = #86C2B4
-				background_color = #FFF9EE
-				text_color = #0F5672
 				accent_color = #86C2B4
+				text_color = #0F5672
+				text_muted_color = #7A8B91
+				background_color = #FFF9EE
 	subtitle
 		subtitle = <a target='_blank' href='https://ayuda.tiendanube.com/es_ES/124497-colores-de-tu-marca/como-cambiar-los-colores-de-mi-diseno/?utm_source=admin-desktop&utm_medium=feature-page&utm_campaign=help'>¿Cómo cambio los colores de mi diseño?</a>
 		

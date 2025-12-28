@@ -74,6 +74,7 @@ style.scss.tpl
 
 $primary-color: {{ settings.primary_color }};
 $main-foreground: {{ settings.text_color }};
+$text-muted: {{ settings.text_muted_color | default('#80807B') }};
 $main-background: {{ settings.background_color }};
 $accent-color: {{ settings.accent_color }};
 
@@ -90,6 +91,9 @@ $body-font: {{ settings.font_rest | raw }};
 .svg-icon-text{
   fill: $main-foreground;
 }
+.svg-icon-muted{
+  fill: $text-muted;
+}
 .svg-icon-accent{
   fill: $accent-color;
 }
@@ -105,6 +109,10 @@ $body-font: {{ settings.font_rest | raw }};
 
 .text-secondary {
   color: $main-background;
+}
+
+.text-muted {
+  color: $text-muted;
 }
 
 .text-accent,
