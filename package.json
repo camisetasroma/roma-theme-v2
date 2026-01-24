@@ -1,0 +1,26 @@
+{
+  "name": "roma-theme-v2",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/camisetasroma/roma-theme-v2#readme",
+  "bugs": {
+    "url": "https://github.com/camisetasroma/roma-theme-v2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camisetasroma/roma-theme-v2.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:css": "npx @tailwindcss/cli -i __src/css/app.css -o static/css/app.tpl --watch",
+    "dev": "npm run watch:css"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "tailwindcss": "^4.1.18"
+  }
+}

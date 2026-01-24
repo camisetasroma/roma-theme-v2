@@ -29,14 +29,15 @@
                     font_settings: 'settings.font_headings, settings.font_rest'
                 })
             }}
-
-            {% include "static/css/style-critical.tpl" %}
         </style>
 
         {# Critical CSS needed to show first elements of store while CSS async is loading #}
 
         <style>
             {% include "static/css/style-critical.tpl" %}
+        </style>
+        <style>
+            {% include "static/css/app.tpl" %}
         </style>
 
 

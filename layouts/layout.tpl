@@ -40,6 +40,9 @@
 
             {% include "static/css/style-critical.tpl" %}
         </style>
+        <style>
+            {% include "static/css/app.tpl" %}
+        </style>
 
         {# Colors and fonts used from settings.txt and defined on theme customization #}
 
