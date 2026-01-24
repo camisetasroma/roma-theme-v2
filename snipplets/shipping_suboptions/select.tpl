@@ -21,7 +21,7 @@
                         <li class="text-capitalize mb-3">{% include "snipplets/svg/map-marker-alt.tpl" with {svg_custom_class: "icon-inline svg-icon-primary d-flex float-left mr-2"} %} <span class="d-flex">{{ option.name | lower }}</span></li>
                     {% endfor %}
                 </ul>
-                <div class="mt-4"><span class="opacity-50">{{ 'Cercanos al CP:'}}</span> <span class="text-primary font-weight-bold">{{cart.shipping_zipcode}}</span></div>
+                <div class="mt-4"><span class="opacity-50">{{ 'Cercanos al CP:' | translate }}</span> <span class="text-primary font-weight-bold">{{cart.shipping_zipcode}}</span></div>
                 <div class="mt-2 font-small">
                     {% include "snipplets/svg/info-circle.tpl" with {svg_custom_class: "icon-inline svg-icon-text"} %}
                     <i>{{ "Vas a poder elegir estas opciones antes de finalizar tu compra" | translate }}</i>

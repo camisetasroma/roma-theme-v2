@@ -270,6 +270,34 @@ Encabezado
 		name = ad_url
 		description = Link (opcional)
 
+Logotipo
+	meta
+		icon = image
+		advanced = true
+	title
+		title = Logo para menu inativo
+	image
+		name = logo_inactive
+		original = logo_inactive.png
+		title = Cargar logo para menú inactivo (PNG, JPG, SVG)
+	description
+		description = Logo mostrada cuando el menú hamburguesa está cerrado
+	title
+		title = Logo para menu activo
+	image
+		name = logo_active
+		original = logo_active.png
+		title = Cargar logo para menú abierto (PNG, JPG, SVG)
+	description
+		description = Logo mostrada cuando el menú hamburguesa está abierto
+	title
+		title = Logo para rodapé
+	image
+		name = logo_footer
+		original = logo_footer.png
+		title = Cargar logo para rodapé (PNG, JPG, SVG)
+	description
+		description = Logo mostrada en el pie de página
 
 Página de inicio
 	meta

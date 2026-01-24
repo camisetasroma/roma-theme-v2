@@ -2882,7 +2882,55 @@ es "Ubicación del logo"
 pt "Posição do logo"
 es_mx "Ubicación del logo"
 
+es "Logotipo"
+pt "Logotipo"
+en "Logo"
+es_mx "Logotipo"
 
+es "Logo para menu inativo"
+pt "Logo para menu inativo"
+en "Logo for inactive menu"
+es_mx "Logo para menú inactivo"
+
+es "Cargar logo para menú inactivo (PNG, JPG, SVG)"
+pt "Carregar logo para menu inativo (PNG, JPG, SVG)"
+en "Upload logo for inactive menu (PNG, JPG, SVG)"
+es_mx "Cargar logo para menú inactivo (PNG, JPG, SVG)"
+
+es "Logo mostrada cuando el menú hamburguesa está cerrado"
+pt "Logo exibida quando o menu hamburguer está fechado"
+en "Logo displayed when the hamburger menu is closed"
+es_mx "Logo mostrada cuando el menú hamburguesa está cerrado"
+
+es "Logo para menu activo"
+pt "Logo para menu ativo"
+en "Logo for active menu"
+es_mx "Logo para menú activo"
+
+es "Cargar logo para menú abierto (PNG, JPG, SVG)"
+pt "Carregar logo para menu aberto (PNG, JPG, SVG)"
+en "Upload logo for open menu (PNG, JPG, SVG)"
+es_mx "Cargar logo para menú abierto (PNG, JPG, SVG)"
+
+es "Logo mostrada cuando el menú hamburguesa está abierto"
+pt "Logo exibida quando o menu hamburguer está aberto"
+en "Logo displayed when the hamburger menu is open"
+es_mx "Logo mostrada cuando el menú hamburguesa está abierto"
+
+es "Logo para rodapé"
+pt "Logo para rodapé"
+en "Logo for footer"
+es_mx "Logo para pie de página"
+
+es "Cargar logo para rodapé (PNG, JPG, SVG)"
+pt "Carregar logo para rodapé (PNG, JPG, SVG)"
+en "Upload logo for footer (PNG, JPG, SVG)"
+es_mx "Cargar logo para pie de página (PNG, JPG, SVG)"
+
+es "Logo mostrada en el pie de página"
+pt "Logo exibida no rodapé"
+en "Logo displayed in the footer"
+es_mx "Logo mostrada en el pie de página"
 
 es "Color de fondo del encabezado"
 pt "Cor de fundo do cabeçalho"
