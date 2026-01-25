@@ -16,7 +16,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch:css": "npx @tailwindcss/cli -i __src/css/app.css -o static/css/app.tpl --watch",
+    "watch:css": "npx @tailwindcss/cli -i __src/css/app.css -o static/css/app.tpl --watch --optimize",
+    "build:css": "npx @tailwindcss/cli -i __src/css/app.css -o static/css/app.tpl --optimize",
     "dev": "npm run watch:css"
   },
   "devDependencies": {

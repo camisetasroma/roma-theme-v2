@@ -60,3 +60,39 @@
   --transition-duration-700: 700ms;
   --transition-duration-1000: 1000ms;
 }
+
+/* ===== NEW HEADER STYLES ===== */
+
+/* Estado Transparente (padrão) */
+.js-new-header[data-state="transparent"] {
+    background-color: transparent;
+}
+
+.js-new-header[data-state="transparent"] .nav-link,
+.js-new-header[data-state="transparent"] .ad-bar,
+.js-new-header[data-state="transparent"] .ad-bar a,
+.js-new-header[data-state="transparent"] .ad-bar span {
+    color: white;
+}
+
+.js-new-header[data-state="transparent"] .logo-text {
+    color: white !important;
+}
+
+/* Estado Ativo (scroll ou interação) */
+.js-new-header[data-state="active"] {
+    background-color: rgba(255, 255, 246, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.js-new-header[data-state="active"] .nav-link,
+.js-new-header[data-state="active"] .ad-bar,
+.js-new-header[data-state="active"] .ad-bar a,
+.js-new-header[data-state="active"] .ad-bar span {
+    color: var(--primary-color);
+}
+
+.js-new-header[data-state="active"] .logo-text {
+    color: var(--primary-color) !important;
+}

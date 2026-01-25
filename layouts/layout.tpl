@@ -113,7 +113,12 @@
 
         {# Header = Advertising + Nav + Logo + Search + Ajax Cart #}
 
+        {# New Header #}
+        {% snipplet "header/header-new.tpl" %}
+
+        {# Old header - mantido para referência, remover depois
         {% snipplet "header/header.tpl" %}
+        #}
 
         {# Page content #}
 
@@ -195,6 +200,8 @@
         <script>
             lucide.createIcons();
         </script>
+
+        {{ 'js/header-state.js' | static_url | script_tag }}
 
     </body>
 </html>
