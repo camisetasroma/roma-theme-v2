@@ -96,3 +96,22 @@
 .js-new-header[data-state="active"] .logo-text {
     color: var(--primary-color) !important;
 }
+
+/* ===== FOOTER STYLES ===== */
+
+/* Powered by Nuvemshop - herdar cor primária */
+.powered-by-wrapper svg,
+.powered-by-wrapper svg path {
+    fill: var(--primary-color);
+}
+
+/* Footer logo SVG - respeitar max-height */
+.footer-logo-svg svg {
+    max-height: inherit;
+    height: auto;
+    width: auto;
+}
+
+.footer-logo-svg svg path{
+    fill: var(--primary-color);
+}

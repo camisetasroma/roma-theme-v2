@@ -276,6 +276,9 @@ Logotipo
 		advanced = true
 	title
 		title = Logo para menu inativo
+	textarea
+		name = logo_inactive_svg
+		description = Código SVG do logo (prioridade sobre imagem)
 	image
 		name = logo_inactive
 		original = logo_inactive.png
@@ -284,6 +287,9 @@ Logotipo
 		description = Logo mostrada cuando el menú hamburguesa está cerrado
 	title
 		title = Logo para menu activo
+	textarea
+		name = logo_active_svg
+		description = Código SVG do logo (prioridade sobre imagem)
 	image
 		name = logo_active
 		original = logo_active.png
@@ -292,12 +298,15 @@ Logotipo
 		description = Logo mostrada cuando el menú hamburguesa está abierto
 	title
 		title = Logo para rodapé
+	textarea
+		name = logo_footer_svg
+		description = Código SVG do logo (prioridade sobre imagem)
 	image
 		name = logo_footer
 		original = logo_footer.png
 		title = Cargar logo para rodapé (PNG, JPG, SVG)
 	description
-		description = Logo mostrada en el pie de página
+		description = Logo mostrada en el pie de página. Se houver SVG acima, a imagem será ignorada.
 
 Página de inicio
 	meta
@@ -781,14 +790,151 @@ Pie de página
 		icon = arrow-down
 		advanced = true
 	title
-		title = Menúes
+		title = Logo de apoyo
+	textarea
+		name = logo_support_svg
+		description = Código SVG do logo (prioridade sobre imagem)
+	image
+		name = logo_support
+		original = logo_support.png
+		title = Cargar logo de apoyo (PNG, JPG, SVG)
+	description
+		description = Logo opcional debajo de las columnas del footer. Se houver SVG acima, a imagem será ignorada.
+	title
+		title = Columna Contacto (Redes Sociales)
 	subtitle
-		subtitle = Elegí el menú para el final de la página (footer). Si aún no configuraste ninguno, podés hacerlo <a target='_blank' href='/admin/navigation/?ref=submenu'>desde acá</a>
+		subtitle = WHATSAPP
+	i18n_input
+		name = footer_social_whatsapp_url
+		description = Link do WhatsApp
 	subtitle
-		subtitle = <a target='_blank' href='https://ayuda.tiendanube.com/es_AR/123259-menues/como-cambiar-el-menu-inferior-de-mi-tienda'>¿Cómo cambio el menú inferior de mi tienda?</a>
-	menu
-		name = footer_menu
-		description = ¿Qué menú vas a mostrar al final de la página?
+		subtitle = INSTAGRAM
+	i18n_input
+		name = footer_social_instagram_url
+		description = Link do Instagram
+	subtitle
+		subtitle = FACEBOOK
+	i18n_input
+		name = footer_social_facebook_url
+		description = Link do Facebook
+	subtitle
+		subtitle = YOUTUBE
+	i18n_input
+		name = footer_social_youtube_url
+		description = Link do YouTube
+	subtitle
+		subtitle = PINTEREST
+	i18n_input
+		name = footer_social_pinterest_url
+		description = Link do Pinterest
+	subtitle
+		subtitle = LINKEDIN
+	i18n_input
+		name = footer_social_linkedin_url
+		description = Link do LinkedIn
+	subtitle
+		subtitle = TIKTOK
+	i18n_input
+		name = footer_social_tiktok_url
+		description = Link do TikTok
+	title
+		title = Columna Suporte
+	i18n_input
+		name = footer_support_title
+		description = Titulo de la columna
+	subtitle
+		subtitle = LINK 1
+	i18n_input
+		name = footer_support_link_1_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_1_url
+		description = URL
+	subtitle
+		subtitle = LINK 2
+	i18n_input
+		name = footer_support_link_2_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_2_url
+		description = URL
+	subtitle
+		subtitle = LINK 3
+	i18n_input
+		name = footer_support_link_3_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_3_url
+		description = URL
+	subtitle
+		subtitle = LINK 4
+	i18n_input
+		name = footer_support_link_4_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_4_url
+		description = URL
+	subtitle
+		subtitle = LINK 5
+	i18n_input
+		name = footer_support_link_5_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_5_url
+		description = URL
+	subtitle
+		subtitle = LINK 6
+	i18n_input
+		name = footer_support_link_6_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_6_url
+		description = URL
+	title
+		title = Columna Sobre
+	i18n_input
+		name = footer_about_title
+		description = Titulo de la columna
+	subtitle
+		subtitle = LINK 1
+	i18n_input
+		name = footer_about_link_1_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_1_url
+		description = URL
+	subtitle
+		subtitle = LINK 2
+	i18n_input
+		name = footer_about_link_2_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_2_url
+		description = URL
+	subtitle
+		subtitle = LINK 3
+	i18n_input
+		name = footer_about_link_3_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_3_url
+		description = URL
+	subtitle
+		subtitle = LINK 4
+	i18n_input
+		name = footer_about_link_4_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_4_url
+		description = URL
+	subtitle
+		subtitle = LINK 5
+	i18n_input
+		name = footer_about_link_5_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_5_url
+		description = URL
 	title
 		title = Medios de envío
 	checkbox_global
@@ -799,17 +945,6 @@ Pie de página
 	checkbox_global
 		name = payments_show
 		description = Mostrar medios de pago en tu tienda
-	title
-		title = Suscripción al newsletter desde el footer
-	checkbox
-		name = news_show
-		description = Permitir que tus clientes se registren para recibir novedades desde el Pié de Página
-	i18n_input
-		name = news_title
-		description = Elegí el título para la sección 'Newsletter' en el footer
-	i18n_input
-		name = news_text
-		description = ¡Escribí algo para que tus clientes se suscriban a tu newsletter!
 	title
 		title = Sellos personalizados en el footer
 	description

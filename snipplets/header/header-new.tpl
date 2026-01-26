@@ -84,4 +84,4 @@
 </header>
 
 {# Spacer para compensar header fixed #}
-<div class="js-header-spacer h-[100px] md:h-[120px]"></div>
+<div class="js-header-spacer h-25 md:h-30"></div>
