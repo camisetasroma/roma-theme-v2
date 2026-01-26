@@ -18,10 +18,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch:css": "npx @tailwindcss/cli -i __src/css/app.css -o static/css/app.tpl --watch --optimize",
     "build:css": "npx @tailwindcss/cli -i __src/css/app.css -o static/css/app.tpl --optimize",
-    "dev": "npm run watch:css"
+    "watch:js": "node esbuild.config.mjs --watch",
+    "build:js": "node esbuild.config.mjs",
+    "dev": "concurrently \"npm run watch:css\" \"npm run watch:js\""
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.18",
+    "concurrently": "^9.2.1",
+    "esbuild": "0.27.2",
     "tailwindcss": "^4.1.18"
   }
 }
