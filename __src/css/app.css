@@ -72,18 +72,21 @@
 .js-new-header[data-state="transparent"] .ad-bar,
 .js-new-header[data-state="transparent"] .ad-bar a,
 .js-new-header[data-state="transparent"] .ad-bar span {
-    color: white;
+    color: var(--background-color);
 }
 
 .js-new-header[data-state="transparent"] .logo-text {
-    color: white !important;
+    color: var(--background-color) !important;
+}
+
+.js-new-header[data-state="transparent"] .logo-text svg path {
+    fill: var(--background-color);
 }
 
 /* Estado Ativo (scroll ou interação) */
 .js-new-header[data-state="active"] {
     background-color: rgba(255, 255, 246, 0.7);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(0.5rem);
 }
 
 .js-new-header[data-state="active"] .nav-link,

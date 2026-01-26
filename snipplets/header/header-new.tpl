@@ -13,7 +13,7 @@
     {% endif %}
 
     {# Main Header Container #}
-    <div class="flex items-center justify-between w-full px-4 md:px-16 py-3 md:py-4">
+    <div class="flex items-center justify-between w-full px-4 md:px-16 py-5.5 md:py-4">
 
         {# Mobile: Hamburger | Desktop: Logo #}
         <div class="flex items-center gap-4 flex-1 md:flex-none">
@@ -24,11 +24,20 @@
 
             {# Logo - Desktop only (left aligned) #}
             <div class="hidden md:block">
-                {{ component('logos/logo', {
-                    logo_size: 'large',
-                    logo_img_classes: 'transition-all duration-300 h-8',
-                    logo_text_classes: 'logo-text text-2xl font-heading font-bold m-0 transition-colors duration-300'
-                }) }}
+                <a href="/">
+                    {% if settings.logo_active_svg %}
+                        <div class="logo-text text-2xl font-heading font-bold m-0 transition-colors duration-300">
+                            {{ settings.logo_active_svg | raw }}
+                        </div>
+                    {% elseif "logo_active.png" | has_custom_image %}
+                        <img 
+                            src="{{ 'images/empty-placeholder.png' | static_url }}"
+                            data-src="{{ "logo_active.png" | static_url }}"
+                            class="lazyload transition-all duration-300 h-8"
+                            alt="{{ store.name }} - Menu Logo" 
+                        />
+                    {% endif %}
+                </a>
             </div>
         </div>
 
@@ -36,11 +45,20 @@
         <div class="flex items-center justify-center flex-1">
             {# Logo - Mobile only (centered) #}
             <div class="md:hidden">
-                {{ component('logos/logo', {
-                    logo_size: 'large',
-                    logo_img_classes: 'transition-all duration-300 h-7',
-                    logo_text_classes: 'logo-text text-xl font-heading font-bold m-0 transition-colors duration-300'
-                }) }}
+                <a href="/">
+                    {% if settings.logo_active_svg %}
+                        <div class="logo-text text-xl font-heading font-bold m-0 transition-colors duration-300">
+                            {{ settings.logo_active_svg | raw }}
+                        </div>
+                    {% elseif "logo_active.png" | has_custom_image %}
+                        <img 
+                            src="{{ 'images/empty-placeholder.png' | static_url }}"
+                            data-src="{{ "logo_active.png" | static_url }}"
+                            class="lazyload transition-all duration-300 h-8"
+                            alt="{{ store.name }} - Menu Logo" 
+                        />
+                    {% endif %}
+                </a>
             </div>
 
             {# Navigation - Desktop only #}
@@ -65,17 +83,17 @@
         <div class="flex items-center justify-end gap-4 md:gap-6 flex-1 md:flex-none">
             {# Buscar #}
             <a href="#" class="nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1">
-                <i data-lucide="search" class="w-4 h-4 md:hidden"></i>
+                <i data-lucide="search" class="w-5 h-5 md:hidden"></i>
                 <span class="hidden md:inline">Buscar</span>
             </a>
             {# Login #}
             <a href="{{ store.customer_login_url }}" class="nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1">
-                <i data-lucide="user" class="w-4 h-4 md:hidden"></i>
+                <i data-lucide="user" class="w-5 h-5 md:hidden"></i>
                 <span class="hidden md:inline">Login</span>
             </a>
             {# Carrinho #}
             <a href="{{ store.cart_url }}" class="nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1">
-                <i data-lucide="shopping-cart" class="w-4 h-4 md:hidden"></i>
+                <i data-lucide="shopping-cart" class="w-5 h-5 md:hidden"></i>
                 <span class="hidden md:inline">Carrinho</span>
                 <span class="js-cart-widget-amount hidden md:inline">({{ cart.items_count }})</span>
             </a>

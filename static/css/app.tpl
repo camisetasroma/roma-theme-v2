@@ -1030,6 +1030,10 @@
     padding-block: calc(var(--spacing) * 5);
   }
 
+  .py-5\.5 {
+    padding-block: calc(var(--spacing) * 5.5);
+  }
+
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
   }
@@ -1349,15 +1353,20 @@
 }
 
 .js-new-header[data-state="transparent"] .nav-link, .js-new-header[data-state="transparent"] .ad-bar, .js-new-header[data-state="transparent"] .ad-bar a, .js-new-header[data-state="transparent"] .ad-bar span {
-  color: #fff;
+  color: var(--background-color);
 }
 
 .js-new-header[data-state="transparent"] .logo-text {
-  color: #fff !important;
+  color: var(--background-color) !important;
+}
+
+.js-new-header[data-state="transparent"] .logo-text svg path {
+  fill: var(--background-color);
 }
 
 .js-new-header[data-state="active"] {
-  -webkit-backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(.5rem);
+  backdrop-filter: blur(.5rem);
   background-color: #fffff6b3;
 }
 
