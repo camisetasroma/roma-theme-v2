@@ -7,7 +7,7 @@
 {% set has_about_links = settings.footer_about_link_1_text or settings.footer_about_link_2_text or settings.footer_about_link_3_text %}
 
 <footer class="js-footer js-hide-footer-while-scrolling display-when-content-ready bg-secondary" data-store="footer">
-    <div class="flex flex-col items-start gap-8 self-stretch px-4 py-8 md:px-16">
+    <div class="flex flex-col items-start gap-8 self-stretch px-6 py-8 md:px-16">
 
         {# Main Footer Content - 3 Columns #}
         <div class="w-full">
@@ -26,17 +26,17 @@
             {% endif %}
 
             {# Grid de 3 Colunas #}
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
                 {# Coluna 1: Contato (Redes Sociais) #}
                 <div class="flex flex-col gap-4">
-                    <h3 class="text-fg font-heading text-xl font-semibold">
+                    <h3 class="text-fg font-heading text-2xl font-semibold">
                         {{ "Contato" | translate }}
                     </h3>
 
                     {# Social Icons #}
                     {% if has_social_network %}
-                        <div class="flex flex-wrap gap-4">
+                        <div class="flex flex-wrap gap-y-4 gap-x-5">
                             {% if settings.footer_social_whatsapp_url %}
                                 <a href="{{ settings.footer_social_whatsapp_url | setting_url }}" target="_blank" aria-label="WhatsApp {{ store.name }}" class="text-fg hover:opacity-70 transition-opacity">
                                     {% include "snipplets/svg/whatsapp.tpl" with {svg_custom_class: "w-5 h-5"} %}
@@ -78,38 +78,38 @@
 
                 {# Coluna 2: Suporte #}
                 <div class="flex flex-col gap-4">
-                    <h3 class="text-fg font-heading text-xl font-semibold">
+                    <h3 class="text-fg font-heading text-2xl font-semibold">
                         {{ settings.footer_support_title | default("Suporte" | translate) }}
                     </h3>
 
-                    <nav class="flex flex-col gap-2">
+                    <nav class="flex flex-col gap-2.5">
                         {% if settings.footer_support_link_1_text and settings.footer_support_link_1_url %}
-                            <a href="{{ settings.footer_support_link_1_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_support_link_1_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_support_link_1_text }}
                             </a>
                         {% endif %}
                         {% if settings.footer_support_link_2_text and settings.footer_support_link_2_url %}
-                            <a href="{{ settings.footer_support_link_2_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_support_link_2_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_support_link_2_text }}
                             </a>
                         {% endif %}
                         {% if settings.footer_support_link_3_text and settings.footer_support_link_3_url %}
-                            <a href="{{ settings.footer_support_link_3_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_support_link_3_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_support_link_3_text }}
                             </a>
                         {% endif %}
                         {% if settings.footer_support_link_4_text and settings.footer_support_link_4_url %}
-                            <a href="{{ settings.footer_support_link_4_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_support_link_4_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_support_link_4_text }}
                             </a>
                         {% endif %}
                         {% if settings.footer_support_link_5_text and settings.footer_support_link_5_url %}
-                            <a href="{{ settings.footer_support_link_5_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_support_link_5_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_support_link_5_text }}
                             </a>
                         {% endif %}
                         {% if settings.footer_support_link_6_text and settings.footer_support_link_6_url %}
-                            <a href="{{ settings.footer_support_link_6_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_support_link_6_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_support_link_6_text }}
                             </a>
                         {% endif %}
@@ -118,33 +118,33 @@
 
                 {# Coluna 3: Sobre #}
                 <div class="flex flex-col gap-4">
-                    <h3 class="text-fg font-heading text-xl font-semibold">
+                    <h3 class="text-fg font-heading text-2xl font-semibold">
                         {{ settings.footer_about_title | default("Sobre" | translate) }}
                     </h3>
 
-                    <nav class="flex flex-col gap-2">
+                    <nav class="flex flex-col gap-2.5">
                         {% if settings.footer_about_link_1_text and settings.footer_about_link_1_url %}
-                            <a href="{{ settings.footer_about_link_1_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_about_link_1_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_about_link_1_text }}
                             </a>
                         {% endif %}
                         {% if settings.footer_about_link_2_text and settings.footer_about_link_2_url %}
-                            <a href="{{ settings.footer_about_link_2_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_about_link_2_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_about_link_2_text }}
                             </a>
                         {% endif %}
                         {% if settings.footer_about_link_3_text and settings.footer_about_link_3_url %}
-                            <a href="{{ settings.footer_about_link_3_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_about_link_3_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_about_link_3_text }}
                             </a>
                         {% endif %}
                         {% if settings.footer_about_link_4_text and settings.footer_about_link_4_url %}
-                            <a href="{{ settings.footer_about_link_4_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_about_link_4_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_about_link_4_text }}
                             </a>
                         {% endif %}
                         {% if settings.footer_about_link_5_text and settings.footer_about_link_5_url %}
-                            <a href="{{ settings.footer_about_link_5_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-base">
+                            <a href="{{ settings.footer_about_link_5_url | setting_url }}" class="text-fg hover:opacity-70 transition-opacity text-sm">
                                 {{ settings.footer_about_link_5_text }}
                             </a>
                         {% endif %}

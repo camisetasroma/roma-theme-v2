@@ -3878,6 +3878,111 @@ pt "Logo da AFIP"
 en "AFIP logo"
 es_mx "Logo de AFIP"
 
+es "Contato"
+pt "Contato"
+en "Contact"
+es_mx "Contacto"
+
+es "Suporte"
+pt "Suporte"
+en "Support"
+es_mx "Soporte"
+
+es "Sobre"
+pt "Sobre"
+en "About"
+es_mx "Acerca de"
+
+es "Título da coluna de suporte"
+pt "Título da coluna de suporte"
+en "Support column title"
+es_mx "Título de la columna de soporte"
+
+es "Título da coluna sobre"
+pt "Título da coluna sobre"
+en "About column title"
+es_mx "Título de la columna acerca de"
+
+es "Texto do link"
+pt "Texto do link"
+en "Link text"
+es_mx "Texto del enlace"
+
+es "URL do link"
+pt "URL do link"
+en "Link URL"
+es_mx "URL del enlace"
+
+es "Código SVG do logo (prioridade sobre imagem)"
+pt "Código SVG do logo (prioridade sobre imagem)"
+en "Logo SVG code (priority over image)"
+es_mx "Código SVG del logo (prioridad sobre imagen)"
+
+es "Logo de apoio"
+pt "Logo de apoio"
+en "Support logo"
+es_mx "Logo de apoyo"
+
+es "Columna Suporte"
+pt "Coluna Suporte"
+en "Support Column"
+es_mx "Columna Soporte"
+
+es "Columna Sobre"
+pt "Coluna Sobre"
+en "About Column"
+es_mx "Columna Acerca de"
+
+es "Titulo de la columna"
+pt "Título da coluna"
+en "Column title"
+es_mx "Título de la columna"
+
+es "Redes Sociais no Rodapé"
+pt "Redes Sociais no Rodapé"
+en "Social Networks in Footer"
+es_mx "Redes Sociales en el Pie de Página"
+
+es "Link do WhatsApp"
+pt "Link do WhatsApp"
+en "WhatsApp link"
+es_mx "Enlace de WhatsApp"
+
+es "Link do Instagram"
+pt "Link do Instagram"
+en "Instagram link"
+es_mx "Enlace de Instagram"
+
+es "Link do Facebook"
+pt "Link do Facebook"
+en "Facebook link"
+es_mx "Enlace de Facebook"
+
+es "Link do YouTube"
+pt "Link do YouTube"
+en "YouTube link"
+es_mx "Enlace de YouTube"
+
+es "Link do Pinterest"
+pt "Link do Pinterest"
+en "Pinterest link"
+es_mx "Enlace de Pinterest"
+
+es "Link do LinkedIn"
+pt "Link do LinkedIn"
+en "LinkedIn link"
+es_mx "Enlace de LinkedIn"
+
+es "Link do TikTok"
+pt "Link do TikTok"
+en "TikTok link"
+es_mx "Enlace de TikTok"
+
+es "Texto"
+pt "Texto"
+en "Text"
+es_mx "Texto"
+
 --- --- CSS
 
 es "Acá podes escribir código CSS para que se muestre en tu tienda"

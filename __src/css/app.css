@@ -103,7 +103,12 @@
 /* ===== FOOTER STYLES ===== */
 
 /* Powered by Nuvemshop - herdar cor primária */
-.powered-by-wrapper svg,
+.powered-by-wrapper svg {
+    @apply h-4.5;
+    width: auto;
+    fill: var(--primary-color);
+}
+
 .powered-by-wrapper svg path {
     fill: var(--primary-color);
 }

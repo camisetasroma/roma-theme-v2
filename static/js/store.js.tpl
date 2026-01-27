@@ -146,7 +146,6 @@ DOMContentLoaded.addEventOrExecute(() => {
             {# Offset to show legal footer #}
 
             const cookieBannerHeight = jQueryNuvem(".js-notification-cookie-banner").outerHeight();
-            footer.css("paddingBottom", cookieBannerHeight + 10 + "px");
 
             {# Whatsapp button position #}
             if (window.innerWidth < 768) {

@@ -54,6 +54,8 @@
     --text-xl--line-height: calc(1.75 / 1.25);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: calc(2.25 / 1.875);
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
@@ -892,6 +894,10 @@
     gap: calc(var(--spacing) * 2);
   }
 
+  .gap-2\.5 {
+    gap: calc(var(--spacing) * 2.5);
+  }
+
   .gap-4 {
     gap: calc(var(--spacing) * 4);
   }
@@ -902,6 +908,22 @@
 
   .gap-8 {
     gap: calc(var(--spacing) * 8);
+  }
+
+  .gap-x-4 {
+    column-gap: calc(var(--spacing) * 4);
+  }
+
+  .gap-x-5 {
+    column-gap: calc(var(--spacing) * 5);
+  }
+
+  .gap-x-6 {
+    column-gap: calc(var(--spacing) * 6);
+  }
+
+  .gap-y-4 {
+    row-gap: calc(var(--spacing) * 4);
   }
 
   .self-stretch {
@@ -1143,6 +1165,11 @@
     line-height: var(--tw-leading, var(--text-2xl--line-height));
   }
 
+  .text-3xl {
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
+
   .text-base {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
@@ -1334,10 +1361,6 @@
       gap: calc(var(--spacing) * 6);
     }
 
-    .md\:gap-16 {
-      gap: calc(var(--spacing) * 16);
-    }
-
     .md\:px-16 {
       padding-inline: calc(var(--spacing) * 16);
     }
@@ -1378,7 +1401,13 @@
   color: var(--primary-color) !important;
 }
 
-.powered-by-wrapper svg, .powered-by-wrapper svg path {
+.powered-by-wrapper svg {
+  height: calc(var(--spacing) * 4.5);
+  width: auto;
+  fill: var(--primary-color);
+}
+
+.powered-by-wrapper svg path {
   fill: var(--primary-color);
 }
 
