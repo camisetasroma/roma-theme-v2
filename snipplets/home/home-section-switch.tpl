@@ -96,10 +96,24 @@
 			banner_help_section: 'Módulo de imagen y texto' | translate,
 			data_store: 'home-image-text-module',
 			banner_module: true,
-			banners_amount: 1} 
+			banners_amount: 1}
 		%}
 	{% else %}
 		{% include 'snipplets/home/home-modules.tpl' with {'textoverimage': false} %}
 	{% endif %}
+
+{% elseif section_select == 'promo_marquee' %}
+
+	{#  **** Promo Marquee Bar ****  #}
+	<section data-store="home-promo-marquee-wrapper">
+		{% set has_promo_marquee = settings.promo_marquee_text_1 %}
+		{% if show_help or (show_component_help and not has_promo_marquee) %}
+			<div class="section-help bg-bg-subtle p-8 text-center text-muted">
+				<p>Configura tu Barra Promocional desde el panel de administración.</p>
+			</div>
+		{% else %}
+			{% include 'snipplets/home/home-promo-marquee.tpl' %}
+		{% endif %}
+	</section>
 
 {% endif %}

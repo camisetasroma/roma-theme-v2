@@ -123,3 +123,30 @@
 .footer-logo-svg svg path{
     fill: var(--primary-color);
 }
+
+/* ===== PROMO MARQUEE BAR ===== */
+
+.promo-marquee-section {
+    width: 100%;
+}
+
+.promo-marquee-track {
+    animation: marquee-scroll 30s linear infinite;
+    will-change: transform;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%);
+    }
+}
+
+/* Pause on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .promo-marquee-track {
+        animation: none;
+    }
+}

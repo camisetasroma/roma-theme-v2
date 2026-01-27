@@ -314,6 +314,41 @@ Página de inicio
 		advanced = true
 		default = home_order_position
 	collapse
+		title = Barra Promocional
+		backto = home_order_position
+	subtitle
+		subtitle = Configure até 4 textos promocionais
+	i18n_input
+		name = promo_marquee_text_1
+		description = Texto 1 (obrigatório)
+	i18n_input
+		name = promo_marquee_text_2
+		description = Texto 2 (opcional)
+	i18n_input
+		name = promo_marquee_text_3
+		description = Texto 3 (opcional)
+	i18n_input
+		name = promo_marquee_text_4
+		description = Texto 4 (opcional)
+	subtitle
+		subtitle = Cores
+	dropdown
+		name = promo_marquee_bg_color
+		description = Cor de fundo
+		values
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+			accent = Cor de acento
+	dropdown
+		name = promo_marquee_text_color
+		description = Cor do texto
+		values
+			white = Branco
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+	collapse
 		title = Hero Banner
 		backto = home_order_position
 	subtitle
@@ -353,7 +388,8 @@ Página de inicio
 		description = Cor dos textos
 		values
 			white = Branco
-			primary = Cor principal da marca
+			primary = Cor principal
+			background = Cor de fundo
 	collapse
 		title = Carrusel de imágenes
 		backto = home_order_position
@@ -661,6 +697,7 @@ Página de inicio
 		name = home_order_position
 		start_index = 0
 		sections
+			promo_marquee = Barra Promocional
 			hero_banner = Hero Banner
 			slider = Carrusel de imágenes
 			welcome = Mensaje institucional

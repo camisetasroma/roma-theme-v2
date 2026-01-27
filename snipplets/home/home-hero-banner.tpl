@@ -10,6 +10,8 @@
     {# Define text color class based on setting #}
     {% if settings.hero_banner_text_color == 'primary' %}
         {% set text_color_class = 'text-fg' %}
+    {% elseif settings.hero_banner_text_color == 'background' %}
+        {% set text_color_class = 'text-bg' %}
     {% else %}
         {% set text_color_class = 'text-white' %}
     {% endif %}

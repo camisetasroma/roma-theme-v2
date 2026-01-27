@@ -69,6 +69,7 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
+    --tracking-wider: .05em;
     --tracking-widest: .1em;
     --ease-in: cubic-bezier(.4, 0, 1, 1);
     --ease-in-out: cubic-bezier(.4, 0, .2, 1);
@@ -809,6 +810,10 @@
     height: calc(var(--spacing) * 8);
   }
 
+  .h-12 {
+    height: calc(var(--spacing) * 12);
+  }
+
   .h-25 {
     height: calc(var(--spacing) * 25);
   }
@@ -985,6 +990,10 @@
     gap: calc(var(--spacing) * 8);
   }
 
+  .gap-12 {
+    gap: calc(var(--spacing) * 12);
+  }
+
   .gap-x-4 {
     column-gap: calc(var(--spacing) * 4);
   }
@@ -1003,6 +1012,10 @@
 
   .self-stretch {
     align-self: stretch;
+  }
+
+  .overflow-hidden {
+    overflow: hidden;
   }
 
   .border {
@@ -1087,6 +1100,10 @@
 
   .p-2 {
     padding: calc(var(--spacing) * 2);
+  }
+
+  .p-2\.5 {
+    padding: calc(var(--spacing) * 2.5);
   }
 
   .p-3 {
@@ -1357,9 +1374,18 @@
     font-weight: var(--font-weight-semibold);
   }
 
+  .tracking-wider {
+    --tw-tracking: var(--tracking-wider);
+    letter-spacing: var(--tracking-wider);
+  }
+
   .tracking-widest {
     --tw-tracking: var(--tracking-widest);
     letter-spacing: var(--tracking-widest);
+  }
+
+  .whitespace-nowrap {
+    white-space: nowrap;
   }
 
   .text-bg {
@@ -1596,6 +1622,31 @@
 
 .footer-logo-svg svg path {
   fill: var(--primary-color);
+}
+
+.promo-marquee-section {
+  width: 100%;
+}
+
+.promo-marquee-track {
+  will-change: transform;
+  animation: 30s linear infinite marquee-scroll;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-25%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-marquee-track {
+    animation: none;
+  }
 }
 
 @property --tw-rotate-x {
