@@ -314,6 +314,47 @@ Página de inicio
 		advanced = true
 		default = home_order_position
 	collapse
+		title = Hero Banner
+		backto = home_order_position
+	subtitle
+		subtitle = Imagem para computadores (obrigatória)
+	image
+		original = hero_banner_desktop.jpg
+		title = Cargar imagen desktop (JPG, PNG)
+		width = 1920
+		height = 820
+	subtitle
+		subtitle = Imagem para celulares (opcional)
+	description
+		description = Se não subir uma imagem para celular, será usada a imagem do desktop
+	image
+		original = hero_banner_mobile.jpg
+		title = Cargar imagen mobile (JPG, PNG)
+		width = 820
+		height = 600
+	subtitle
+		subtitle = Textos e Link
+	i18n_input
+		name = hero_banner_subtitle
+		description = Texto de apoio (ex: Peças Limitadas)
+	i18n_input
+		name = hero_banner_title
+		description = Título principal (ex: Linha Jeans)
+	i18n_input
+		name = hero_banner_button_text
+		description = Texto do botão (ex: Confira)
+	i18n_input
+		name = hero_banner_button_url
+		description = Link do botão
+	subtitle
+		subtitle = Cores
+	dropdown
+		name = hero_banner_text_color
+		description = Cor dos textos
+		values
+			white = Branco
+			primary = Cor principal da marca
+	collapse
 		title = Carrusel de imágenes
 		backto = home_order_position
 	subtitle
@@ -620,6 +661,7 @@ Página de inicio
 		name = home_order_position
 		start_index = 0
 		sections
+			hero_banner = Hero Banner
 			slider = Carrusel de imágenes
 			welcome = Mensaje institucional
 			products = Productos destacados

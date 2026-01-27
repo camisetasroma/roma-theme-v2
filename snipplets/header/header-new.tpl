@@ -101,5 +101,6 @@
     </div>
 </header>
 
-{# Spacer para compensar header fixed #}
-<div class="js-header-spacer h-25 md:h-30"></div>
+{# Spacer para compensar header fixed - oculto quando hero_banner é primeira seção #}
+{% set hero_banner_first = settings.home_order_position_0 == 'hero_banner' and 'hero_banner_desktop.jpg' | has_custom_image %}
+<div class="js-header-spacer h-25 md:h-30 {% if template == 'home' and hero_banner_first %}hidden{% endif %}"></div>

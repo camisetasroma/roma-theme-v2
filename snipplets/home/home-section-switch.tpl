@@ -1,5 +1,19 @@
-{% if section_select == 'slider' %}
-	
+{% if section_select == 'hero_banner' %}
+
+	{#  **** Hero Banner ****  #}
+	<section data-store="home-hero-banner">
+		{% if show_help or (show_component_help and not has_hero_banner) %}
+			{# Help placeholder when not configured #}
+			<div class="section-help bg-bg-subtle p-8 text-center text-muted">
+				<p>Configura tu Hero Banner desde el panel de administración.</p>
+			</div>
+		{% else %}
+			{% include 'snipplets/home/home-hero-banner.tpl' %}
+		{% endif %}
+	</section>
+
+{% elseif section_select == 'slider' %}
+
 	{#  **** Home slider ****  #}
 	<section data-store="home-slider">
 		{% if show_help or (show_component_help and not (has_main_slider or has_mobile_slider)) %}

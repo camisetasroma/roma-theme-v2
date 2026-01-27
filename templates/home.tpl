@@ -8,8 +8,9 @@
 {% set has_image_text_modules = settings.module_01_show or settings.module_02_show or settings.module_03_show %}
 {% set has_video = settings.video_embed %}
 {% set has_instafeed = store.instagram and settings.show_instafeed and store.hasInstagramToken() %}
+{% set has_hero_banner = 'hero_banner_desktop.jpg' | has_custom_image %}
 
-{% set show_help = not (has_main_slider or has_mobile_slider or has_category_banners or has_image_text_modules or has_video or has_instafeed or has_informative_banners) and not has_products %}
+{% set show_help = not (has_hero_banner or has_main_slider or has_mobile_slider or has_category_banners or has_image_text_modules or has_video or has_instafeed or has_informative_banners) and not has_products %}
 
 {% set show_component_help = params.preview %}
 
@@ -35,7 +36,7 @@
 	{#  **** Hidden Sections ****  #}
 	{% if show_component_help %}
 		<div style="display:none">
-			{% for section_select in ['slider', 'products', 'informatives', 'categories', 'welcome', 'video', 'instafeed', 'modules'] %}
+			{% for section_select in ['hero_banner', 'slider', 'products', 'informatives', 'categories', 'welcome', 'video', 'instafeed', 'modules'] %}
 				{% if section_select not in newArray %}
 					{% include 'snipplets/home/home-section-switch.tpl' %}
 				{% endif %}
