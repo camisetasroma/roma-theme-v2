@@ -270,6 +270,123 @@ Encabezado
 		name = ad_url
 		description = Link (opcional)
 
+Menú de navegación
+	meta
+		icon = bars
+		advanced = true
+	title
+		title = Menús
+	menu
+		name = menu_principal
+		description = Menú principal (aparece en el header)
+	title
+		title = Items destacados
+	i18n_input
+		name = menu_highlighted_items
+		description = Nombres de items para destacar en rojo (separados por coma)
+	description
+		description = Ej: Ofertas, Promoções, Sale
+	title
+		title = Carrusel de categorías
+	description
+		description = Configure hasta 6 categorías para mostrar en el menú expandido
+	subtitle
+		subtitle = CATEGORÍA 1
+	image
+		original = menu_category_01.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_01_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_01_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_01_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 2
+	image
+		original = menu_category_02.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_02_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_02_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_02_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 3
+	image
+		original = menu_category_03.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_03_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_03_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_03_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 4
+	image
+		original = menu_category_04.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_04_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_04_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_04_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 5
+	image
+		original = menu_category_05.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_05_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_05_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_05_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 6
+	image
+		original = menu_category_06.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_06_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_06_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_06_url
+		description = Link de la categoría
+
 Logotipo
 	meta
 		icon = image

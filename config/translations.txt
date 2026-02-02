@@ -50,6 +50,23 @@
 --- --- Social
 
 
+--- Menu Navigation ---
+
+es "Ver Todo"
+pt "Ver Tudo"
+en "See All"
+es_mx "Ver Todo"
+
+es "Cerrar"
+pt "Fechar"
+en "Close"
+es_mx "Cerrar"
+
+es "Menu"
+pt "Menu"
+en "Menu"
+es_mx "Menú"
+
 --- General ---
 
 es "Si"

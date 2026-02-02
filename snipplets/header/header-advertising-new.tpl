@@ -1,4 +1,4 @@
-<div class="ad-bar w-full py-2 text-center transition-colors duration-300">
+<div class="advertising-bar w-full py-2 text-center transition-colors duration-300">
     {% if settings.ad_url %}
         <a href="{{ settings.ad_url | setting_url }}" class="text-sm font-medium transition-colors duration-300">
             {{ settings.ad_text }}

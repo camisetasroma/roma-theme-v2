@@ -69,9 +69,9 @@
 }
 
 .js-new-header[data-state="transparent"] .nav-link,
-.js-new-header[data-state="transparent"] .ad-bar,
-.js-new-header[data-state="transparent"] .ad-bar a,
-.js-new-header[data-state="transparent"] .ad-bar span {
+.js-new-header[data-state="transparent"] .advertising-bar,
+.js-new-header[data-state="transparent"] .advertising-bar a,
+.js-new-header[data-state="transparent"] .advertising-bar span {
     color: var(--background-color);
 }
 
@@ -90,9 +90,9 @@
 }
 
 .js-new-header[data-state="active"] .nav-link,
-.js-new-header[data-state="active"] .ad-bar,
-.js-new-header[data-state="active"] .ad-bar a,
-.js-new-header[data-state="active"] .ad-bar span {
+.js-new-header[data-state="active"] .advertising-bar,
+.js-new-header[data-state="active"] .advertising-bar a,
+.js-new-header[data-state="active"] .advertising-bar span {
     color: var(--primary-color);
 }
 
@@ -150,3 +150,47 @@
         animation: none;
     }
 }
+
+/* ============================
+   MENU - minimal custom CSS
+   (only what Tailwind can't do)
+   ============================ */
+
+/* Accordion icon toggle via aria-expanded */
+.js-menu-accordion-toggle[aria-expanded="true"] .js-icon-closed { display: none; }
+.js-menu-accordion-toggle[aria-expanded="true"] .js-icon-open { display: block; }
+
+/* Carousel track: custom floating scrollbar */
+.js-menu-carousel-track { scrollbar-width: none; -ms-overflow-style: none; }
+.js-menu-carousel-track::-webkit-scrollbar { display: none; }
+
+.js-menu-carousel {
+  position: relative;
+}
+
+.js-menu-carousel-scrollbar {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  right: 16px;
+  height: 0.5rem;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.js-menu-carousel-scrollbar-thumb {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 9999px;
+  transition: width 0.15s ease;
+  pointer-events: auto;
+  cursor: grab;
+}
+
+.js-menu-carousel-scrollbar-thumb:active {
+  cursor: grabbing;
+  background: rgba(255, 255, 255, 1);
+}
+

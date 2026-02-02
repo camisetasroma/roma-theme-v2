@@ -3,7 +3,7 @@
 
 {# New Header #}
 <header
-    class="js-new-header fixed top-0 left-0 right-0 z-50 flex flex-col w-full transition-all duration-300"
+    class="js-new-header fixed top-0 left-0 right-0 z-50 flex flex-col w-full transition-[background-color,backdrop-filter] duration-300"
     data-state="transparent"
     data-store="head"
 >
@@ -17,9 +17,13 @@
 
         {# Mobile: Hamburger | Desktop: Logo #}
         <div class="flex items-center gap-4 flex-1 md:flex-none">
-            {# Hamburger - Mobile only #}
-            <button class="nav-link md:hidden p-1" aria-label="Menu">
-                <i data-lucide="menu" class="w-5 h-5"></i>
+            {# Hamburger - Mobile only (just opens menu, X is inside mobile menu) #}
+            <button
+              type="button"
+              class="js-menu-mobile-toggle nav-link md:hidden p-1 cursor-pointer bg-transparent border-0"
+              aria-label="{{ 'Menu' | translate }}"
+            >
+              <i data-lucide="menu" class="w-5 h-5"></i>
             </button>
 
             {# Logo - Desktop only (left aligned) #}
@@ -30,11 +34,11 @@
                             {{ settings.logo_active_svg | raw }}
                         </div>
                     {% elseif "logo_active.png" | has_custom_image %}
-                        <img 
+                        <img
                             src="{{ 'images/empty-placeholder.png' | static_url }}"
                             data-src="{{ "logo_active.png" | static_url }}"
                             class="lazyload transition-all duration-300 h-8"
-                            alt="{{ store.name }} - Menu Logo" 
+                            alt="{{ store.name }} - Menu Logo"
                         />
                     {% endif %}
                 </a>
@@ -51,32 +55,50 @@
                             {{ settings.logo_active_svg | raw }}
                         </div>
                     {% elseif "logo_active.png" | has_custom_image %}
-                        <img 
+                        <img
                             src="{{ 'images/empty-placeholder.png' | static_url }}"
                             data-src="{{ "logo_active.png" | static_url }}"
                             class="lazyload transition-all duration-300 h-8"
-                            alt="{{ store.name }} - Menu Logo" 
+                            alt="{{ store.name }} - Menu Logo"
                         />
                     {% endif %}
                 </a>
             </div>
 
             {# Navigation - Desktop only #}
-            <nav class="hidden md:flex items-center gap-8">
-                <a href="#" class="nav-link flex items-center gap-1 text-sm font-medium transition-colors duration-300">
-                    Produtos
-                    <i data-lucide="minus" class="w-3 h-3"></i>
-                </a>
-                <a href="#" class="nav-link text-sm font-medium transition-colors duration-300">
-                    Sobre
-                </a>
-                <a href="#" class="nav-link text-sm font-medium transition-colors duration-300">
-                    Suporte
-                </a>
-                <a href="#" class="nav-link text-sm font-medium transition-colors duration-300">
-                    Personalize
-                </a>
-            </nav>
+            {% if settings.menu_principal %}
+              {% set main_menu = menus[settings.menu_principal] %}
+              {% set highlighted_list = settings.menu_highlighted_items | default('') | split(',') | map(item => item | trim | lower) %}
+
+              <nav class="hidden md:flex items-center gap-8" data-menu-desktop>
+                {% for item in main_menu %}
+                  {% set has_subitems = item.subitems is not empty %}
+                  {% set is_highlighted = item.name | lower | trim in highlighted_list %}
+
+                  {% if has_subitems %}
+                    <button
+                      type="button"
+                      class="js-menu-desktop-toggle nav-link flex items-center gap-1 text-sm font-medium transition-colors duration-300 cursor-pointer bg-transparent border-0 {% if is_highlighted %}text-red-600{% endif %}"
+                      data-menu-index="{{ loop.index0 }}"
+                      aria-expanded="false"
+                    >
+                      {{ item.name }}
+                      <i data-lucide="plus" class="js-icon-closed w-3 h-3"></i>
+                      <i data-lucide="minus" class="js-icon-open w-3 h-3 hidden"></i>
+                    </button>
+                  {% else %}
+                    <a
+                      href="{{ item.url }}"
+                      class="nav-link flex items-center gap-1 text-sm font-medium transition-colors duration-300 {% if is_highlighted %}text-red-600{% endif %}"
+                      {% if item.url | is_external %}target="_blank" rel="noopener"{% endif %}
+                    >
+                      {{ item.name }}
+                      <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </nav>
+            {% endif %}
         </div>
 
         {# Utilities - Right #}
@@ -99,6 +121,25 @@
             </a>
         </div>
     </div>
+
+    {# Dropdown panels for each menu item with subitems - Desktop only #}
+    {% if settings.menu_principal %}
+      {% set main_menu = menus[settings.menu_principal] %}
+      <div class="hidden md:block">
+        {% for item in main_menu %}
+          {% if item.subitems is not empty %}
+            {% include 'snipplets/navigation/menu-dropdown-desktop.tpl' with {
+              menu_items: item.subitems,
+              show_carousel: loop.first,
+              highlighted_items: settings.menu_highlighted_items
+            } %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {# Mobile Menu #}
+    {% include 'snipplets/navigation/menu-mobile.tpl' %}
 </header>
 
 {# Spacer para compensar header fixed - oculto quando hero_banner é primeira seção #}
