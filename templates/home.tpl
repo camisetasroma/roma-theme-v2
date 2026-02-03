@@ -9,10 +9,12 @@
 {% set has_video = settings.video_embed %}
 {% set has_instafeed = store.instagram and settings.show_instafeed and store.hasInstagramToken() %}
 {% set has_hero_banner = 'hero_banner_desktop.jpg' | has_custom_image %}
+{% set has_hero_banner_2 = 'hero_banner_2_desktop.jpg' | has_custom_image %}
 {% set has_promo_marquee = settings.promo_marquee_text_1 %}
 {% set has_product_carousel = sections.carousel_tab_1.products is not empty or sections.carousel_tab_2.products is not empty or sections.carousel_tab_3.products is not empty %}
+{% set has_product_grid = sections.primary.products is not empty %}
 
-{% set show_help = not (has_hero_banner or has_main_slider or has_mobile_slider or has_category_banners or has_image_text_modules or has_video or has_instafeed or has_informative_banners or has_promo_marquee) and not has_products %}
+{% set show_help = not (has_hero_banner or has_hero_banner_2 or has_main_slider or has_mobile_slider or has_category_banners or has_image_text_modules or has_video or has_instafeed or has_informative_banners or has_promo_marquee or has_product_grid) and not has_products %}
 
 {% set show_component_help = params.preview %}
 
@@ -24,7 +26,7 @@
 {% set newArray = [] %}
 
 <div class="js-home-sections-container">
-	{% for i in 0..9 %}
+	{% for i in 0..12 %}
 		{% set section = 'home_order_position_' ~ i %}
 		{% set section_select = attribute(settings, section) %}
 
@@ -38,7 +40,7 @@
 	{#  **** Hidden Sections ****  #}
 	{% if show_component_help %}
 		<div style="display:none">
-			{% for section_select in ['hero_banner', 'slider', 'products', 'informatives', 'categories', 'welcome', 'video', 'instafeed', 'modules', 'promo_marquee', 'product_carousel'] %}
+			{% for section_select in ['hero_banner', 'hero_banner_2', 'slider', 'products', 'informatives', 'categories', 'welcome', 'video', 'instafeed', 'modules', 'promo_marquee', 'product_carousel', 'product_grid'] %}
 				{% if section_select not in newArray %}
 					{% include 'snipplets/home/home-section-switch.tpl' %}
 				{% endif %}

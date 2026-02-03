@@ -1,6 +1,6 @@
 {# Product Carousel Item - Miniature Card #}
 
-<div class="swiper-slide flex flex-col justify-center items-start"
+<div class="{{ item_class | default('') }} flex flex-col justify-center items-start"
      data-product-id="{{ product.id }}"
      data-store="product-item-{{ product.id }}">
 
@@ -41,7 +41,7 @@
     {# Product Info Container #}
     <div class="flex flex-col items-start gap-1.5 shrink-0 self-stretch p-2">
         {# Product Name #}
-        <a href="{{ product.url }}" title="{{ product.name }}" class="self-stretch text-secondary font-sans text-[13px] font-medium leading-[120%] no-underline line-clamp-2">
+        <a href="{{ product.url }}" title="{{ product.name }}" class="self-stretch text-secondary font-sans text-[13px] font-medium leading-[120%] no-underline line-clamp-2 min-h-[calc(2*13px*1.2)]">
             {{ product.name }}
         </a>
 

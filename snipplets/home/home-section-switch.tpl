@@ -12,6 +12,19 @@
 		{% endif %}
 	</section>
 
+{% elseif section_select == 'hero_banner_2' %}
+
+	{#  **** Hero Banner 2 ****  #}
+	<section data-store="home-hero-banner-2">
+		{% if show_help or (show_component_help and not has_hero_banner_2) %}
+			<div class="section-help bg-bg-subtle p-8 text-center text-muted">
+				<p>Configura tu Hero Banner 2 desde el panel de administración.</p>
+			</div>
+		{% else %}
+			{% include 'snipplets/home/home-hero-banner-2.tpl' %}
+		{% endif %}
+	</section>
+
 {% elseif section_select == 'slider' %}
 
 	{#  **** Home slider ****  #}
@@ -125,6 +138,17 @@
 		</div>
 	{% else %}
 		{% include 'snipplets/home/home-product-carousel.tpl' %}
+	{% endif %}
+
+{% elseif section_select == 'product_grid' %}
+
+	{#  **** Product Grid ****  #}
+	{% if show_help or (show_component_help and not has_product_grid) %}
+		<div class="section-help bg-bg-subtle p-8 text-center text-muted">
+			<p>Configura tu Grid de Productos desde el panel de administración.</p>
+		</div>
+	{% else %}
+		{% include 'snipplets/home/home-product-grid.tpl' %}
 	{% endif %}
 
 {% endif %}

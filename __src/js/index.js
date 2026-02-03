@@ -305,10 +305,11 @@ const productCarousel = () => {
   }
 
   // Show/hide controls (invisible but keeping space) when not needed
-  function updateControlsVisibility(swiper, realCount) {
+  function updateControlsVisibility(realCount) {
     if (!controlsContainer) return;
-    const perView = swiper.params.slidesPerView;
-    const needsControls = realCount > Math.ceil(perView);
+    // With infinite loop, always show controls if there are at least 2 items
+    // Hide only when there's 1 or 0 items (nothing to scroll)
+    const needsControls = realCount >= 2;
     controlsContainer.style.visibility = needsControls ? "visible" : "hidden";
   }
 
@@ -318,6 +319,18 @@ const productCarousel = () => {
     const realCount = realSlideCounts[activeTab] || 0;
     const isLoop = swiper.params.loop;
     const currentIndex = isLoop ? swiper.realIndex : swiper.activeIndex;
+    renderPagination(realCount, currentIndex);
+  }
+
+  // Update pagination with a specific index (used when switching tabs)
+  function updatePaginationForIndex(index) {
+    const realCount = realSlideCounts[activeTab] || 0;
+    renderPagination(realCount, index);
+  }
+
+  // Render the pagination seeds
+  function renderPagination(realCount, currentIndex) {
+    if (!paginationContainer) return;
 
     let html = "";
     for (let i = 0; i < realCount; i++) {
@@ -341,21 +354,26 @@ const productCarousel = () => {
   }
 
   // Init swipers for each tab (using setTimeout like the theme's createSwiper)
+  const mobilePerView = 2.25;
+  const desktopPerView = 3.25;
+
   for (let i = 1; i <= 3; i++) {
     const container = section.querySelector(`.js-swiper-product-carousel-${i}`);
     if (container) {
       const slideCount = container.querySelectorAll(".swiper-slide").length;
       realSlideCounts[`tab-${i}`] = slideCount;
 
-      // Swiper 6 loop needs more slides than slidesPerView
-      const desktopPerView = 3.25;
-      const useLoop = slideCount > Math.ceil(desktopPerView);
-
       setTimeout(() => {
+        // For loop to work smoothly, we need enough cloned slides
+        // loopedSlides should be at least slidesPerView rounded up
+        const loopSlides = Math.max(slideCount, Math.ceil(mobilePerView) + 1);
+
         swipers[`tab-${i}`] = new Swiper(container, {
-          slidesPerView: 2.25,
+          slidesPerView: mobilePerView,
           spaceBetween: 12,
-          loop: useLoop,
+          loop: true,
+          loopedSlides: loopSlides,
+          loopAdditionalSlides: 2,
           breakpoints: {
             768: {
               slidesPerView: desktopPerView,
@@ -364,7 +382,11 @@ const productCarousel = () => {
           },
           on: {
             slideChange: function () {
-              if (`tab-${i}` === activeTab) updatePagination(this);
+              if (`tab-${i}` === activeTab) {
+                // realIndex already handles loop correctly
+                const realIndex = this.realIndex % slideCount;
+                updatePaginationForIndex(realIndex);
+              }
             },
           },
         });
@@ -373,7 +395,7 @@ const productCarousel = () => {
         // After first tab swiper is ready, update UI
         if (i === 1 || (initCount === 1 && `tab-${i}` === activeTab)) {
           updatePagination(swipers[`tab-${i}`]);
-          updateControlsVisibility(swipers[`tab-${i}`], slideCount);
+          updateControlsVisibility(slideCount);
         }
       }, 0);
     }
@@ -392,8 +414,15 @@ const productCarousel = () => {
     const swiper = getActiveSwiper();
     if (swiper) {
       swiper.update();
-      updatePagination(swiper);
-      updateControlsVisibility(swiper, realSlideCounts[activeTab] || 0);
+      // Reset to first slide when switching tabs
+      if (swiper.params.loop) {
+        swiper.slideToLoop(0, 0);
+      } else {
+        swiper.slideTo(0, 0);
+      }
+      // Force pagination to show first seed as active
+      updatePaginationForIndex(0);
+      updateControlsVisibility(realSlideCounts[activeTab] || 0);
     }
     if (typeof lucide !== "undefined") lucide.createIcons();
   }
@@ -452,6 +481,14 @@ const productCarousel = () => {
       if (swiper) swiper.slideNext();
     });
   }
+
+  // Update controls visibility on resize (breakpoint may change)
+  window.addEventListener("resize", () => {
+    const swiper = getActiveSwiper();
+    if (swiper) {
+      updateControlsVisibility(realSlideCounts[activeTab] || 0);
+    }
+  });
 
   // Reinit icons for lazy loaded content
   if (typeof lucide !== "undefined") lucide.createIcons();

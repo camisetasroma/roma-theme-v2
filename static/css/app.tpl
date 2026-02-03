@@ -917,10 +917,6 @@
     height: calc(var(--spacing) * 100);
   }
 
-  .h-\[1px\] {
-    height: 1px;
-  }
-
   .h-\[596\.4px\] {
     height: 596.4px;
   }
@@ -967,6 +963,10 @@
 
   .min-h-145 {
     min-height: calc(var(--spacing) * 145);
+  }
+
+  .min-h-\[calc\(2\*13px\*1\.2\)\] {
+    min-height: 31.2px;
   }
 
   .w-3 {
@@ -1074,11 +1074,6 @@
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
-  .-translate-y-1\/2 {
-    --tw-translate-y: calc(calc(1 / 2 * 100%) * -1);
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-
   .transform {
     transform: var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, );
   }
@@ -1113,6 +1108,10 @@
 
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .flex-col {
@@ -1205,10 +1204,6 @@
 
   .gap-12 {
     gap: calc(var(--spacing) * 12);
-  }
-
-  .gap-\[5px\] {
-    gap: 5px;
   }
 
   .gap-x-4 {
@@ -1883,12 +1878,6 @@
     filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
   }
 
-  .backdrop-blur-\[0\.5rem\] {
-    --tw-backdrop-blur: blur(.5rem);
-    -webkit-backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
-    backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
-  }
-
   .backdrop-blur-sm {
     --tw-backdrop-blur: blur(var(--blur-sm));
     -webkit-backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
@@ -1974,10 +1963,6 @@
     background: #fffff6b3;
   }
 
-  .\[background\:rgba\(255\,255\,255\,0\.95\)\] {
-    background: #fffffff2;
-  }
-
   @media (hover: hover) {
     .group-hover\:scale-110:is(:where(.group):hover *) {
       --tw-scale-x: 110%;
@@ -2042,6 +2027,10 @@
       flex-direction: row;
     }
 
+    .md\:gap-4 {
+      gap: calc(var(--spacing) * 4);
+    }
+
     .md\:gap-6 {
       gap: calc(var(--spacing) * 6);
     }
@@ -2056,6 +2045,10 @@
 
     .md\:pb-0 {
       padding-bottom: calc(var(--spacing) * 0);
+    }
+
+    .md\:text-center {
+      text-align: center;
     }
 
     .md\:text-5xl {

@@ -508,6 +508,48 @@ Página de inicio
 			primary = Cor principal
 			background = Cor de fundo
 	collapse
+		title = Hero Banner 2
+		backto = home_order_position
+	subtitle
+		subtitle = Imagem para computadores (obrigatória)
+	image
+		original = hero_banner_2_desktop.jpg
+		title = Cargar imagen desktop (JPG, PNG)
+		width = 1920
+		height = 820
+	subtitle
+		subtitle = Imagem para celulares (opcional)
+	description
+		description = Se não subir uma imagem para celular, será usada a imagem do desktop
+	image
+		original = hero_banner_2_mobile.jpg
+		title = Cargar imagen mobile (JPG, PNG)
+		width = 820
+		height = 600
+	subtitle
+		subtitle = Textos e Link
+	i18n_input
+		name = hero_banner_2_subtitle
+		description = Texto de apoio (ex: Peças Limitadas)
+	i18n_input
+		name = hero_banner_2_title
+		description = Título principal (ex: Linha Jeans)
+	i18n_input
+		name = hero_banner_2_button_text
+		description = Texto do botão (ex: Confira)
+	i18n_input
+		name = hero_banner_2_button_url
+		description = Link do botão
+	subtitle
+		subtitle = Cores
+	dropdown
+		name = hero_banner_2_text_color
+		description = Cor dos textos
+		values
+			white = Branco
+			primary = Cor principal
+			background = Cor de fundo
+	collapse
 		title = Carrusel de imágenes
 		backto = home_order_position
 	subtitle
@@ -731,6 +773,28 @@ Página de inicio
 			background = Cor de fundo
 			accent = Cor de acento
 	collapse
+		title = Grid de produtos
+		backto = home_order_position
+	description
+		description = Exibe os 4 primeiros produtos destacados em um grid 2x2 na página de inicio.
+		name = product_grid_description
+	subtitle
+		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Escolha os produtos destacados</a>
+	i18n_input
+		description = Título da seção
+		name = product_grid_title
+	subtitle
+		subtitle = Aparência
+	dropdown
+		name = product_grid_bg
+		description = Cor de fundo da seção
+		values
+			none = Sem fundo
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+			accent = Cor de acento
+	collapse
 		title = Módulos de imagen y texto
 		backto = home_order_position
 	description
@@ -847,6 +911,7 @@ Página de inicio
 		sections
 			promo_marquee = Barra Promocional
 			hero_banner = Hero Banner
+			hero_banner_2 = Hero Banner 2
 			slider = Carrusel de imágenes
 			welcome = Mensaje institucional
 			products = Productos destacados
@@ -855,6 +920,7 @@ Página de inicio
 			modules = Módulos de imagen y texto
 			video = Video
 			product_carousel = Carrossel de produtos
+			product_grid = Grid de produtos
 			instafeed = Publicaciones de Instagram
 	link
 		text = Pop-up promocional

@@ -74,7 +74,7 @@
         <div class="js-swiper-product-carousel-1 swiper-container">
             <div class="swiper-wrapper">
                 {% for product in sections.carousel_tab_1.products %}
-                    {% include 'snipplets/grid/item-carousel.tpl' %}
+                    {% include 'snipplets/grid/item-card.tpl' with { 'item_class': 'swiper-slide' } %}
                 {% endfor %}
             </div>
         </div>
@@ -86,7 +86,7 @@
         <div class="js-swiper-product-carousel-2 swiper-container">
             <div class="swiper-wrapper">
                 {% for product in sections.carousel_tab_2.products %}
-                    {% include 'snipplets/grid/item-carousel.tpl' %}
+                    {% include 'snipplets/grid/item-card.tpl' with { 'item_class': 'swiper-slide' } %}
                 {% endfor %}
             </div>
         </div>
@@ -98,7 +98,7 @@
         <div class="js-swiper-product-carousel-3 swiper-container">
             <div class="swiper-wrapper">
                 {% for product in sections.carousel_tab_3.products %}
-                    {% include 'snipplets/grid/item-carousel.tpl' %}
+                    {% include 'snipplets/grid/item-card.tpl' with { 'item_class': 'swiper-slide' } %}
                 {% endfor %}
             </div>
         </div>
