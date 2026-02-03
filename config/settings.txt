@@ -263,11 +263,31 @@ Encabezado
 	checkbox
 		name = ad_bar
 		description = Mostrar barra de anuncio
+	description
+		description = Configure até 3 mensagens que irão rotacionar automaticamente
+	subtitle
+		subtitle = MENSAGEM 1
 	i18n_input
 		name = ad_text
 		description = Mensaje
 	i18n_input
 		name = ad_url
+		description = Link (opcional)
+	subtitle
+		subtitle = MENSAGEM 2 (opcional)
+	i18n_input
+		name = ad_text_2
+		description = Mensaje
+	i18n_input
+		name = ad_url_2
+		description = Link (opcional)
+	subtitle
+		subtitle = MENSAGEM 3 (opcional)
+	i18n_input
+		name = ad_text_3
+		description = Mensaje
+	i18n_input
+		name = ad_url_3
 		description = Link (opcional)
 
 Menú de navegación
@@ -544,6 +564,47 @@ Página de inicio
 		subtitle = Cores
 	dropdown
 		name = hero_banner_2_text_color
+		description = Cor dos textos
+		values
+			white = Branco
+			primary = Cor principal
+			background = Cor de fundo
+	title
+		title = Slide 2 (opcional)
+	description
+		description = Adicione um segundo slide para criar um carrossel no Hero Banner 2
+	subtitle
+		subtitle = Imagem para computadores
+	image
+		original = hero_banner_2_slide2_desktop.jpg
+		title = Cargar imagen desktop (JPG, PNG)
+		width = 1920
+		height = 820
+	subtitle
+		subtitle = Imagem para celulares (opcional)
+	image
+		original = hero_banner_2_slide2_mobile.jpg
+		title = Cargar imagen mobile (JPG, PNG)
+		width = 820
+		height = 600
+	subtitle
+		subtitle = Textos e Link
+	i18n_input
+		name = hero_banner_2_slide2_subtitle
+		description = Texto de apoio (ex: Peças Limitadas)
+	i18n_input
+		name = hero_banner_2_slide2_title
+		description = Título principal (ex: Linha Jeans)
+	i18n_input
+		name = hero_banner_2_slide2_button_text
+		description = Texto do botão (ex: Confira)
+	i18n_input
+		name = hero_banner_2_slide2_button_url
+		description = Link do botão
+	subtitle
+		subtitle = Cores
+	dropdown
+		name = hero_banner_2_slide2_text_color
 		description = Cor dos textos
 		values
 			white = Branco

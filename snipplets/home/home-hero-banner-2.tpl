@@ -1,104 +1,73 @@
-{# Hero Banner 2 - Secondary hero banner for homepage #}
+{# Hero Banner 2 - Secondary hero banner for homepage with carousel support #}
 
-{% set has_hero2_desktop_image = 'hero_banner_2_desktop.jpg' | has_custom_image %}
-{% set has_hero2_mobile_image = 'hero_banner_2_mobile.jpg' | has_custom_image %}
+{% set has_hero2_slide1_desktop = 'hero_banner_2_desktop.jpg' | has_custom_image %}
+{% set has_hero2_slide2_desktop = 'hero_banner_2_slide2_desktop.jpg' | has_custom_image %}
+{% set has_hero2_slide1_mobile = 'hero_banner_2_mobile.jpg' | has_custom_image %}
+{% set has_hero2_slide2_mobile = 'hero_banner_2_slide2_mobile.jpg' | has_custom_image %}
 {% set section_first = settings.home_order_position_0 == 'hero_banner_2' %}
-{% set hero2_link = settings.hero_banner_2_button_url | setting_url %}
 
-{% if has_hero2_desktop_image %}
+{# Count how many slides we have #}
+{% set slide_count = 0 %}
+{% if has_hero2_slide1_desktop %}{% set slide_count = slide_count + 1 %}{% endif %}
+{% if has_hero2_slide2_desktop %}{% set slide_count = slide_count + 1 %}{% endif %}
 
-    {# Define text color class based on setting #}
-    {% if settings.hero_banner_2_text_color == 'primary' %}
-        {% set text_color_class = 'text-fg' %}
-    {% elseif settings.hero_banner_2_text_color == 'background' %}
-        {% set text_color_class = 'text-bg' %}
-    {% else %}
-        {% set text_color_class = 'text-white' %}
-    {% endif %}
+{% if has_hero2_slide1_desktop %}
 
     {# Lazy loading logic - don't lazy load if first section #}
     {% set apply_lazy_load = not section_first %}
 
-    {# Mobile image fallback to desktop #}
-    {% set mobile_image = has_hero2_mobile_image ? 'hero_banner_2_mobile.jpg' : 'hero_banner_2_desktop.jpg' %}
+    <section class="js-hero-banner-2 relative w-full" data-store="home-hero-banner-2">
 
-    <section class="relative w-full" data-store="home-hero-banner-2">
+        {# Slides Container - needs fixed height since slides are absolute #}
+        <div class="relative h-[596.4px] md:h-170">
+            {# Slide 1 #}
+            {% include 'snipplets/home/hero-banner-2-slide.tpl' with {
+                'slide_index': 0,
+                'desktop_image': 'hero_banner_2_desktop.jpg',
+                'mobile_image': has_hero2_slide1_mobile ? 'hero_banner_2_mobile.jpg' : 'hero_banner_2_desktop.jpg',
+                'subtitle': settings.hero_banner_2_subtitle,
+                'title': settings.hero_banner_2_title,
+                'button_text': settings.hero_banner_2_button_text,
+                'button_url': settings.hero_banner_2_button_url,
+                'text_color': settings.hero_banner_2_text_color,
+                'apply_lazy_load': apply_lazy_load,
+                'is_active': true
+            } %}
 
-        {# Wrapper - clickable if has link #}
-        {% if hero2_link %}
-            <a href="{{ hero2_link }}" class="block relative">
-        {% else %}
-            <div class="relative">
-        {% endif %}
+            {# Slide 2 #}
+            {% if has_hero2_slide2_desktop %}
+                {% include 'snipplets/home/hero-banner-2-slide.tpl' with {
+                    'slide_index': 1,
+                    'desktop_image': 'hero_banner_2_slide2_desktop.jpg',
+                    'mobile_image': has_hero2_slide2_mobile ? 'hero_banner_2_slide2_mobile.jpg' : 'hero_banner_2_slide2_desktop.jpg',
+                    'subtitle': settings.hero_banner_2_slide2_subtitle,
+                    'title': settings.hero_banner_2_slide2_title,
+                    'button_text': settings.hero_banner_2_slide2_button_text,
+                    'button_url': settings.hero_banner_2_slide2_button_url,
+                    'text_color': settings.hero_banner_2_slide2_text_color,
+                    'apply_lazy_load': true,
+                    'is_active': false
+                } %}
+            {% endif %}
+        </div>
 
-            {# Desktop Container #}
-            <div class="hidden md:block relative h-[819.2px]">
-                {% if apply_lazy_load %}
-                    {% set desktop_src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' %}
-                {% else %}
-                    {% set desktop_src = 'hero_banner_2_desktop.jpg' | static_url | settings_image_url('original') %}
-                {% endif %}
+        {# Controls: Seeds (pagination) left + Arrows right - only show if more than 1 slide #}
+        {% if slide_count > 1 %}
+            <div class="js-hero2-controls absolute bottom-6 left-0 right-0 flex items-center justify-between px-4 md:px-16 z-20">
+                {# Seed pagination indicators #}
+                <div class="js-hero2-pagination flex items-center gap-2">
+                    {# Seeds will be rendered here by JS #}
+                </div>
 
-                <img
-                    {% if not apply_lazy_load %}fetchpriority="high"{% endif %}
-                    {% if apply_lazy_load %}data-{% endif %}src="{{ desktop_src }}"
-                    {% if apply_lazy_load %}data-{% endif %}srcset="{{ 'hero_banner_2_desktop.jpg' | static_url | settings_image_url('large') }} 1024w, {{ 'hero_banner_2_desktop.jpg' | static_url | settings_image_url('huge') }} 1440w, {{ 'hero_banner_2_desktop.jpg' | static_url | settings_image_url('original') }} 1920w"
-                    {% if apply_lazy_load %}
-                    data-sizes="100vw"
-                    data-expand="-10"
-                    {% else %}
-                    sizes="100vw"
-                    {% endif %}
-                    class="absolute inset-0 w-full h-full object-cover {% if apply_lazy_load %}lazyautosizes lazyload fade-in{% endif %}"
-                    alt="{{ settings.hero_banner_2_title ?: store.name }}"
-                />
-            </div>
-
-            {# Mobile Container #}
-            <div class="md:hidden relative h-[596.4px]">
-                {% if apply_lazy_load %}
-                    {% set mobile_src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' %}
-                {% else %}
-                    {% set mobile_src = mobile_image | static_url | settings_image_url('large') %}
-                {% endif %}
-
-                <img
-                    {% if not apply_lazy_load %}fetchpriority="high"{% endif %}
-                    {% if apply_lazy_load %}data-{% endif %}src="{{ mobile_src }}"
-                    {% if apply_lazy_load %}data-{% endif %}srcset="{{ mobile_image | static_url | settings_image_url('medium') }} 480w, {{ mobile_image | static_url | settings_image_url('large') }} 768w"
-                    {% if apply_lazy_load %}
-                    data-sizes="100vw"
-                    data-expand="-10"
-                    {% else %}
-                    sizes="100vw"
-                    {% endif %}
-                    class="absolute inset-0 w-full h-full object-cover {% if apply_lazy_load %}lazyautosizes lazyload fade-in{% endif %}"
-                    alt="{{ settings.hero_banner_2_title ?: store.name }}"
-                />
-            </div>
-
-            {# Overlay - shared between desktop and mobile #}
-            <div class="absolute inset-0 bg-black/35"></div>
-
-            {# Content - positioned at bottom center #}
-            <div class="absolute inset-x-0 bottom-0 flex flex-col items-center px-6 pb-6 {{ text_color_class }}">
-                {% if settings.hero_banner_2_subtitle %}
-                    <span class="text-base font-normal font-sans mb-2">{{ settings.hero_banner_2_subtitle }}</span>
-                {% endif %}
-                {% if settings.hero_banner_2_title %}
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-2">{{ settings.hero_banner_2_title }}</h2>
-                {% endif %}
-                {% if settings.hero_banner_2_button_text %}
-                    <span class="inline-flex items-center gap-2 text-base font-semibold">
-                        {{ settings.hero_banner_2_button_text }}
-                        <i data-lucide="arrow-right" class="w-5 h-5 mt-0.5"></i>
-                    </span>
-                {% endif %}
-            </div>
-
-        {% if hero2_link %}
-            </a>
-        {% else %}
+                {# Navigation arrows - same style as product carousel #}
+                <div class="flex items-center gap-2">
+                    <button class="js-hero2-prev flex w-8 h-8 justify-center items-center cursor-pointer" aria-label="{{ 'Anterior' | translate }}">
+                        <i data-lucide="arrow-left" class="w-5 h-5 text-white"></i>
+                    </button>
+                    <button class="js-hero2-next flex w-8 h-8 justify-center items-center cursor-pointer" aria-label="{{ 'Siguiente' | translate }}">
+                        <i data-lucide="arrow-right" class="w-5 h-5 text-white"></i>
+                    </button>
+                </div>
             </div>
         {% endif %}
 

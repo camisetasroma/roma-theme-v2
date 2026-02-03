@@ -12,7 +12,7 @@
 {% set grid_bg_value = grid_bg_map[settings.product_grid_bg] | default('transparent') %}
 
 {% if has_grid_products %}
-<section class="section-product-grid px-4 md:px-16 py-8" data-store="home-product-grid" style="background-color: {{ grid_bg_value }}">
+<section class="section-product-grid px-4 md:px-32 py-8" data-store="home-product-grid" style="background-color: {{ grid_bg_value }}">
 
     {# Title #}
     {% if settings.product_grid_title %}
@@ -23,8 +23,8 @@
         </div>
     {% endif %}
 
-    {# Product Grid 2x2 #}
-    <div class="grid grid-cols-2 gap-3 md:gap-4">
+    {# Product Grid 2x2 - increased horizontal gap on medium+ screens to prevent items from being too large #}
+    <div class="grid grid-cols-2 gap-3 md:gap-x-12 md:gap-y-4 lg:gap-x-16 xl:gap-x-20">
         {% for product in sections.primary.products | slice(0, 4) %}
             {% include 'snipplets/grid/item-card.tpl' %}
         {% endfor %}

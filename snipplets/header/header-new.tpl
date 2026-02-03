@@ -1,19 +1,19 @@
 {# Site Overlay #}
 <div class="js-overlay site-overlay" style="display: none;"></div>
 
-{# New Header #}
+{# New Header - Fixed at top #}
 <header
-    class="js-new-header fixed top-0 left-0 right-0 z-50 flex flex-col w-full transition-[background-color,backdrop-filter] duration-300"
+    class="js-new-header fixed top-0 left-0 right-0 z-50 flex flex-col w-full transition-[background-color,backdrop-filter] duration-300 overflow-hidden"
     data-state="transparent"
     data-store="head"
 >
-    {# Advertising Bar #}
+    {# Advertising Bar - inside header, simulates scroll with translateY #}
     {% if settings.ad_bar and settings.ad_text %}
         {% snipplet "header/header-advertising-new.tpl" %}
     {% endif %}
 
     {# Main Header Container #}
-    <div class="flex items-center justify-between w-full px-4 md:px-16 py-5.5 md:py-4">
+    <div class="flex items-center justify-between w-full px-4 md:px-16 py-5.5">
 
         {# Mobile: Hamburger | Desktop: Logo #}
         <div class="flex items-center gap-4 flex-1">

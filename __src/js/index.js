@@ -2,23 +2,29 @@ const app = () => {
   const header = document.querySelector(".js-new-header");
   if (!header) return;
 
+  const advertisingBar = document.querySelector(".js-advertising-bar");
+  const adBarHeight = advertisingBar ? advertisingBar.offsetHeight : 0;
   const SCROLL_THRESHOLD = 50;
-  let isScrolled = false;
   let isMenuActive = false;
 
-  function updateHeaderState() {
-    const shouldBeActive = isScrolled || isMenuActive;
+  function updateHeaderState(scrollY) {
+    const shouldBeActive = scrollY > SCROLL_THRESHOLD || isMenuActive;
     header.setAttribute(
       "data-state",
       shouldBeActive ? "active" : "transparent",
     );
+
+    // Simulate scroll on advertising bar - moves up with page scroll
+    if (advertisingBar && adBarHeight > 0) {
+      const translateY = Math.min(scrollY, adBarHeight);
+      advertisingBar.style.transform = `translateY(-${translateY}px)`;
+      advertisingBar.style.marginBottom = `-${translateY}px`;
+    }
   }
 
   function handleScroll() {
     const scrollY = window.scrollY || window.pageYOffset;
-    const wasScrolled = isScrolled;
-    isScrolled = scrollY > SCROLL_THRESHOLD;
-    if (wasScrolled !== isScrolled) updateHeaderState();
+    updateHeaderState(scrollY);
   }
 
   window.addEventListener("scroll", handleScroll, { passive: true });
@@ -26,7 +32,7 @@ const app = () => {
 
   window.setHeaderMenuActive = function (active) {
     isMenuActive = active;
-    updateHeaderState();
+    updateHeaderState(window.scrollY || window.pageYOffset);
   };
 };
 
@@ -522,7 +528,137 @@ const productCarousel = () => {
   if (typeof lucide !== "undefined") lucide.createIcons();
 };
 
+const advertisingCarousel = () => {
+  const carousel = document.querySelector(".js-ad-carousel");
+  if (!carousel) return;
+
+  const slides = carousel.querySelectorAll(".js-ad-slide");
+  if (slides.length < 2) return;
+
+  let currentSlide = 0;
+  const INTERVAL = 4000; // 4 seconds - reasonable reading time
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      if (i === index) {
+        slide.classList.remove("opacity-0");
+        slide.classList.add("opacity-100");
+      } else {
+        slide.classList.remove("opacity-100");
+        slide.classList.add("opacity-0");
+      }
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  // Start the rotation
+  setInterval(nextSlide, INTERVAL);
+};
+
+const heroBanner2Carousel = () => {
+  const section = document.querySelector(".js-hero-banner-2");
+  if (!section) return;
+
+  const slides = section.querySelectorAll(".js-hero2-slide");
+  if (slides.length < 2) return;
+
+  const paginationContainer = section.querySelector(".js-hero2-pagination");
+  const prevBtn = section.querySelector(".js-hero2-prev");
+  const nextBtn = section.querySelector(".js-hero2-next");
+
+  let currentSlide = 0;
+  const AUTOPLAY_INTERVAL = 6000; // 6 seconds for hero banner
+  let autoplayTimer = null;
+
+  // SVG for seed pagination dot (white version for dark overlay)
+  const seedSVG = (active) => `
+    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">
+      <path d="M6.93294 6.9178C10.0118 6.33768 11.5457 4.64453 10.8236 2.44759C10.2482 0.697531 8.31108 -0.0463472 6.24753 0.00222694C4.0117 0.0549646 2.34216 1.16245 1.5248 2.83063C1.07947 3.73966 0.564497 5.41477 0.0330304 6.99968C-0.164895 7.58812 0.559 8.12244 1.34154 7.97533C2.63722 7.73523 5.76371 7.13846 6.93294 6.9178Z" fill="${active ? '#FFFFFF' : 'rgba(255,255,255,0.4)'}"/>
+    </svg>`;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      if (i === index) {
+        slide.classList.remove("opacity-0", "z-0");
+        slide.classList.add("opacity-100", "z-10");
+      } else {
+        slide.classList.remove("opacity-100", "z-10");
+        slide.classList.add("opacity-0", "z-0");
+      }
+    });
+    renderPagination(index);
+    if (typeof lucide !== "undefined") lucide.createIcons();
+  }
+
+  function renderPagination(currentIndex) {
+    if (!paginationContainer) return;
+    let html = "";
+    for (let i = 0; i < slides.length; i++) {
+      html += `<span class="cursor-pointer js-hero2-seed" data-index="${i}">${seedSVG(i === currentIndex)}</span>`;
+    }
+    paginationContainer.innerHTML = html;
+
+    // Click listeners on seeds
+    paginationContainer.querySelectorAll(".js-hero2-seed").forEach((seed) => {
+      seed.addEventListener("click", () => {
+        const idx = parseInt(seed.dataset.index);
+        goToSlide(idx);
+      });
+    });
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    showSlide(currentSlide);
+    resetAutoplay();
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  function resetAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(nextSlide, AUTOPLAY_INTERVAL);
+  }
+
+  // Navigation buttons
+  if (prevBtn) {
+    prevBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      prevSlide();
+      resetAutoplay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      nextSlide();
+      resetAutoplay();
+    });
+  }
+
+  // Initialize
+  renderPagination(0);
+  resetAutoplay();
+};
+
 // Script is loaded at end of body, DOM is ready
 app();
 menuSystem();
 productCarousel();
+advertisingCarousel();
+heroBanner2Carousel();

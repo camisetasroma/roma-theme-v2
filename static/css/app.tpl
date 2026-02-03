@@ -143,6 +143,7 @@
     --transition-duration-200: .2s;
     --transition-duration-300: .3s;
     --transition-duration-500: .5s;
+    --transition-duration-700: .7s;
   }
 }
 
@@ -472,8 +473,20 @@
     bottom: calc(var(--spacing) * 2);
   }
 
+  .bottom-6 {
+    bottom: calc(var(--spacing) * 6);
+  }
+
+  .bottom-16 {
+    bottom: calc(var(--spacing) * 16);
+  }
+
   .left-0 {
     left: calc(var(--spacing) * 0);
+  }
+
+  .z-0 {
+    z-index: 0;
   }
 
   .z-10 {
@@ -917,6 +930,14 @@
     height: calc(var(--spacing) * 100);
   }
 
+  .h-150 {
+    height: calc(var(--spacing) * 150);
+  }
+
+  .h-170 {
+    height: calc(var(--spacing) * 170);
+  }
+
   .h-\[596\.4px\] {
     height: 596.4px;
   }
@@ -1240,6 +1261,10 @@
 
   .rounded {
     border-radius: .25rem;
+  }
+
+  .rounded-full {
+    border-radius: 3.40282e38px;
   }
 
   .rounded-lg {
@@ -1829,6 +1854,10 @@
     text-decoration-line: underline;
   }
 
+  .opacity-0 {
+    opacity: 0;
+  }
+
   .opacity-40 {
     opacity: .4;
   }
@@ -1847,6 +1876,10 @@
 
   .opacity-90 {
     opacity: .9;
+  }
+
+  .opacity-100 {
+    opacity: 1;
   }
 
   .shadow-lg {
@@ -1940,6 +1973,11 @@
     transition-duration: var(--transition-duration-500);
   }
 
+  .duration-700 {
+    --tw-duration: var(--transition-duration-700);
+    transition-duration: var(--transition-duration-700);
+  }
+
   .ease-in {
     --tw-ease: var(--ease-in);
     transition-timing-function: var(--ease-in);
@@ -2015,6 +2053,10 @@
       height: calc(var(--spacing) * 30);
     }
 
+    .md\:h-170 {
+      height: calc(var(--spacing) * 170);
+    }
+
     .md\:snap-none {
       scroll-snap-type: none;
     }
@@ -2027,16 +2069,24 @@
       flex-direction: row;
     }
 
-    .md\:gap-4 {
-      gap: calc(var(--spacing) * 4);
-    }
-
     .md\:gap-6 {
       gap: calc(var(--spacing) * 6);
     }
 
+    .md\:gap-x-12 {
+      column-gap: calc(var(--spacing) * 12);
+    }
+
+    .md\:gap-y-4 {
+      row-gap: calc(var(--spacing) * 4);
+    }
+
     .md\:px-16 {
       padding-inline: calc(var(--spacing) * 16);
+    }
+
+    .md\:px-32 {
+      padding-inline: calc(var(--spacing) * 32);
     }
 
     .md\:py-4 {
@@ -2058,9 +2108,19 @@
   }
 
   @media (min-width: 64rem) {
+    .lg\:gap-x-16 {
+      column-gap: calc(var(--spacing) * 16);
+    }
+
     .lg\:text-6xl {
       font-size: var(--text-6xl);
       line-height: var(--tw-leading, var(--text-6xl--line-height));
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .xl\:gap-x-20 {
+      column-gap: calc(var(--spacing) * 20);
     }
   }
 }
