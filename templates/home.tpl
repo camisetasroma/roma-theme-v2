@@ -10,6 +10,7 @@
 {% set has_instafeed = store.instagram and settings.show_instafeed and store.hasInstagramToken() %}
 {% set has_hero_banner = 'hero_banner_desktop.jpg' | has_custom_image %}
 {% set has_promo_marquee = settings.promo_marquee_text_1 %}
+{% set has_product_carousel = sections.carousel_tab_1.products is not empty or sections.carousel_tab_2.products is not empty or sections.carousel_tab_3.products is not empty %}
 
 {% set show_help = not (has_hero_banner or has_main_slider or has_mobile_slider or has_category_banners or has_image_text_modules or has_video or has_instafeed or has_informative_banners or has_promo_marquee) and not has_products %}
 
@@ -23,7 +24,7 @@
 {% set newArray = [] %}
 
 <div class="js-home-sections-container">
-	{% for i in 0..8 %}
+	{% for i in 0..9 %}
 		{% set section = 'home_order_position_' ~ i %}
 		{% set section_select = attribute(settings, section) %}
 
@@ -37,7 +38,7 @@
 	{#  **** Hidden Sections ****  #}
 	{% if show_component_help %}
 		<div style="display:none">
-			{% for section_select in ['hero_banner', 'slider', 'products', 'informatives', 'categories', 'welcome', 'video', 'instafeed', 'modules', 'promo_marquee'] %}
+			{% for section_select in ['hero_banner', 'slider', 'products', 'informatives', 'categories', 'welcome', 'video', 'instafeed', 'modules', 'promo_marquee', 'product_carousel'] %}
 				{% if section_select not in newArray %}
 					{% include 'snipplets/home/home-section-switch.tpl' %}
 				{% endif %}

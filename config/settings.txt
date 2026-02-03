@@ -700,6 +700,37 @@ Página de inicio
 	subtitle
 		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Elegí cuáles vas a destacar</a>
 	collapse
+		title = Carrossel de produtos
+		backto = home_order_position
+	description
+		description = Configure até 3 abas de produtos para exibir no carrossel da página de inicio.
+		name = product_carousel_description
+	subtitle
+		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Escolha os produtos de cada aba</a>
+	i18n_input
+		description = Título da seção
+		name = product_carousel_title
+	i18n_input
+		description = Nome da Aba 1
+		name = product_carousel_tab_1_label
+	i18n_input
+		description = Nome da Aba 2
+		name = product_carousel_tab_2_label
+	i18n_input
+		description = Nome da Aba 3
+		name = product_carousel_tab_3_label
+	subtitle
+		subtitle = Aparência
+	dropdown
+		name = product_carousel_bg
+		description = Cor de fundo da seção
+		values
+			none = Sem fundo
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+			accent = Cor de acento
+	collapse
 		title = Módulos de imagen y texto
 		backto = home_order_position
 	description
@@ -823,6 +854,7 @@ Página de inicio
 			categories = Banners de categorías
 			modules = Módulos de imagen y texto
 			video = Video
+			product_carousel = Carrossel de produtos
 			instafeed = Publicaciones de Instagram
 	link
 		text = Pop-up promocional

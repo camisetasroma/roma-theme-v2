@@ -116,4 +116,15 @@
 		{% endif %}
 	</section>
 
+{% elseif section_select == 'product_carousel' %}
+
+	{#  **** Product Carousel ****  #}
+	{% if show_help or (show_component_help and not has_product_carousel) %}
+		<div class="section-help bg-bg-subtle p-8 text-center text-muted">
+			<p>Configura tu Carrossel de Productos desde el panel de administración.</p>
+		</div>
+	{% else %}
+		{% include 'snipplets/home/home-product-carousel.tpl' %}
+	{% endif %}
+
 {% endif %}

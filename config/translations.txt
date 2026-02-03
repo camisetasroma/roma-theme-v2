@@ -3132,6 +3132,18 @@ es_mx "Diseño con espacios y bordes curvos"
 
 --- --- Home
 
+--- --- Product Carousel ---
+Anterior
+es "Anterior"
+pt "Anterior"
+en "Previous"
+es_mx "Anterior"
+Siguiente
+es "Siguiente"
+pt "Próximo"
+en "Next"
+es_mx "Siguiente"
+
 es "Mensaje de bienvenida en la página de inicio"
 pt "Mensagem de boas vindas na página inicial"
 es_mx "Mensaje de bienvenida de la página de inicio"

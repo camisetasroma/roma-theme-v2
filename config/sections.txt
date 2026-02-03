@@ -1,3 +1,15 @@
 primary
 	name = Destacados
 	description = Los productos aparecen destacados en la página de inicio (hasta 40 productos).
+
+carousel_tab_1
+	name = Carrossel Tab 1
+	description = Produtos exibidos na primeira aba do carrossel na página de inicio (até 40 produtos).
+
+carousel_tab_2
+	name = Carrossel Tab 2
+	description = Produtos exibidos na segunda aba do carrossel na página de inicio (até 40 produtos).
+
+carousel_tab_3
+	name = Carrossel Tab 3
+	description = Produtos exibidos na terceira aba do carrossel na página de inicio (até 40 produtos).
