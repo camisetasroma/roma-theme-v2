@@ -355,7 +355,8 @@ const productCarousel = () => {
 
   // Init swipers for each tab (using setTimeout like the theme's createSwiper)
   const mobilePerView = 2.25;
-  const desktopPerView = 3.25;
+  const tabletPerView = 3.25;
+  const desktopPerView = 4.25;
 
   for (let i = 1; i <= 3; i++) {
     const container = section.querySelector(`.js-swiper-product-carousel-${i}`);
@@ -363,10 +364,33 @@ const productCarousel = () => {
       const slideCount = container.querySelectorAll(".swiper-slide").length;
       realSlideCounts[`tab-${i}`] = slideCount;
 
+      // Garantir slides suficientes para loop em telas grandes
+      // Necessário: Math.ceil(maxSlidesPerView) * 2 + 1 = 10 slides mínimo
+      const minSlidesForLoop = Math.ceil(desktopPerView) * 2 + 1;
+
+      if (slideCount < minSlidesForLoop && slideCount >= 1) {
+        const wrapper = container.querySelector(".swiper-wrapper");
+        const originalSlides = Array.from(
+          wrapper.querySelectorAll(".swiper-slide")
+        );
+
+        // Duplicar slides até ter o mínimo necessário
+        let currentCount = slideCount;
+        while (currentCount < minSlidesForLoop) {
+          for (const slide of originalSlides) {
+            if (currentCount >= minSlidesForLoop) break;
+            const clone = slide.cloneNode(true);
+            wrapper.appendChild(clone);
+            currentCount++;
+          }
+        }
+      }
+
       setTimeout(() => {
         // For loop to work smoothly, we need enough cloned slides
-        // loopedSlides should be at least slidesPerView rounded up
-        const loopSlides = Math.max(slideCount, Math.ceil(mobilePerView) + 1);
+        // Considerar o maior slidesPerView (4.25) para cálculo de clones
+        const actualSlideCount = container.querySelectorAll(".swiper-slide").length;
+        const loopSlides = Math.max(actualSlideCount, Math.ceil(desktopPerView) + 1);
 
         swipers[`tab-${i}`] = new Swiper(container, {
           slidesPerView: mobilePerView,
@@ -376,6 +400,10 @@ const productCarousel = () => {
           loopAdditionalSlides: 2,
           breakpoints: {
             768: {
+              slidesPerView: tabletPerView,
+              spaceBetween: 16,
+            },
+            1280: {
               slidesPerView: desktopPerView,
               spaceBetween: 16,
             },
