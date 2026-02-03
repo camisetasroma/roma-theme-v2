@@ -16,7 +16,7 @@
     <div class="flex items-center justify-between w-full px-4 md:px-16 py-5.5 md:py-4">
 
         {# Mobile: Hamburger | Desktop: Logo #}
-        <div class="flex items-center gap-4 flex-1 md:flex-none">
+        <div class="flex items-center gap-4 flex-1">
             {# Hamburger - Mobile only (just opens menu, X is inside mobile menu) #}
             <button
               type="button"
@@ -102,7 +102,7 @@
         </div>
 
         {# Utilities - Right #}
-        <div class="flex items-center justify-end gap-4 md:gap-6 flex-1 md:flex-none">
+        <div class="flex items-center justify-end gap-4 md:gap-6 flex-1">
             {# Buscar #}
             <a href="#" class="nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1">
                 <i data-lucide="search" class="w-5 h-5 md:hidden"></i>

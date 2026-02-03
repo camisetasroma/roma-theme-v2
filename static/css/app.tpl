@@ -1838,12 +1838,6 @@
     }
   }
 
-  @media (min-width: 40rem) {
-    .sm\:pb-22 {
-      padding-bottom: calc(var(--spacing) * 22);
-    }
-  }
-
   @media (min-width: 48rem) {
     .md\:mt-0 {
       margin-top: calc(var(--spacing) * 0);
@@ -1903,10 +1897,6 @@
 
     .md\:pb-0 {
       padding-bottom: calc(var(--spacing) * 0);
-    }
-
-    .md\:pb-22 {
-      padding-bottom: calc(var(--spacing) * 22);
     }
 
     .md\:text-5xl {
