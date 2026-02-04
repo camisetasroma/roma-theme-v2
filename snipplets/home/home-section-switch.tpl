@@ -151,4 +151,32 @@
 		{% include 'snipplets/home/home-product-grid.tpl' %}
 	{% endif %}
 
+{% elseif section_select == 'vip_group' %}
+
+	{#  **** VIP Group Banner ****  #}
+	{% set has_vip_group = settings.vip_group_title or settings.vip_group_subtitle %}
+	<section data-store="home-vip-group-wrapper">
+		{% if show_help or (show_component_help and not has_vip_group) %}
+			<div class="section-help bg-bg-subtle p-8 text-center text-muted">
+				<p>Configura tu Banner Grupo VIP desde el panel de administración.</p>
+			</div>
+		{% else %}
+			{% include 'snipplets/home/home-vip-group.tpl' %}
+		{% endif %}
+	</section>
+
+{% elseif section_select == 'faq' %}
+
+	{#  **** FAQ - Perguntas Frequentes ****  #}
+	{% set has_faq = settings.faq_question_1 and settings.faq_answer_1 %}
+	<section data-store="home-faq-wrapper">
+		{% if show_help or (show_component_help and not has_faq) %}
+			<div class="section-help bg-bg-subtle p-8 text-center text-muted">
+				<p>Configura tu FAQ desde el panel de administración.</p>
+			</div>
+		{% else %}
+			{% include 'snipplets/home/home-faq.tpl' %}
+		{% endif %}
+	</section>
+
 {% endif %}

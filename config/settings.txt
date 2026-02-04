@@ -964,6 +964,106 @@ Página de inicio
 		name = home_news_box
 		description = Permitir que tus clientes se registren para recibir novedades desde el pop-up (Opcional)
 	collapse
+		title = Banner Grupo VIP
+		backto = home_order_position
+	subtitle
+		subtitle = Imagem de fundo
+	image
+		original = vip_group_bg.jpg
+		title = Cargar imagen de fondo (JPG, PNG)
+		width = 1920
+		height = 600
+	subtitle
+		subtitle = Textos
+	i18n_input
+		name = vip_group_title
+		description = Título (ex: Grupo VIP)
+	i18n_input
+		name = vip_group_subtitle
+		description = Subtítulo (ex: Mais do que descontos...)
+	subtitle
+		subtitle = Conteúdo HTML customizado
+	description
+		description = Insira código HTML para personalizar o conteúdo (textos, ícones, listas, etc.)
+	textarea
+		name = vip_group_custom_html
+		description = Código HTML personalizado
+	subtitle
+		subtitle = Botão
+	i18n_input
+		name = vip_group_button_text
+		description = Texto do botão (ex: Acesse o Grupo)
+	i18n_input
+		name = vip_group_button_url
+		description = Link do botão
+	collapse
+		title = FAQ - Perguntas Frequentes
+		backto = home_order_position
+	subtitle
+		subtitle = Título da seção
+	i18n_input
+		name = faq_title
+		description = Título (ex: Perguntas Frequentes)
+	subtitle
+		subtitle = Aparência
+	dropdown
+		name = faq_bg
+		description = Cor de fundo da seção
+		values
+			none = Sem fundo
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+			accent = Cor de acento
+	subtitle
+		subtitle = PERGUNTA 1
+	i18n_input
+		name = faq_question_1
+		description = Pergunta
+	textarea
+		name = faq_answer_1
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 2
+	i18n_input
+		name = faq_question_2
+		description = Pergunta
+	textarea
+		name = faq_answer_2
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 3
+	i18n_input
+		name = faq_question_3
+		description = Pergunta
+	textarea
+		name = faq_answer_3
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 4
+	i18n_input
+		name = faq_question_4
+		description = Pergunta
+	textarea
+		name = faq_answer_4
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 5
+	i18n_input
+		name = faq_question_5
+		description = Pergunta
+	textarea
+		name = faq_answer_5
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 6
+	i18n_input
+		name = faq_question_6
+		description = Pergunta
+	textarea
+		name = faq_answer_6
+		description = Resposta (HTML permitido)
+	collapse
 		title = Página de inicio
 		backto = _top
 	section_order
@@ -982,6 +1082,8 @@ Página de inicio
 			video = Video
 			product_carousel = Carrossel de produtos
 			product_grid = Grid de produtos
+			vip_group = Banner Grupo VIP
+			faq = FAQ - Perguntas Frequentes
 			instafeed = Publicaciones de Instagram
 	link
 		text = Pop-up promocional
