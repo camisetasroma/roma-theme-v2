@@ -16,7 +16,15 @@
     {# Lazy loading logic - don't lazy load if first section #}
     {% set apply_lazy_load = not section_first %}
 
-    <section class="js-hero-banner-2 relative w-full" data-store="home-hero-banner-2">
+    {# Define color values for JS to use #}
+    {% set slide1_color = settings.hero_banner_2_text_color | default('white') %}
+    {% set slide2_color = settings.hero_banner_2_slide2_text_color | default('white') %}
+
+    <section
+        class="js-hero-banner-2 relative w-full"
+        data-store="home-hero-banner-2"
+        data-slide-colors='["{{ slide1_color }}"{% if has_hero2_slide2_desktop %},"{{ slide2_color }}"{% endif %}]'
+    >
 
         {# Slides Container - needs fixed height since slides are absolute #}
         <div class="relative h-[596.4px] md:h-170">
@@ -53,19 +61,19 @@
 
         {# Controls: Seeds (pagination) left + Arrows right - only show if more than 1 slide #}
         {% if slide_count > 1 %}
-            <div class="js-hero2-controls absolute bottom-6 left-0 right-0 flex items-center justify-between px-4 md:px-16 z-20">
+            <div class="js-hero2-controls absolute bottom-6 left-0 right-0 flex items-center justify-between px-4 md:px-16 z-20 transition-colors duration-500">
                 {# Seed pagination indicators #}
                 <div class="js-hero2-pagination flex items-center gap-2">
                     {# Seeds will be rendered here by JS #}
                 </div>
 
-                {# Navigation arrows - same style as product carousel #}
+                {# Navigation arrows - color will be updated by JS #}
                 <div class="flex items-center gap-2">
                     <button class="js-hero2-prev flex w-8 h-8 justify-center items-center cursor-pointer" aria-label="{{ 'Anterior' | translate }}">
-                        <i data-lucide="arrow-left" class="w-5 h-5 text-white"></i>
+                        <i data-lucide="arrow-left" class="js-hero2-arrow w-5 h-5"></i>
                     </button>
                     <button class="js-hero2-next flex w-8 h-8 justify-center items-center cursor-pointer" aria-label="{{ 'Siguiente' | translate }}">
-                        <i data-lucide="arrow-right" class="w-5 h-5 text-white"></i>
+                        <i data-lucide="arrow-right" class="js-hero2-arrow w-5 h-5"></i>
                     </button>
                 </div>
             </div>

@@ -69,7 +69,7 @@
         <div class="absolute inset-0 bg-black/35"></div>
 
         {# Content - positioned at bottom center #}
-        <div class="absolute inset-x-0 bottom-16 flex flex-col items-center px-6 {{ text_color_class }}">
+        <div class="absolute inset-x-0 bottom-16 md:bottom-6 flex flex-col items-center px-6 {{ text_color_class }}">
             {% if subtitle %}
                 <span class="text-base font-normal font-sans mb-2">{{ subtitle }}</span>
             {% endif %}

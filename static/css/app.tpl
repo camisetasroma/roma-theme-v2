@@ -473,6 +473,10 @@
     bottom: calc(var(--spacing) * 2);
   }
 
+  .bottom-4 {
+    bottom: calc(var(--spacing) * 4);
+  }
+
   .bottom-6 {
     bottom: calc(var(--spacing) * 6);
   }
@@ -2025,6 +2029,10 @@
   }
 
   @media (min-width: 48rem) {
+    .md\:bottom-6 {
+      bottom: calc(var(--spacing) * 6);
+    }
+
     .md\:mt-0 {
       margin-top: calc(var(--spacing) * 0);
     }
