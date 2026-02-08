@@ -124,9 +124,10 @@
 
         {% template_content %}
 
-        {# Modals overlay #}
+        {# Modal and Toast notification system #}
 
-        <div class="js-modal-overlay modal-overlay" style="display: none;"></div>
+        {% snipplet "notification/modal.tpl" %}
+        {% snipplet "notification/toast.tpl" %}
 
         {# Quickshop modal #}
 
@@ -201,7 +202,7 @@
             lucide.createIcons();
         </script>
 
-        {{ 'js/gaius-v39.js' | static_url | script_tag }}
+        {{ 'js/gaius-v62.js' | static_url | script_tag }}
 
     </body>
 </html>

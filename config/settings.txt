@@ -964,6 +964,20 @@ Página de inicio
 		name = home_news_box
 		description = Permitir que tus clientes se registren para recibir novedades desde el pop-up (Opcional)
 	collapse
+		title = Toast de Cupom de Boas-vindas
+		backto = home_order_position
+	description
+		description = Exibe um toast com cupom de desconto para novos visitantes (primeira visita ao site)
+	checkbox
+		name = welcome_coupon_enabled
+		description = Mostrar toast de cupom para novos visitantes
+	i18n_input
+		name = welcome_coupon_text
+		description = Texto de apoio (ex: Use na sua primeira compra)
+	i18n_input
+		name = welcome_coupon_code
+		description = Código do cupom (ex: BEMVINDO10)
+	collapse
 		title = Banner Grupo VIP
 		backto = home_order_position
 	subtitle
@@ -1088,6 +1102,9 @@ Página de inicio
 	link
 		text = Pop-up promocional
 		linkto = home_promotional_popup
+	link
+		text = Toast de Cupom de Boas-vindas
+		linkto = welcome_coupon_enabled
 
 Listado de productos
 	meta

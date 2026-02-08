@@ -49,6 +49,5 @@
 	{% endif %}
 </div>
 
-{% if settings.home_promotional_popup %}
-    {% include 'snipplets/home/home-popup.tpl' %}
-{% endif %}
+{# Toast de cupom de boas-vindas (primeira visita) #}
+{% snipplet "notification/toast-welcome-coupon.tpl" %}
