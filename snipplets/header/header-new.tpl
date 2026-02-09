@@ -104,10 +104,14 @@
         {# Utilities - Right #}
         <div class="flex items-center justify-end gap-4 md:gap-6 flex-1">
             {# Buscar #}
-            <a href="#" class="nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1">
+            <button
+              type="button"
+              class="js-search-toggle nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1 cursor-pointer bg-transparent border-0"
+              aria-label="{{ 'Abrir busca' | translate }}"
+            >
                 <i data-lucide="search" class="w-5 h-5 md:hidden"></i>
                 <span class="hidden md:inline">Buscar</span>
-            </a>
+            </button>
             {# Login #}
             <a href="{{ store.customer_login_url }}" class="nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1">
                 <i data-lucide="user" class="w-5 h-5 md:hidden"></i>
@@ -141,6 +145,9 @@
     {# Mobile Menu #}
     {% include 'snipplets/navigation/menu-mobile.tpl' %}
 </header>
+
+{# Search Panel - FORA do header para não herdar posicionamento #}
+{% include 'snipplets/header/header-search-new.tpl' %}
 
 {# Spacer para compensar header fixed - oculto quando hero_banner é primeira seção #}
 {% set hero_banner_first = settings.home_order_position_0 == 'hero_banner' and 'hero_banner_desktop.jpg' | has_custom_image %}

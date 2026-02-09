@@ -457,7 +457,7 @@ DOMContentLoaded.addEventOrExecute(() => {
                 $search_suggests.hide();
             }
         }, {
-            snipplet: 'header/header-search-results.tpl'
+            snipplet: 'header/header-search-results-new.tpl'
         });
 
         if (window.innerWidth > 768) {

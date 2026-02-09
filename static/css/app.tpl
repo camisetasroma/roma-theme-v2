@@ -116,6 +116,7 @@
     --radius-xl: .75rem;
     --ease-in: cubic-bezier(.4, 0, 1, 1);
     --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+    --animate-spin: spin 1s linear infinite;
     --blur-sm: 8px;
     --default-transition-duration: .15s;
     --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
@@ -454,6 +455,10 @@
     top: 50%;
   }
 
+  .top-20 {
+    top: calc(var(--spacing) * 20);
+  }
+
   .top-full {
     top: 100%;
   }
@@ -494,6 +499,14 @@
     left: calc(var(--spacing) * 0);
   }
 
+  .left-1 {
+    left: calc(var(--spacing) * 1);
+  }
+
+  .left-1\/2 {
+    left: 50%;
+  }
+
   .z-0 {
     z-index: 0;
   }
@@ -512,6 +525,10 @@
 
   .z-50 {
     z-index: 50;
+  }
+
+  .z-9999 {
+    z-index: 9999;
   }
 
   .order-0 {
@@ -1031,12 +1048,20 @@
     width: calc(var(--spacing) * 70);
   }
 
+  .w-78 {
+    width: calc(var(--spacing) * 78);
+  }
+
   .w-100 {
     width: calc(var(--spacing) * 100);
   }
 
   .w-\[40\%\] {
     width: 40%;
+  }
+
+  .w-\[90vw\] {
+    width: 90vw;
   }
 
   .w-auto {
@@ -1057,6 +1082,10 @@
 
   .max-w-100 {
     max-width: calc(var(--spacing) * 100);
+  }
+
+  .max-w-125 {
+    max-width: calc(var(--spacing) * 125);
   }
 
   .max-w-350 {
@@ -1115,6 +1144,16 @@
     border-collapse: collapse;
   }
 
+  .-translate-x-1 {
+    --tw-translate-x: calc(var(--spacing) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+
+  .-translate-x-1\/2 {
+    --tw-translate-x: calc(calc(1 / 2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+
   .-translate-y-1 {
     --tw-translate-y: calc(var(--spacing) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -1122,6 +1161,10 @@
 
   .transform {
     transform: var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, );
+  }
+
+  .animate-spin {
+    animation: var(--animate-spin);
   }
 
   .cursor-pointer {
@@ -1270,6 +1313,12 @@
 
   .self-stretch {
     align-self: stretch;
+  }
+
+  .truncate {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .overflow-hidden {
@@ -1431,6 +1480,16 @@
 
   .bg-white {
     background-color: var(--color-white);
+  }
+
+  .bg-white\/5 {
+    background-color: #ffffff0d;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-white\/5 {
+      background-color: color-mix(in oklab, var(--color-white) 5%, transparent);
+    }
   }
 
   .bg-linear-to-t {
@@ -1942,6 +2001,10 @@
     opacity: 0;
   }
 
+  .opacity-25 {
+    opacity: .25;
+  }
+
   .opacity-40 {
     opacity: .4;
   }
@@ -1952,6 +2015,10 @@
 
   .opacity-60 {
     opacity: .6;
+  }
+
+  .opacity-75 {
+    opacity: .75;
   }
 
   .opacity-80 {
@@ -2096,7 +2163,19 @@
       --tw-scale-z: 110%;
       scale: var(--tw-scale-x) var(--tw-scale-y);
     }
+  }
 
+  .placeholder\:text-bg\/60::placeholder {
+    color: var(--color-bg);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .placeholder\:text-bg\/60::placeholder {
+      color: color-mix(in oklab, var(--color-bg) 60%, transparent);
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:bg-black\/5:hover {
       background-color: #0000000d;
     }
@@ -2109,6 +2188,16 @@
 
     .hover\:bg-fg:hover {
       background-color: var(--color-fg);
+    }
+
+    .hover\:bg-white\/10:hover {
+      background-color: #ffffff1a;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-white\/10:hover {
+        background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+      }
     }
 
     .hover\:bg-white\/40:hover {
@@ -2135,6 +2224,10 @@
   }
 
   @media (min-width: 48rem) {
+    .md\:top-\[30\%\] {
+      top: 30%;
+    }
+
     .md\:bottom-6 {
       bottom: calc(var(--spacing) * 6);
     }
@@ -2305,6 +2398,33 @@
 
 .js-new-header[data-state="active"] .logo-text {
   color: var(--primary-color) !important;
+}
+
+.js-search-overlay[data-state="open"] {
+  pointer-events: auto;
+}
+
+.js-search-overlay[data-state="closed"] {
+  pointer-events: none;
+}
+
+.js-search-panel {
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+}
+
+.js-search-input {
+  font-size: 16px !important;
+}
+
+@media (min-width: 768px) {
+  .js-search-input {
+    font-size: 16px !important;
+  }
+}
+
+.js-search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  display: none;
 }
 
 .powered-by-wrapper svg {
@@ -2874,4 +2994,10 @@
   syntax: "*";
   inherits: false;
   initial-value: 1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -102,6 +102,38 @@
     color: var(--primary-color) !important;
 }
 
+/* ===== SEARCH OVERLAY STYLES ===== */
+
+.js-search-overlay[data-state="open"] {
+  pointer-events: auto;
+}
+
+.js-search-overlay[data-state="closed"] {
+  pointer-events: none;
+}
+
+/* Smooth transitions for search panel */
+.js-search-panel {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevent input zoom on iOS */
+.js-search-input {
+  font-size: 16px !important;
+}
+
+@media (min-width: 768px) {
+  .js-search-input {
+    font-size: 16px !important;
+  }
+}
+
+/* Remove native X button from search input (Chrome, Safari, Edge) */
+.js-search-input::-webkit-search-cancel-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
 /* ===== FOOTER STYLES ===== */
 
 /* Powered by Nuvemshop - herdar cor primária */

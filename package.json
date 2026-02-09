@@ -20,7 +20,8 @@
     "build:css": "npx @tailwindcss/cli -i __src/css/app.css -o static/css/app.tpl --optimize",
     "watch:js": "node esbuild.config.mjs --watch",
     "build:js": "node esbuild.config.mjs",
-    "dev": "concurrently \"npm run watch:css\" \"npm run watch:js\""
+    "dev": "concurrently \"npm run watch:css\" \"npm run watch:js\"",
+    "build": "npm run build:css && npm run build:js"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.18",
