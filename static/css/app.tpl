@@ -1019,10 +1019,6 @@
     min-height: calc(var(--spacing) * 145);
   }
 
-  .min-h-\[77px\] {
-    min-height: 77px;
-  }
-
   .min-h-\[calc\(2\*13px\*1\.2\)\] {
     min-height: 31.2px;
   }
@@ -1069,10 +1065,6 @@
 
   .w-\[90vw\] {
     width: 90vw;
-  }
-
-  .w-\[241px\] {
-    width: 241px;
   }
 
   .w-auto {
