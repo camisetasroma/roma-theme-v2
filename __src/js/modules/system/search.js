@@ -38,6 +38,7 @@ export const searchSystem = () => {
 
     // Prevent body scroll
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
   }
 
   function closeSearch() {
@@ -62,6 +63,7 @@ export const searchSystem = () => {
 
     // Restore body scroll
     document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
   }
 
   // ============================================
