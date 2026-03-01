@@ -5,13 +5,14 @@ export const headerAnimations = () => {
   const advertisingBar = document.querySelector(".js-advertising-bar");
   const adBarHeight = advertisingBar ? advertisingBar.offsetHeight : 0;
   const SCROLL_THRESHOLD = 50;
+  const initialState = header.dataset.initialState || "transparent";
   let isMenuActive = false;
 
   function updateHeaderState(scrollY) {
     const shouldBeActive = scrollY > SCROLL_THRESHOLD || isMenuActive;
     header.setAttribute(
       "data-state",
-      shouldBeActive ? "active" : "transparent",
+      shouldBeActive ? "active" : initialState,
     );
 
     // Simulate scroll on advertising bar - moves up with page scroll

@@ -113,6 +113,7 @@
     --leading-snug: 1.375;
     --leading-relaxed: 1.625;
     --radius-sm: .25rem;
+    --radius-md: .375rem;
     --radius-lg: .5rem;
     --radius-xl: .75rem;
     --ease-in: cubic-bezier(.4, 0, 1, 1);
@@ -1099,6 +1100,10 @@
     min-width: calc(var(--spacing) * 0);
   }
 
+  .min-w-48 {
+    min-width: calc(var(--spacing) * 48);
+  }
+
   .min-w-60 {
     min-width: calc(var(--spacing) * 60);
   }
@@ -1109,6 +1114,10 @@
 
   .min-w-full {
     min-width: 100%;
+  }
+
+  .min-w-max {
+    min-width: max-content;
   }
 
   .flex-1 {
@@ -1348,6 +1357,10 @@
     border-radius: var(--radius-lg);
   }
 
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+
   .rounded-sm {
     border-radius: var(--radius-sm);
   }
@@ -1393,6 +1406,10 @@
 
   .border-bg {
     border-color: var(--color-bg);
+  }
+
+  .border-bg-subtle {
+    border-color: var(--color-bg-subtle);
   }
 
   .border-fg {
@@ -1602,6 +1619,10 @@
     padding-inline: calc(var(--spacing) * 2);
   }
 
+  .px-2\.5 {
+    padding-inline: calc(var(--spacing) * 2.5);
+  }
+
   .px-3 {
     padding-inline: calc(var(--spacing) * 3);
   }
@@ -1640,6 +1661,10 @@
 
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
+  }
+
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
   }
 
   .py-2 {
@@ -1877,6 +1902,16 @@
 
   .text-\[32px\] {
     font-size: 32px;
+  }
+
+  .leading-3 {
+    --tw-leading: calc(var(--spacing) * 3);
+    line-height: calc(var(--spacing) * 3);
+  }
+
+  .leading-4 {
+    --tw-leading: calc(var(--spacing) * 4);
+    line-height: calc(var(--spacing) * 4);
   }
 
   .leading-\[80\%\] {
@@ -2193,6 +2228,16 @@
       }
     }
 
+    .hover\:bg-black\/10:hover {
+      background-color: #0000001a;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-black\/10:hover {
+        background-color: color-mix(in oklab, var(--color-black) 10%, transparent);
+      }
+    }
+
     .hover\:bg-white\/10:hover {
       background-color: #ffffff1a;
     }
@@ -2211,6 +2256,10 @@
       .hover\:bg-white\/40:hover {
         background-color: color-mix(in oklab, var(--color-white) 40%, transparent);
       }
+    }
+
+    .hover\:underline:hover {
+      text-decoration-line: underline;
     }
 
     .hover\:opacity-70:hover {
@@ -2279,6 +2328,10 @@
       gap: calc(var(--spacing) * 6);
     }
 
+    .md\:gap-x-4 {
+      column-gap: calc(var(--spacing) * 4);
+    }
+
     .md\:gap-x-12 {
       column-gap: calc(var(--spacing) * 12);
     }
@@ -2344,6 +2397,10 @@
   }
 
   @media (min-width: 64rem) {
+    .lg\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
     .lg\:gap-x-16 {
       column-gap: calc(var(--spacing) * 16);
     }

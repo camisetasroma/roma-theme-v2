@@ -4,7 +4,8 @@
 {# New Header - Fixed at top #}
 <header
     class="js-new-header fixed top-0 left-0 right-0 z-50 flex flex-col w-full transition-[background-color,backdrop-filter] duration-300 overflow-hidden"
-    data-state="transparent"
+    data-state="{% if template == 'home' %}transparent{% else %}active{% endif %}"
+    data-initial-state="{% if template == 'home' %}transparent{% else %}active{% endif %}"
     data-store="head"
 >
     {# Advertising Bar - inside header, simulates scroll with translateY #}

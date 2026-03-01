@@ -851,7 +851,7 @@ DOMContentLoaded.addEventOrExecute(() => {
 
     {% set has_item_slider = settings.product_item_slider %}
 
-    {% if template == 'category' or template == 'search' %}
+    {% if template == 'search' %}
 
         {# /* // Product item slider */ #}
 
