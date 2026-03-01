@@ -20,12 +20,6 @@ export const headerAnimations = () => {
       advertisingBar.style.transform = `translateY(-${translateY}px)`;
       advertisingBar.style.marginBottom = `-${translateY}px`;
     }
-
-    // Update toast container position after header height changes
-    const toastContainer = document.querySelector(".js-toast-container");
-    if (toastContainer) {
-      toastContainer.style.top = (header.offsetHeight + 16) + "px";
-    }
   }
 
   function handleScroll() {

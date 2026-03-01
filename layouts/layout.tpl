@@ -8,7 +8,7 @@
         <link rel="preconnect" href="https://use.typekit.net" crossorigin />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">   
         <title>{{ page_title }}</title>
         <meta name="description" content="{{ page_description }}" />
         <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest] | google_fonts_url('300, 400, 700') }}" />
@@ -124,11 +124,6 @@
 
         {% template_content %}
 
-        {# Modal and Toast notification system #}
-
-        {% snipplet "notification/modal.tpl" %}
-        {% snipplet "notification/toast.tpl" %}
-
         {# Quickshop modal #}
 
         {% snipplet "grid/quick-shop.tpl" %}
@@ -202,7 +197,7 @@
             lucide.createIcons();
         </script>
 
-        {{ 'js/gaius-v72.js' | static_url | script_tag }}
+        {{ 'js/gaius-v95.js' | static_url | script_tag }}
 
     </body>
 </html>

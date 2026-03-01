@@ -48,6 +48,3 @@
 		</div>
 	{% endif %}
 </div>
-
-{# Toast de cupom de boas-vindas (primeira visita) #}
-{% snipplet "notification/toast-welcome-coupon.tpl" %}
