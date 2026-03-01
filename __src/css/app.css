@@ -134,6 +134,28 @@
   -webkit-appearance: none;
 }
 
+/* ===== TOAST NOTIFICATION STYLES ===== */
+
+.js-toast-container [data-state] {
+  pointer-events: auto;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.js-toast-container [data-state="entering"] {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.js-toast-container [data-state="visible"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.js-toast-container [data-state="exiting"] {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
 /* ===== FOOTER STYLES ===== */
 
 /* Powered by Nuvemshop - herdar cor primária */

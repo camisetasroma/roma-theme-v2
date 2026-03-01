@@ -110,6 +110,7 @@
     --tracking-wide: .025em;
     --tracking-wider: .05em;
     --tracking-widest: .1em;
+    --leading-snug: 1.375;
     --leading-relaxed: 1.625;
     --radius-sm: .25rem;
     --radius-lg: .5rem;
@@ -147,6 +148,7 @@
 
   :root, :host {
     --font-heading: var(--font-headings);
+    --z-toast: 90;
     --transition-duration-200: .2s;
     --transition-duration-300: .3s;
     --transition-duration-500: .5s;
@@ -1017,6 +1019,10 @@
     min-height: calc(var(--spacing) * 145);
   }
 
+  .min-h-\[77px\] {
+    min-height: 77px;
+  }
+
   .min-h-\[calc\(2\*13px\*1\.2\)\] {
     min-height: 31.2px;
   }
@@ -1063,6 +1069,10 @@
 
   .w-\[90vw\] {
     width: 90vw;
+  }
+
+  .w-\[241px\] {
+    width: 241px;
   }
 
   .w-auto {
@@ -1897,6 +1907,11 @@
     line-height: var(--leading-relaxed);
   }
 
+  .leading-snug {
+    --tw-leading: var(--leading-snug);
+    line-height: var(--leading-snug);
+  }
+
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
@@ -2413,6 +2428,26 @@
 .js-search-input::-webkit-search-cancel-button {
   -webkit-appearance: none;
   display: none;
+}
+
+.js-toast-container [data-state] {
+  pointer-events: auto;
+  transition: opacity .3s, transform .3s;
+}
+
+.js-toast-container [data-state="entering"] {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.js-toast-container [data-state="visible"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.js-toast-container [data-state="exiting"] {
+  opacity: 0;
+  transform: translateX(100%);
 }
 
 .powered-by-wrapper svg {
