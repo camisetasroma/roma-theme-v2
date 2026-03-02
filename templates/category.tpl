@@ -40,6 +40,10 @@
 
 {% if not show_help %}
 
+    {# Sentinels for store.js.tpl IntersectionObserver & sticky controls #}
+    <div class="js-category-controls-prev" aria-hidden="true"></div>
+    <div class="js-category-controls" aria-hidden="true"></div>
+
     {# Category Header Bar #}
     <section class="px-4 md:px-16 py-4" style="background-color: var(--background-color)">
         <div class="flex items-center gap-3 mb-2">
@@ -87,28 +91,36 @@
                     </ul>
                 </div>
             {% endif %}
+
+            {% if has_filters_available %}
+                <button type="button" class="js-category-filter-trigger hidden md:flex h-8 items-center gap-1.5 [background:rgba(0,0,0,0.05)] px-3 py-1 rounded-lg text-secondary font-sans text-sm font-medium cursor-pointer hover:bg-black/10 transition-colors" data-filter-title="{{ 'Filtros' | translate }}">
+                    <i data-lucide="list-filter" class="w-4 h-4 text-secondary"></i>
+                    {{ 'Filtrar' | translate }}
+                </button>
+            {% endif %}
         </div>
 
         {# Breadcrumb #}
         {% include 'snipplets/navigation/breadcrumb-category.tpl' %}
 
         {% if has_filters_available %}
-            {# Filter trigger button #}
-            <div class="flex items-center gap-3 mt-3">
-                <a href="#" class="js-modal-open flex items-center gap-1.5 [background:rgba(0,0,0,0.05)] px-3 py-1.5 rounded-lg text-secondary font-sans text-sm font-medium no-underline cursor-pointer hover:bg-black/10 transition-colors" data-toggle="#nav-filters">
-                    <i data-lucide="sliders-horizontal" class="w-4 h-4 text-secondary"></i>
-                    {{ 'Filtrar' | translate }}
-                </a>
-            </div>
+            <button type="button" class="js-category-filter-trigger flex md:hidden h-8 items-center gap-1.5 [background:rgba(0,0,0,0.05)] px-3 py-1 rounded-lg text-secondary font-sans text-sm font-medium cursor-pointer hover:bg-black/10 transition-colors mt-2" data-filter-title="{{ 'Filtros' | translate }}">
+                <i data-lucide="list-filter" class="w-4 h-4 text-secondary"></i>
+                {{ 'Filtrar' | translate }}
+            </button>
+        {% endif %}
+
+        {% if has_filters_available %}
 
             {# Applied filters chips #}
             {% if has_applied_filters %}
                 <div class="flex flex-wrap items-center gap-2 mt-3">
                     <span class="text-secondary font-sans text-sm">{{ 'Filtrado por:' | translate }}</span>
                     {% for product_filter in product_filters %}
+                        {% set is_size = product_filter.type == 'size' or product_filter.key == 'Talle' or product_filter.key == 'Tamanho' or product_filter.key == 'Size' %}
                         {% for value in product_filter.values %}
                             {% if value.selected %}
-                                <button class="js-remove-filter flex items-center gap-1 [background:rgba(0,0,0,0.05)] px-2.5 py-1 rounded-lg text-secondary font-sans text-xs font-medium cursor-pointer hover:bg-black/10 transition-colors" data-filter-name="{{ product_filter.key }}" data-filter-value="{{ value.name }}">
+                                <button class="js-remove-filter flex items-center gap-1 [background:rgba(0,0,0,0.05)] px-2.5 py-1 rounded-lg text-secondary font-sans text-xs font-medium cursor-pointer hover:bg-black/10 transition-colors {% if is_size %}uppercase{% endif %}" data-filter-name="{{ product_filter.key }}" data-filter-value="{{ value.name }}">
                                     {{ value.pill_label }}
                                     <i data-lucide="x" class="w-3 h-3 text-secondary"></i>
                                 </button>
@@ -118,25 +130,22 @@
                     <a href="#" class="js-remove-all-filters text-secondary font-sans text-xs font-medium underline">{{ 'Borrar filtros' | translate }}</a>
                 </div>
             {% endif %}
-            {% embed "snipplets/modal.tpl" with{modal_id: 'nav-filters', modal_class: 'filters modal-docked-small', modal_position: 'left', modal_transition: 'slide', modal_width: 'full'} %}
-                {% block modal_head %}
-                    {{'Filtros' | translate }}
-                {% endblock %}
-                {% block modal_body %}
-                    {% if filter_categories is not empty %}
-                        {% snipplet "grid/categories.tpl" %}
-                    {% endif %}
-                    {% if product_filters is not empty %}
-                        {% snipplet "grid/filters.tpl" %}
-                    {% endif %}
-                    <div class="js-filters-overlay filters-overlay" style="display: none;">
-                        <div class="filters-updating-message">
-                            <h3 class="js-applying-filter" style="display: none;">{{ 'Aplicando filtro...' | translate }}</h3>
-                            <h3 class="js-removing-filter" style="display: none;">{{ 'Borrando filtro...' | translate }}</h3>
-                        </div>
+
+            {# Hidden filter content — source for gaius modal/drawer #}
+            <div class="js-category-filter-content" hidden>
+                {% if filter_categories is not empty %}
+                    {% snipplet "grid/categories.tpl" %}
+                {% endif %}
+                {% if product_filters is not empty %}
+                    {% snipplet "grid/filters.tpl" %}
+                {% endif %}
+                <div class="js-filters-overlay" style="display:none;position:absolute;inset:0;background:color-mix(in srgb, var(--background-color) 80%, transparent);z-index:10;align-items:center;justify-content:center">
+                    <div>
+                        <h3 class="js-applying-filter text-secondary font-sans text-sm" style="display:none;">{{ 'Aplicando filtro...' | translate }}</h3>
+                        <h3 class="js-removing-filter text-secondary font-sans text-sm" style="display:none;">{{ 'Borrando filtro...' | translate }}</h3>
                     </div>
-                {% endblock %}
-            {% endembed %}
+                </div>
+            </div>
         {% endif %}
     </section>
 

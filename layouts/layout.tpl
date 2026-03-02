@@ -203,7 +203,7 @@
             lucide.createIcons();
         </script>
 
-        {{ 'js/gaius-v1772413470950.js' | static_url | script_tag }}
+        {{ 'js/gaius-v1772416291925.js' | static_url | script_tag }}
 
     </body>
 </html>

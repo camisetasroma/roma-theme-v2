@@ -22,7 +22,17 @@ export const modalSystem = () => {
 
     const content = container.querySelector(".js-gaius-modal-content");
     if (content) {
+      let cleaned = false;
       const cleanup = () => {
+        if (cleaned) return;
+        cleaned = true;
+        if (contentSourceEl) {
+          const body = content.querySelector(".js-gaius-modal-body");
+          if (body) {
+            contentSourceEl.innerHTML = body.innerHTML;
+          }
+          contentSourceEl = null;
+        }
         container.innerHTML = "";
         currentModal = null;
       };
@@ -34,20 +44,35 @@ export const modalSystem = () => {
     }
   };
 
-  const openModal = ({ title, content, size } = {}) => {
+  let contentSourceEl = null;
+
+  const openModal = ({ title, content, contentSelector, size, mode } = {}) => {
     if (currentModal) {
+      if (contentSourceEl) {
+        const body = container.querySelector(".js-gaius-modal-body");
+        if (body) {
+          contentSourceEl.innerHTML = body.innerHTML;
+        }
+        contentSourceEl = null;
+      }
       container.innerHTML = "";
       currentModal = null;
     }
 
-    const sizeClass = size === "lg" ? "max-width:640px" : size === "sm" ? "max-width:360px" : "max-width:480px";
+    const isDrawer = mode === "drawer";
 
     const overlay = document.createElement("div");
     overlay.className = "js-gaius-modal-overlay";
 
     const modalContent = document.createElement("div");
-    modalContent.className = "js-gaius-modal-content";
-    modalContent.style.cssText = sizeClass;
+    modalContent.className = isDrawer
+      ? "js-gaius-modal-content js-gaius-modal-drawer"
+      : "js-gaius-modal-content";
+
+    if (!isDrawer) {
+      const sizeClass = size === "lg" ? "max-width:640px" : size === "sm" ? "max-width:360px" : "max-width:480px";
+      modalContent.style.cssText = sizeClass;
+    }
 
     const headerMarkup = title
       ? '<div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid color-mix(in srgb, var(--primary-color) 15%, transparent)">' +
@@ -60,7 +85,19 @@ export const modalSystem = () => {
           '<i data-lucide="x" style="width:20px;height:20px"></i>' +
         "</button>";
 
-    const bodyMarkup = '<div style="padding:20px">' + (content || "") + "</div>";
+    let bodyContent = content || "";
+    contentSourceEl = null;
+
+    if (contentSelector) {
+      const sourceEl = document.querySelector(contentSelector);
+      if (sourceEl) {
+        contentSourceEl = sourceEl;
+        bodyContent = sourceEl.innerHTML;
+        sourceEl.innerHTML = "";
+      }
+    }
+
+    const bodyMarkup = '<div class="js-gaius-modal-body" style="padding:20px;overflow-y:auto">' + bodyContent + "</div>";
 
     modalContent.innerHTML = headerMarkup + bodyMarkup;
 

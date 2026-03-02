@@ -1325,6 +1325,10 @@
     row-gap: calc(var(--spacing) * 4);
   }
 
+  .self-center {
+    align-self: center;
+  }
+
   .self-stretch {
     align-self: stretch;
   }
@@ -1663,10 +1667,6 @@
 
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
-  }
-
-  .py-1\.5 {
-    padding-block: calc(var(--spacing) * 1.5);
   }
 
   .py-2 {
@@ -2192,6 +2192,10 @@
     background: #0000000d;
   }
 
+  .\[background\:rgba\(0\,0\,0\,0\.12\)\] {
+    background: #0000001f;
+  }
+
   .\[background\:rgba\(255\,255\,246\,0\.7\)\] {
     background: #fffff6b3;
   }
@@ -2237,6 +2241,16 @@
     @supports (color: color-mix(in lab, red, red)) {
       .hover\:bg-black\/10:hover {
         background-color: color-mix(in oklab, var(--color-black) 10%, transparent);
+      }
+    }
+
+    .hover\:bg-black\/20:hover {
+      background-color: #0003;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:bg-black\/20:hover {
+        background-color: color-mix(in oklab, var(--color-black) 20%, transparent);
       }
     }
 
@@ -2542,6 +2556,96 @@
 .js-gaius-modal-container[data-state="open"] .js-gaius-modal-content {
   opacity: 1;
   transform: scale(1);
+}
+
+.js-gaius-modal-container[data-state="closed"] .js-gaius-modal-drawer {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.js-gaius-modal-container[data-state="open"] .js-gaius-modal-drawer {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.js-gaius-modal-drawer {
+  border-radius: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  transition: opacity .3s, transform .3s;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.js-gaius-modal-drawer .js-gaius-modal-body {
+  height: calc(100% - 57px);
+}
+
+@media (min-width: 768px) {
+  .js-gaius-modal-drawer {
+    max-width: 420px;
+  }
+}
+
+.js-price-filter-wrapper .filter-input-price-container {
+  flex-direction: column;
+  width: auto;
+  margin-bottom: 8px;
+  margin-right: 0;
+  display: flex;
+}
+
+.js-price-filter-wrapper .filter-input-price-container label {
+  font-family: var(--font-body);
+  color: var(--text-color);
+  margin-bottom: 4px;
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.js-price-filter-wrapper .filter-input-price {
+  width: 80px;
+  font-family: var(--font-body);
+  color: var(--text-color);
+  background: #0000000d;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  padding: 4px 10px;
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.js-price-filter-wrapper .filter-input-price:focus {
+  background: #0000001a;
+}
+
+.js-price-filter-wrapper .js-price-filter-btn {
+  color: var(--text-color);
+  font-family: var(--font-body);
+  cursor: pointer;
+  background: #0000000d;
+  border: none;
+  border-radius: 8px;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: .75rem;
+  font-weight: 500;
+  transition: background .15s;
+  display: inline-flex;
+}
+
+.js-price-filter-wrapper .js-price-filter-btn:hover {
+  background: #0000001a;
+}
+
+.js-gaius-modal-body .filters-container, .js-gaius-modal-body [data-store="filters-group"] {
+  position: relative;
 }
 
 .powered-by-wrapper svg {

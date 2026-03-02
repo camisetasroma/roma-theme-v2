@@ -15,9 +15,11 @@ modalSystem();
 //Category
 import { categoryDropdown } from "./modules/category/category-dropdown";
 import { categoryInfiniteScroll } from "./modules/category/category-infinite-scroll";
+import { categoryFilters } from "./modules/category/category-filters";
 
 categoryDropdown();
 categoryInfiniteScroll();
+categoryFilters();
 
 //Home
 import { heroBanner2Carousel } from "./modules/home/hero-banner-2-carousel";
