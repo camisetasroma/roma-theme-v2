@@ -22,7 +22,7 @@ export const menuSystem = () => {
    
 
     reinitIcons();
-    requestAnimationFrame(initCarouselScrollbars);
+    requestAnimationFrame(initMenuCarousel);
   };
 
   const closeMobileMenu = () => {
@@ -63,71 +63,28 @@ export const menuSystem = () => {
     tab.addEventListener("click", () => switchMobileTab(index));
   });
 
-  // === CAROUSEL SCROLLBAR ===
+  // === MENU CAROUSEL (Swiper) ===
 
-  function initCarouselScrollbars() {
+  function initMenuCarousel() {
     document.querySelectorAll(".js-menu-carousel").forEach((carousel) => {
-      if (carousel._scrollbarInit) return;
-      carousel._scrollbarInit = true;
+      if (carousel._swiperInit) return;
+      carousel._swiperInit = true;
 
-      const track = carousel.querySelector(".js-menu-carousel-track");
-      const thumb = carousel.querySelector(".js-menu-carousel-scrollbar-thumb");
-      if (!track || !thumb) return;
-
-      let rafId = null;
-      const updateThumb = () => {
-        const { scrollWidth, clientWidth, scrollLeft } = track;
-        if (scrollWidth <= clientWidth) {
-          thumb.parentElement.style.display = "none";
-          return;
-        }
-        thumb.parentElement.style.display = "block";
-        const ratio = clientWidth / scrollWidth;
-        const thumbWidth = Math.max(ratio * 100, 15);
-        const maxScroll = scrollWidth - clientWidth;
-        const thumbLeft = maxScroll > 0 ? (scrollLeft / maxScroll) * (100 - thumbWidth) : 0;
-        thumb.style.width = thumbWidth + "%";
-        thumb.style.marginLeft = thumbLeft + "%";
-      };
-
-      const onScroll = () => {
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(updateThumb);
-      };
-
-      track.addEventListener("scroll", onScroll, { passive: true });
-
-      // Drag support
-      let isDragging = false;
-      let startX = 0;
-      let startScroll = 0;
-
-      thumb.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        startScroll = track.scrollLeft;
-        e.preventDefault();
+      new Swiper(carousel, {
+        slidesPerView: "auto",
+        spaceBetween: 0,
+        watchOverflow: true,
+        navigation: {
+          prevEl: carousel.querySelector(".js-menu-carousel-prev"),
+          nextEl: carousel.querySelector(".js-menu-carousel-next"),
+        },
+        pagination: {
+          el: carousel.querySelector(".js-menu-carousel-pagination"),
+          clickable: true,
+        },
       });
 
-      document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        const bar = thumb.parentElement;
-        const barWidth = bar.offsetWidth;
-        const { scrollWidth, clientWidth } = track;
-        const maxScroll = scrollWidth - clientWidth;
-        const ratio = clientWidth / scrollWidth;
-        const thumbWidth = Math.max(ratio, 0.15);
-        const movableBarWidth = barWidth * (1 - thumbWidth);
-        const dx = e.clientX - startX;
-        const scrollDelta = (dx / movableBarWidth) * maxScroll;
-        track.scrollLeft = startScroll + scrollDelta;
-      });
-
-      document.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
-
-      updateThumb();
+      if (typeof lucide !== "undefined") lucide.createIcons();
     });
   }
 
@@ -150,7 +107,7 @@ export const menuSystem = () => {
 
     window.setHeaderMenuActive?.(true);
     reinitIcons();
-    requestAnimationFrame(initCarouselScrollbars);
+    requestAnimationFrame(initMenuCarousel);
   };
 
   const closeDesktopMenu = (index) => {

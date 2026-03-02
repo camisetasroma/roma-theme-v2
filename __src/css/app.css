@@ -356,38 +356,69 @@
 .js-menu-accordion-toggle[aria-expanded="true"] .js-icon-closed { display: none; }
 .js-menu-accordion-toggle[aria-expanded="true"] .js-icon-open { display: block; }
 
-/* Carousel track: custom floating scrollbar */
-.js-menu-carousel-track { scrollbar-width: none; -ms-overflow-style: none; }
-.js-menu-carousel-track::-webkit-scrollbar { display: none; }
-
+/* Carousel: Swiper navigation & pagination */
 .js-menu-carousel {
   position: relative;
+  overflow: hidden;
 }
 
-.js-menu-carousel-scrollbar {
+.js-menu-carousel-prev,
+.js-menu-carousel-next {
   position: absolute;
-  bottom: 12px;
-  left: 16px;
-  right: 16px;
-  height: 0.5rem;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 9999px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.js-menu-carousel-prev:hover,
+.js-menu-carousel-next:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.js-menu-carousel-prev {
+  left: 8px;
+}
+
+.js-menu-carousel-next {
+  right: 8px;
+}
+
+.js-menu-carousel-prev.swiper-button-disabled,
+.js-menu-carousel-next.swiper-button-disabled {
+  opacity: 0;
   pointer-events: none;
 }
 
-.js-menu-carousel-scrollbar-thumb {
-  height: 100%;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 9999px;
-  transition: width 0.15s ease;
-  pointer-events: auto;
-  cursor: grab;
+.js-menu-carousel-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 0;
 }
 
-.js-menu-carousel-scrollbar-thumb:active {
-  cursor: grabbing;
-  background: rgba(255, 255, 255, 1);
+.js-menu-carousel-pagination .swiper-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 200ms ease, width 200ms ease;
+  cursor: pointer;
+}
+
+.js-menu-carousel-pagination .swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 0.9);
+  width: 18px;
 }
 
 

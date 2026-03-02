@@ -101,7 +101,7 @@
         </div>
 
         {# Breadcrumb #}
-        {% include 'snipplets/navigation/breadcrumb-category.tpl' %}
+        {% include 'snipplets/breadcrumbs.tpl' %}
 
         {% if has_filters_available %}
             <button type="button" class="js-category-filter-trigger flex md:hidden h-8 items-center gap-1.5 [background:rgba(0,0,0,0.05)] px-3 py-1 rounded-lg text-secondary font-sans text-sm font-medium cursor-pointer hover:bg-black/10 transition-colors mt-2" data-filter-title="{{ 'Filtros' | translate }}">

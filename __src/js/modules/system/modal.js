@@ -36,7 +36,12 @@ export const modalSystem = () => {
         container.innerHTML = "";
         currentModal = null;
       };
-      content.addEventListener("transitionend", cleanup, { once: true });
+      const onTransitionEnd = (e) => {
+        if (e.target !== content) return;
+        content.removeEventListener("transitionend", onTransitionEnd);
+        cleanup();
+      };
+      content.addEventListener("transitionend", onTransitionEnd);
       setTimeout(cleanup, 400);
     } else {
       container.innerHTML = "";
@@ -75,13 +80,13 @@ export const modalSystem = () => {
     }
 
     const headerMarkup = title
-      ? '<div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid color-mix(in srgb, var(--primary-color) 15%, transparent)">' +
-          '<h2 style="font-family:var(--font-headings);font-size:1.125rem;font-weight:600;color:var(--primary-color);margin:0">' + escapeHtml(title) + "</h2>" +
-          '<button type="button" class="js-gaius-modal-close" style="cursor:pointer;color:var(--primary-color);background:none;border:none;padding:4px" aria-label="Close">' +
+      ? '<div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">' +
+          '<h2 style="font-family:var(--font-headings);font-size:1.125rem;font-weight:600;color:var(--text-color);margin:0">' + escapeHtml(title) + "</h2>" +
+          '<button type="button" class="js-gaius-modal-close" style="cursor:pointer;color:var(--text-color);background:none;border:none;padding:4px" aria-label="Close">' +
             '<i data-lucide="x" style="width:20px;height:20px"></i>' +
           "</button>" +
         "</div>"
-      : '<button type="button" class="js-gaius-modal-close" style="position:absolute;top:12px;right:12px;cursor:pointer;color:var(--primary-color);background:none;border:none;padding:4px;z-index:1" aria-label="Close">' +
+      : '<button type="button" class="js-gaius-modal-close" style="position:absolute;top:12px;right:12px;cursor:pointer;color:var(--text-color);background:none;border:none;padding:4px;z-index:1" aria-label="Close">' +
           '<i data-lucide="x" style="width:20px;height:20px"></i>' +
         "</button>";
 

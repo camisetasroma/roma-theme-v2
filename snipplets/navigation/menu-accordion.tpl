@@ -27,6 +27,15 @@
         </button>
 
         <div class="js-menu-accordion-content pl-4" hidden>
+          <a
+            href="{{ item.url }}"
+            class="flex w-full justify-between items-center px-6 py-3 no-underline text-secondary transition-colors duration-200 hover:opacity-70"
+          >
+            <span class="font-heading text-lg font-bold leading-[80%]">
+              {{ 'Ver todos' | translate }}
+            </span>
+            <i data-lucide="arrow-right" class="w-4 h-4 shrink-0"></i>
+          </a>
           {% include 'snipplets/navigation/menu-accordion.tpl' with {
             menu_items: item.subitems,
             highlighted_items: highlighted_items,

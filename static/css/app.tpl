@@ -2010,7 +2010,17 @@
     color: var(--color-red-600);
   }
 
-  .text-secondary, .text-secondary\/80 {
+  .text-secondary, .text-secondary\/60 {
+    color: var(--color-secondary);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-secondary\/60 {
+      color: color-mix(in oklab, var(--color-secondary) 60%, transparent);
+    }
+  }
+
+  .text-secondary\/80 {
     color: var(--color-secondary);
   }
 
@@ -2326,10 +2336,6 @@
 
     .md\:h-170 {
       height: calc(var(--spacing) * 170);
-    }
-
-    .md\:snap-none {
-      scroll-snap-type: none;
     }
 
     .md\:grid-cols-3 {
@@ -2701,43 +2707,65 @@
   display: block;
 }
 
-.js-menu-carousel-track {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.js-menu-carousel-track::-webkit-scrollbar {
-  display: none;
-}
-
 .js-menu-carousel {
   position: relative;
+  overflow: hidden;
 }
 
-.js-menu-carousel-scrollbar {
+.js-menu-carousel-prev, .js-menu-carousel-next {
   z-index: 10;
-  pointer-events: none;
-  background: #ffffff40;
+  color: #ffffffe6;
+  cursor: pointer;
+  background: #0006;
+  border: none;
   border-radius: 9999px;
-  height: .5rem;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  transition: background .2s;
+  display: flex;
   position: absolute;
-  bottom: 12px;
-  left: 16px;
-  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.js-menu-carousel-scrollbar-thumb {
-  pointer-events: auto;
-  cursor: grab;
-  background: #fff9;
+.js-menu-carousel-prev:hover, .js-menu-carousel-next:hover {
+  background: #0009;
+}
+
+.js-menu-carousel-prev {
+  left: 8px;
+}
+
+.js-menu-carousel-next {
+  right: 8px;
+}
+
+.js-menu-carousel-prev.swiper-button-disabled, .js-menu-carousel-next.swiper-button-disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.js-menu-carousel-pagination {
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 0;
+  display: flex;
+}
+
+.js-menu-carousel-pagination .swiper-pagination-bullet {
+  cursor: pointer;
+  background: #fff6;
   border-radius: 9999px;
-  height: 100%;
-  transition: width .15s;
+  width: 6px;
+  height: 6px;
+  transition: background .2s, width .2s;
 }
 
-.js-menu-carousel-scrollbar-thumb:active {
-  cursor: grabbing;
-  background: #fff;
+.js-menu-carousel-pagination .swiper-pagination-bullet-active {
+  background: #ffffffe6;
+  width: 18px;
 }
 
 @property --tw-translate-x {
