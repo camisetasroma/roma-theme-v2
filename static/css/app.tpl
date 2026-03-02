@@ -116,6 +116,7 @@
     --radius-md: .375rem;
     --radius-lg: .5rem;
     --radius-xl: .75rem;
+    --shadow-xl: 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
     --ease-in: cubic-bezier(.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, .2, 1);
     --ease-in-out: cubic-bezier(.4, 0, .2, 1);
@@ -150,6 +151,7 @@
   :root, :host {
     --font-heading: var(--font-headings);
     --z-toast: 90;
+    --z-modal: 100;
     --transition-duration-200: .2s;
     --transition-duration-300: .3s;
     --transition-duration-500: .5s;
@@ -2497,6 +2499,49 @@
 .js-toast-container [data-state="exiting"] {
   opacity: 0;
   transform: translateX(100%);
+}
+
+.js-gaius-modal-container[data-state="closed"] {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.js-gaius-modal-container[data-state="open"] {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.js-gaius-modal-overlay {
+  -webkit-backdrop-filter: blur(4px);
+  background: #0000004d;
+  transition: opacity .3s;
+  position: absolute;
+  inset: 0;
+}
+
+.js-gaius-modal-content {
+  background: var(--background-color);
+  color: var(--primary-color);
+  box-shadow: var(--shadow-xl);
+  border-radius: 12px;
+  width: calc(100% - 32px);
+  max-width: 480px;
+  max-height: calc(100vh - 64px);
+  transition: opacity .3s, transform .3s;
+  position: relative;
+  overflow-y: auto;
+}
+
+.js-gaius-modal-container[data-state="closed"] .js-gaius-modal-content {
+  opacity: 0;
+  transform: scale(.95);
+}
+
+.js-gaius-modal-container[data-state="open"] .js-gaius-modal-content {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .powered-by-wrapper svg {

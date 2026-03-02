@@ -156,6 +156,52 @@
   transform: translateX(100%);
 }
 
+/* ===== MODAL SYSTEM STYLES ===== */
+
+.js-gaius-modal-container[data-state="closed"] {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.js-gaius-modal-container[data-state="open"] {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.js-gaius-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: opacity 300ms ease;
+}
+
+.js-gaius-modal-content {
+  position: relative;
+  background: var(--background-color);
+  color: var(--primary-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-xl);
+  max-width: 480px;
+  width: calc(100% - 32px);
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.js-gaius-modal-container[data-state="closed"] .js-gaius-modal-content {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.js-gaius-modal-container[data-state="open"] .js-gaius-modal-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
 /* ===== FOOTER STYLES ===== */
 
 /* Powered by Nuvemshop - herdar cor primária */

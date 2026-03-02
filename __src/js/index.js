@@ -3,12 +3,14 @@ import { advertisingCarousel, headerAnimations } from "./modules/system/header";
 import { menuSystem } from "./modules/system/menu";
 import { searchSystem } from "./modules/system/search";
 import { toastSystem } from "./modules/system/toast";
+import { modalSystem } from "./modules/system/modal";
 
 headerAnimations();
 advertisingCarousel();
 menuSystem();
 searchSystem();
 toastSystem();
+modalSystem();
 
 //Category
 import { categoryDropdown } from "./modules/category/category-dropdown";

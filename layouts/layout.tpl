@@ -123,6 +123,9 @@
         {# Toast notifications #}
         {% snipplet "notification/toast.tpl" %}
 
+        {# Modal system #}
+        {% snipplet "notification/modal.tpl" %}
+
         {# Page content #}
 
         {% template_content %}
@@ -200,7 +203,7 @@
             lucide.createIcons();
         </script>
 
-        {{ 'js/gaius-v1772407157501.js' | static_url | script_tag }}
+        {{ 'js/gaius-v1772413345571.js' | static_url | script_tag }}
 
     </body>
 </html>
