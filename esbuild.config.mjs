@@ -4,7 +4,7 @@ const isWatch = process.argv.includes("--watch");
 
 const ctx = await esbuild.context({
   entryPoints: ["__src/js/index.js"],
-  outfile: "static/js/gaius-v1772413345571.js",
+  outfile: "static/js/gaius-v1772413470950.js",
 
   bundle: true,
   minify: true, // 🔥 minifica sempre

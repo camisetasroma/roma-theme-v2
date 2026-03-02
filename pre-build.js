@@ -5,6 +5,18 @@ const epoch = Date.now();
 const newFileName = `gaius-v${epoch}.js`;
 
 const regex = /gaius-v\d+\.js/g;
+const jsDir = path.join(__dirname, "static/js");
+
+// Excluir arquivos antigos gaius-v*.js
+if (fs.existsSync(jsDir)) {
+  fs.readdirSync(jsDir)
+    .filter((file) => regex.test(file))
+    .forEach((file) => {
+      fs.unlinkSync(path.join(jsDir, file));
+      console.log("Excluído:", file);
+    });
+  regex.lastIndex = 0;
+}
 
 function updateFile(filePath) {
   if (!fs.existsSync(filePath)) {
