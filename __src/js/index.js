@@ -16,10 +16,12 @@ modalSystem();
 import { categoryDropdown } from "./modules/category/category-dropdown";
 import { categoryInfiniteScroll } from "./modules/category/category-infinite-scroll";
 import { categoryFilters } from "./modules/category/category-filters";
+import { categorySorting } from "./modules/category/category-sorting";
 
 categoryDropdown();
 categoryInfiniteScroll();
 categoryFilters();
+categorySorting();
 
 //Home
 import { heroBanner2Carousel } from "./modules/home/hero-banner-2-carousel";

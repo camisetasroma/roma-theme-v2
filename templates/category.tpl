@@ -1,4 +1,17 @@
 {% set has_filters_available = products and has_filters_enabled and (filter_categories is not empty or product_filters is not empty) %}
+
+{# Sort method labels #}
+{% set sort_text = {
+    'best-selling': 'Más Vendidos',
+    'user': 'Destacado',
+    'price-ascending': 'Precio: Menor a Mayor',
+    'price-descending': 'Precio: Mayor a Menor',
+    'alpha-ascending': 'A - Z',
+    'alpha-descending': 'Z - A',
+    'created-ascending': 'Más Viejo al más Nuevo',
+    'created-descending': 'Más Nuevo al más Viejo',
+} %}
+{% set current_sort_label = sort_text[sort_by] ? (sort_text[sort_by] | t) : ('Ordenar' | translate) %}
 {% set show_help = not has_products %}
 {% paginate by 12 %}
 
@@ -92,6 +105,52 @@
                 </div>
             {% endif %}
 
+            {# Sorting Dropdown — Desktop #}
+            {% if sort_methods is not empty %}
+                <div class="js-category-sorting relative hidden md:block">
+                    <button
+                        class="js-category-sorting-trigger flex h-8 items-center gap-1 [background:rgba(0,0,0,0.05)] px-3 py-1 rounded-lg text-secondary font-sans text-sm font-medium cursor-pointer"
+                        type="button"
+                        aria-expanded="false"
+                    >
+                        <span class="js-category-sorting-label">{{ current_sort_label }}</span>
+                        <i data-lucide="chevron-down" class="js-category-sorting-icon w-4 h-4 text-secondary transition-transform duration-200"></i>
+                    </button>
+                    <ul class="js-category-sorting-list absolute top-full left-0 mt-1 min-w-max bg-bg/70 backdrop-blur-sm rounded-lg shadow-md overflow-hidden z-20" hidden>
+                        {# Best-selling first #}
+                        {% for sort_method in sort_methods %}
+                            {% if sort_method == 'best-selling' %}
+                                <li>
+                                    <button
+                                        type="button"
+                                        class="js-category-sorting-option block w-full text-left whitespace-nowrap px-3 py-2 text-secondary font-sans text-base cursor-pointer hover:bg-black/5 {% if sort_by == sort_method %}font-bold{% endif %}"
+                                        data-sort-value="{{ sort_method }}"
+                                    >
+                                        {{ sort_text[sort_method] | t }}
+                                    </button>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        {# Rest of sort methods #}
+                        {% for sort_method in sort_methods %}
+                            {% if sort_method != 'best-selling' %}
+                                {% if sort_method != 'user' or category.sort_method == 'user' %}
+                                    <li>
+                                        <button
+                                            type="button"
+                                            class="js-category-sorting-option block w-full text-left whitespace-nowrap px-3 py-2 text-secondary font-sans text-base cursor-pointer hover:bg-black/5 {% if sort_by == sort_method %}font-bold{% endif %}"
+                                            data-sort-value="{{ sort_method }}"
+                                        >
+                                            {{ sort_text[sort_method] | t }}
+                                        </button>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
             {% if has_filters_available %}
                 <button type="button" class="js-category-filter-trigger hidden md:flex h-8 items-center gap-1.5 [background:rgba(0,0,0,0.05)] px-3 py-1 rounded-lg text-secondary font-sans text-sm font-medium cursor-pointer hover:bg-black/10 transition-colors" data-filter-title="{{ 'Filtros' | translate }}">
                     <i data-lucide="list-filter" class="w-4 h-4 text-secondary"></i>
@@ -103,11 +162,56 @@
         {# Breadcrumb #}
         {% include 'snipplets/breadcrumbs.tpl' %}
 
-        {% if has_filters_available %}
-            <button type="button" class="js-category-filter-trigger flex md:hidden h-8 items-center gap-1.5 [background:rgba(0,0,0,0.05)] px-3 py-1 rounded-lg text-secondary font-sans text-sm font-medium cursor-pointer hover:bg-black/10 transition-colors mt-2" data-filter-title="{{ 'Filtros' | translate }}">
-                <i data-lucide="list-filter" class="w-4 h-4 text-secondary"></i>
-                {{ 'Filtrar' | translate }}
-            </button>
+        {# Mobile controls row: sorting + filter #}
+        {% if sort_methods is not empty or has_filters_available %}
+            <div class="flex md:hidden items-center gap-2 mt-2">
+                {# Sorting Dropdown — Mobile #}
+                {% if sort_methods is not empty %}
+                    <div class="js-category-sorting relative">
+                        <button
+                            class="js-category-sorting-trigger flex h-8 items-center gap-1 [background:rgba(0,0,0,0.05)] px-3 py-1 rounded-lg text-secondary font-sans text-sm font-medium cursor-pointer"
+                            type="button"
+                            aria-expanded="false"
+                        >
+                            <span class="js-category-sorting-label">{{ current_sort_label }}</span>
+                            <i data-lucide="chevron-down" class="js-category-sorting-icon w-4 h-4 text-secondary transition-transform duration-200"></i>
+                        </button>
+                        <ul class="js-category-sorting-list absolute top-full left-0 mt-1 min-w-max bg-bg/70 backdrop-blur-sm rounded-lg shadow-md overflow-hidden z-20" hidden>
+                            {% for sort_method in sort_methods %}
+                                {% if sort_method != 'user' or category.sort_method == 'user' %}
+                                    <li>
+                                        <button
+                                            type="button"
+                                            class="js-category-sorting-option block w-full text-left whitespace-nowrap px-3 py-2 text-secondary font-sans text-base cursor-pointer hover:bg-black/5 {{ sort_by == sort_method ? 'font-bold' : '' }}"
+                                            data-sort-value="{{ sort_method }}"
+                                        >
+                                            {{ sort_text[sort_method] | t }}
+                                        </button>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                {% if has_filters_available %}
+                    <button type="button" class="js-category-filter-trigger flex h-8 items-center gap-1.5 [background:rgba(0,0,0,0.05)] px-3 py-1 rounded-lg text-secondary font-sans text-sm font-medium cursor-pointer hover:bg-black/10 transition-colors" data-filter-title="{{ 'Filtros' | translate }}">
+                        <i data-lucide="list-filter" class="w-4 h-4 text-secondary"></i>
+                        {{ 'Filtrar' | translate }}
+                    </button>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {# Hidden native select for platform compatibility #}
+        {% if sort_methods is not empty %}
+            <select class="js-sort-by" hidden aria-label="{{ 'Ordenar por:' | translate }}">
+                {% for sort_method in sort_methods %}
+                    {% if sort_method != 'user' or category.sort_method == 'user' %}
+                        <option value="{{ sort_method }}" {% if sort_by == sort_method %}selected{% endif %}>{{ sort_text[sort_method] | t }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
         {% endif %}
 
         {% if has_filters_available %}

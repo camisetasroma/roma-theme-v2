@@ -1448,6 +1448,16 @@
     background-color: var(--color-bg-subtle);
   }
 
+  .bg-bg\/70 {
+    background-color: var(--color-bg);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-bg\/70 {
+      background-color: color-mix(in oklab, var(--color-bg) 70%, transparent);
+    }
+  }
+
   .bg-black {
     background-color: var(--color-black);
   }
