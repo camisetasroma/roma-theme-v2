@@ -2362,6 +2362,10 @@
       row-gap: calc(var(--spacing) * 4);
     }
 
+    .md\:px-0 {
+      padding-inline: calc(var(--spacing) * 0);
+    }
+
     .md\:px-16 {
       padding-inline: calc(var(--spacing) * 16);
     }
@@ -2710,62 +2714,6 @@
 .js-menu-carousel {
   position: relative;
   overflow: hidden;
-}
-
-.js-menu-carousel-prev, .js-menu-carousel-next {
-  z-index: 10;
-  color: #ffffffe6;
-  cursor: pointer;
-  background: #0006;
-  border: none;
-  border-radius: 9999px;
-  justify-content: center;
-  align-items: center;
-  width: 36px;
-  height: 36px;
-  transition: background .2s;
-  display: flex;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.js-menu-carousel-prev:hover, .js-menu-carousel-next:hover {
-  background: #0009;
-}
-
-.js-menu-carousel-prev {
-  left: 8px;
-}
-
-.js-menu-carousel-next {
-  right: 8px;
-}
-
-.js-menu-carousel-prev.swiper-button-disabled, .js-menu-carousel-next.swiper-button-disabled {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.js-menu-carousel-pagination {
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 0;
-  display: flex;
-}
-
-.js-menu-carousel-pagination .swiper-pagination-bullet {
-  cursor: pointer;
-  background: #fff6;
-  border-radius: 9999px;
-  width: 6px;
-  height: 6px;
-  transition: background .2s, width .2s;
-}
-
-.js-menu-carousel-pagination .swiper-pagination-bullet-active {
-  background: #ffffffe6;
-  width: 18px;
 }
 
 @property --tw-translate-x {

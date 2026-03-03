@@ -65,24 +65,67 @@ export const menuSystem = () => {
 
   // === MENU CAROUSEL (Swiper) ===
 
+  const menuSeedSVG = (() => {
+    const styles = getComputedStyle(document.documentElement);
+    const activeColor = styles.getPropertyValue("--text-color").trim();
+    const inactiveColor = "color-mix(in srgb, var(--text-color) 40%, transparent)";
+    return (active) => `
+      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8" fill="none">
+        <path d="M6.93294 6.9178C10.0118 6.33768 11.5457 4.64453 10.8236 2.44759C10.2482 0.697531 8.31108 -0.0463472 6.24753 0.00222694C4.0117 0.0549646 2.34216 1.16245 1.5248 2.83063C1.07947 3.73966 0.564497 5.41477 0.0330304 6.99968C-0.164895 7.58812 0.559 8.12244 1.34154 7.97533C2.63722 7.73523 5.76371 7.13846 6.93294 6.9178Z" fill="${active ? activeColor : inactiveColor}"/>
+      </svg>`;
+  })();
+
+  function renderMenuPagination(swiper, paginationEl, realCount) {
+    if (!paginationEl) return;
+    const current = swiper.realIndex;
+    let html = "";
+    for (let i = 0; i < realCount; i++) {
+      html += `<span class="cursor-pointer js-menu-carousel-seed" data-index="${i}">${menuSeedSVG(i === current)}</span>`;
+    }
+    paginationEl.innerHTML = html;
+    paginationEl.querySelectorAll(".js-menu-carousel-seed").forEach((seed) => {
+      seed.addEventListener("click", () => {
+        swiper.slideToLoop(parseInt(seed.dataset.index));
+      });
+    });
+  }
+
   function initMenuCarousel() {
     document.querySelectorAll(".js-menu-carousel").forEach((carousel) => {
       if (carousel._swiperInit) return;
       carousel._swiperInit = true;
 
-      new Swiper(carousel, {
+      const controlsBar = carousel.nextElementSibling?.classList.contains("js-menu-carousel-controls")
+        ? carousel.nextElementSibling
+        : null;
+      const paginationEl = controlsBar?.querySelector(".js-menu-carousel-pagination");
+      const prevBtn = controlsBar?.querySelector(".js-menu-carousel-prev");
+      const nextBtn = controlsBar?.querySelector(".js-menu-carousel-next");
+
+      const realCount = carousel.querySelectorAll(".swiper-slide").length;
+
+      const swiper = new Swiper(carousel, {
         slidesPerView: "auto",
         spaceBetween: 0,
+        loop: true,
         watchOverflow: true,
-        navigation: {
-          prevEl: carousel.querySelector(".js-menu-carousel-prev"),
-          nextEl: carousel.querySelector(".js-menu-carousel-next"),
-        },
-        pagination: {
-          el: carousel.querySelector(".js-menu-carousel-pagination"),
-          clickable: true,
+        on: {
+          slideChange: function () {
+            renderMenuPagination(this, paginationEl, realCount);
+          },
+          init: function () {
+            renderMenuPagination(this, paginationEl, realCount);
+            if (this.isLocked && controlsBar) controlsBar.style.display = "none";
+          },
         },
       });
+
+      if (prevBtn) {
+        prevBtn.addEventListener("click", () => swiper.slidePrev());
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener("click", () => swiper.slideNext());
+      }
 
       if (typeof lucide !== "undefined") lucide.createIcons();
     });

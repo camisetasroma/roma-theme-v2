@@ -86,12 +86,16 @@
       </div>
     {% endfor %}
   </div>
-  <button type="button" class="js-menu-carousel-prev" aria-label="Previous">
-    <i data-lucide="chevron-left" style="width:20px;height:20px"></i>
-  </button>
-  <button type="button" class="js-menu-carousel-next" aria-label="Next">
-    <i data-lucide="chevron-right" style="width:20px;height:20px"></i>
-  </button>
-  <div class="js-menu-carousel-pagination"></div>
+</div>
+<div class="js-menu-carousel-controls flex items-center justify-between mt-4 px-4 md:px-0">
+  <div class="js-menu-carousel-pagination flex items-center gap-2"></div>
+  <div class="flex items-center gap-2">
+    <button type="button" class="js-menu-carousel-prev flex w-8 h-8 justify-center items-center cursor-pointer" aria-label="{{ 'Anterior' | translate }}">
+      <i data-lucide="arrow-left" class="w-5 h-5 text-secondary"></i>
+    </button>
+    <button type="button" class="js-menu-carousel-next flex w-8 h-8 justify-center items-center cursor-pointer" aria-label="{{ 'Siguiente' | translate }}">
+      <i data-lucide="arrow-right" class="w-5 h-5 text-secondary"></i>
+    </button>
+  </div>
 </div>
 {% endif %}
