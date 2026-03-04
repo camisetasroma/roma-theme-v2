@@ -501,6 +501,10 @@
     bottom: calc(var(--spacing) * 16);
   }
 
+  .bottom-full {
+    bottom: 100%;
+  }
+
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
@@ -1006,6 +1010,10 @@
     max-height: calc(var(--spacing) * 16);
   }
 
+  .max-h-32 {
+    max-height: calc(var(--spacing) * 32);
+  }
+
   .max-h-dvh {
     max-height: 100dvh;
   }
@@ -1042,12 +1050,20 @@
     width: calc(var(--spacing) * 6);
   }
 
+  .w-7 {
+    width: calc(var(--spacing) * 7);
+  }
+
   .w-8 {
     width: calc(var(--spacing) * 8);
   }
 
   .w-12 {
     width: calc(var(--spacing) * 12);
+  }
+
+  .w-40 {
+    width: calc(var(--spacing) * 40);
   }
 
   .w-70 {
@@ -1086,6 +1102,10 @@
     max-width: var(--container-3xl);
   }
 
+  .max-w-16 {
+    max-width: calc(var(--spacing) * 16);
+  }
+
   .max-w-100 {
     max-width: calc(var(--spacing) * 100);
   }
@@ -1100,6 +1120,10 @@
 
   .min-w-0 {
     min-width: calc(var(--spacing) * 0);
+  }
+
+  .min-w-16 {
+    min-width: calc(var(--spacing) * 16);
   }
 
   .min-w-48 {
@@ -1267,6 +1291,10 @@
 
   .justify-end {
     justify-content: flex-end;
+  }
+
+  .justify-start {
+    justify-content: flex-start;
   }
 
   .gap-1 {
@@ -1679,6 +1707,10 @@
     padding-block: calc(var(--spacing) * 1);
   }
 
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
+  }
+
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
@@ -2048,6 +2080,10 @@
     text-transform: uppercase;
   }
 
+  .line-through {
+    text-decoration-line: line-through;
+  }
+
   .no-underline {
     text-decoration-line: none;
   }
@@ -2099,6 +2135,11 @@
 
   .shadow-md {
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, #0000001a), 0 2px 4px -2px var(--tw-shadow-color, #0000001a);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .shadow-sm {
+    --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, #0000000d);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
@@ -2214,6 +2255,10 @@
 
   .\[background\:rgba\(0\,0\,0\,0\.12\)\] {
     background: #0000001f;
+  }
+
+  .\[background\:rgba\(0\,0\,0\,0\.15\)\] {
+    background: #00000026;
   }
 
   .\[background\:rgba\(255\,255\,246\,0\.7\)\] {

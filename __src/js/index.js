@@ -4,6 +4,7 @@ import { menuSystem } from "./modules/system/menu";
 import { searchSystem } from "./modules/system/search";
 import { toastSystem } from "./modules/system/toast";
 import { modalSystem } from "./modules/system/modal";
+import { itemCardQuickbuy } from "./modules/system/item-card-quickbuy";
 
 headerAnimations();
 advertisingCarousel();
@@ -11,6 +12,7 @@ menuSystem();
 searchSystem();
 toastSystem();
 modalSystem();
+itemCardQuickbuy();
 
 //Category
 import { categoryDropdown } from "./modules/category/category-dropdown";
