@@ -2,7 +2,10 @@
 
 <div class="{{ item_class | default('') }} flex flex-col justify-start items-start"
      data-product-id="{{ product.id }}"
-     data-store="product-item-{{ product.id }}">
+     data-store="product-item-{{ product.id }}"
+     data-product-name="{{ product.name }}"
+     data-product-image="{{ product.featured_image | product_image_url('small') }}"
+     {% if product.display_price %}data-product-price="{{ product.price | money }}"{% endif %}>
     {% if product.variations %}
         <script class="js-quickbuy-variants-data" type="application/json">{{ product.variants_object | json_encode | raw }}</script>
     {% endif %}

@@ -107,6 +107,26 @@ export const itemCardQuickbuy = () => {
       return;
     }
 
+    var addBtn = e.target.closest(".js-quickbuy-add-btn");
+    if (addBtn) {
+      var card = addBtn.closest("[data-product-id]");
+      if (!card) return;
+
+      var productName = card.dataset.productName || "";
+      var productPrice = card.dataset.productPrice || "";
+      var productImage = card.dataset.productImage || "";
+
+      window.showToast?.({
+        product: {
+          image: productImage,
+          name: productName,
+          price: productPrice,
+          quantity: 1,
+        },
+      });
+      return;
+    }
+
     if (currentOpen && !e.target.closest(".js-quickbuy-dropdown")) {
       closeCurrent();
     }
