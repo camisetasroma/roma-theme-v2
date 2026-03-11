@@ -116,13 +116,25 @@ export const itemCardQuickbuy = () => {
       var productPrice = card.dataset.productPrice || "";
       var productImage = card.dataset.productImage || "";
 
-      window.showToast?.({
-        product: {
-          image: productImage,
-          name: productName,
-          price: productPrice,
-          quantity: 1,
-        },
+      // Collect selected variations
+      var variations = [];
+      var qbContainer = addBtn.closest(".js-quickbuy-container");
+      if (qbContainer) {
+        qbContainer.querySelectorAll(".js-quickbuy-dropdown").forEach(function (dropdown) {
+          var selected = dropdown.querySelector("[data-selected='true']");
+          if (selected) {
+            var value = selected.dataset.optionName || selected.textContent.trim();
+            if (value) variations.push(value);
+          }
+        });
+      }
+
+      window.showProductToast?.({
+        image: productImage,
+        name: productName,
+        price: productPrice,
+        quantity: 1,
+        variation: variations.length > 0 ? variations.join(" / ") : null,
       });
       return;
     }
