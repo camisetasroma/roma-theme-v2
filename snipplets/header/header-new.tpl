@@ -119,11 +119,18 @@
                 <span class="hidden md:inline">Login</span>
             </a>
             {# Carrinho #}
-            <a href="{{ store.cart_url }}" class="nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1">
+            <button
+              type="button"
+              class="js-cart-drawer-toggle nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1 cursor-pointer bg-transparent border-0"
+              aria-label="{{ 'Carrinho' | translate }}"
+            >
                 <i data-lucide="shopping-cart" class="w-5 h-5 md:hidden"></i>
                 <span class="hidden md:inline">Carrinho</span>
                 <span class="js-cart-widget-amount hidden md:inline">({{ cart.items_count }})</span>
-            </a>
+            </button>
+            <noscript>
+              <a href="{{ store.cart_url }}" class="nav-link text-sm font-medium flex items-center gap-1">Carrinho</a>
+            </noscript>
         </div>
     </div>
 

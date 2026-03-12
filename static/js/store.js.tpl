@@ -2024,6 +2024,9 @@ DOMContentLoaded.addEventOrExecute(() => {
                     if (isCrossSelling) {
                         jQueryNuvem('#js-cross-selling-modal .js-modal-close').trigger('click');
                     }
+
+                    {# Notify cart drawer of cart update #}
+                    window.onCartUpdate?.();
                 }
                 var callback_error = function(){
                     {# Restore real button visibility in case of error #}

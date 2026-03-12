@@ -92,7 +92,7 @@
         {{ component('structured-data') }}
 
     </head>
-    <body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}">
+    <body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}" data-cart-url="{{ store.cart_url }}">
         {# Facebook comments on product page #}
 
         {% if template == 'product' %}
@@ -125,6 +125,9 @@
 
         {# Modal system #}
         {% snipplet "notification/modal.tpl" %}
+
+        {# Cart drawer #}
+        {% snipplet "cart/cart-drawer.tpl" %}
 
         {# Page content #}
 
@@ -203,7 +206,7 @@
             lucide.createIcons();
         </script>
 
-        {{ 'js/gaius-v1773192712475.js' | static_url | script_tag }}
+        {{ 'js/gaius-v1773282531128.js' | static_url | script_tag }}
 
     </body>
 </html>

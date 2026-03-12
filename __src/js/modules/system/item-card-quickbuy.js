@@ -116,26 +116,68 @@ export const itemCardQuickbuy = () => {
       var productPrice = card.dataset.productPrice || "";
       var productImage = card.dataset.productImage || "";
 
-      // Collect selected variations
-      var variations = [];
+      // Collect selected variation option names
+      var selectedOptions = [];
       var qbContainer = addBtn.closest(".js-quickbuy-container");
       if (qbContainer) {
         qbContainer.querySelectorAll(".js-quickbuy-dropdown").forEach(function (dropdown) {
           var selected = dropdown.querySelector("[data-selected='true']");
           if (selected) {
             var value = selected.dataset.optionName || selected.textContent.trim();
-            if (value) variations.push(value);
+            if (value) selectedOptions.push(value);
           }
         });
       }
 
-      window.showProductToast?.({
-        image: productImage,
-        name: productName,
-        price: productPrice,
-        quantity: 1,
-        variation: variations.length > 0 ? variations.join(" / ") : null,
-      });
+      // Build FormData for add-to-cart
+      var productId = card.dataset.productId;
+      var cartUrl = document.body.dataset.cartUrl;
+      if (!productId || !cartUrl) return;
+
+      var formData = new FormData();
+      formData.append("add_to_cart", productId);
+      formData.append("quantity", "1");
+
+      // Add variation selections (variation[variationId] = optionId)
+      if (qbContainer) {
+        qbContainer.querySelectorAll(".js-quickbuy-dropdown").forEach(function (dropdown) {
+          var variationId = dropdown.dataset.variationId;
+          var selected = dropdown.querySelector("[data-selected='true']");
+          if (variationId && selected && selected.dataset.optionId) {
+            formData.append("variation[" + variationId + "]", selected.dataset.optionId);
+          }
+        });
+      }
+
+      // Disable button during request
+      addBtn.style.pointerEvents = "none";
+      addBtn.style.opacity = "0.5";
+
+      // Add to cart via Nuvemshop cart endpoint
+      fetch(cartUrl, {
+        method: "POST",
+        body: formData,
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("Add to cart failed");
+          window.showProductToast?.({
+            image: productImage,
+            name: productName,
+            price: productPrice,
+            quantity: 1,
+            variation: selectedOptions.length > 0 ? selectedOptions.join(" / ") : null,
+          });
+          window.onCartUpdate?.();
+        })
+        .catch(function (err) {
+          console.error("Quickbuy add to cart error:", err);
+        })
+        .finally(function () {
+          addBtn.style.pointerEvents = "";
+          addBtn.style.opacity = "";
+        });
+
       return;
     }
 

@@ -6,9 +6,7 @@
      data-product-name="{{ product.name }}"
      data-product-image="{{ product.featured_image | product_image_url('small') }}"
      {% if product.display_price %}data-product-price="{{ product.price | money }}"{% endif %}>
-    {% if product.variations %}
-        <script class="js-quickbuy-variants-data" type="application/json">{{ product.variants_object | json_encode | raw }}</script>
-    {% endif %}
+    <script class="js-quickbuy-variants-data" type="application/json">{{ product.variants_object | json_encode | raw }}</script>
 
     {# Product Image Container #}
     <div class="flex flex-col items-start relative w-full rounded-sm">
