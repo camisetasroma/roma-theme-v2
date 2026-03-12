@@ -3,19 +3,61 @@ export const cartDrawerSystem = () => {
   if (!drawer) return;
 
   let isOpen = false;
-  let fetchController = null;
 
   const backdrop = drawer.querySelector(".js-cart-drawer-backdrop");
   const closeBtn = drawer.querySelector(".js-cart-drawer-close");
+  const panel = drawer.querySelector(".js-cart-drawer-panel");
+
+  const applyDesktopOffset = () => {
+    if (!panel) return;
+    if (window.innerWidth >= 768) {
+      const header = document.querySelector(".js-new-header");
+      const headerHeight = header ? header.offsetHeight : 0;
+      panel.style.top = headerHeight + "px";
+      panel.style.height = "calc(100% - " + headerHeight + "px)";
+    } else {
+      panel.style.top = "";
+      panel.style.height = "";
+    }
+  };
+
+  let resizeTimer = null;
+  const onResize = () => {
+    if (!isOpen) return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyDesktopOffset, 100);
+  };
+
+  window.addEventListener("resize", onResize);
 
   const openDrawer = () => {
     if (isOpen) return;
     isOpen = true;
-    drawer.dataset.state = "open";
-    window.setHeaderMenuActive?.(true);
 
-    if (window.innerWidth < 768) {
-      document.body.style.overflow = "hidden";
+    // Capture header height BEFORE body lock changes scroll/header state
+    const preHeaderHeight = (() => {
+      if (!panel || window.innerWidth < 768) return 0;
+      const header = document.querySelector(".js-new-header");
+      return header ? header.offsetHeight : 0;
+    })();
+
+    const scrollPos = window.scrollY;
+
+    drawer.dataset.state = "open";
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+    document.body.style.top = "-" + scrollPos + "px";
+
+    // Apply pre-calculated offset (avoids wrong header height after body lock)
+    if (panel && window.innerWidth >= 768) {
+      panel.style.top = preHeaderHeight + "px";
+      panel.style.height = "calc(100% - " + preHeaderHeight + "px)";
+    } else if (panel) {
+      panel.style.top = "";
+      panel.style.height = "";
     }
 
     refreshCart();
@@ -25,33 +67,27 @@ export const cartDrawerSystem = () => {
     if (!isOpen) return;
     isOpen = false;
     drawer.dataset.state = "closed";
-    window.setHeaderMenuActive?.(false);
 
-    if (window.innerWidth < 768) {
-      document.body.style.overflow = "";
-    }
+    const scrollY = Math.abs(parseInt(document.body.style.top || "0", 10));
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.width = "";
+    document.body.style.top = "";
+    window.scrollTo(0, scrollY);
   };
 
-  // Fetch remote drawer HTML and return parsed elements
-  const fetchRemoteDrawer = () => {
-    if (fetchController) fetchController.abort();
-    fetchController = new AbortController();
-
-    return fetch(window.location.pathname, { signal: fetchController.signal })
+  // Simple fetch that does NOT abort previous requests
+  const fetchPage = () => {
+    return fetch(window.location.pathname)
       .then((res) => {
         if (!res.ok) throw new Error("fetch failed");
         return res.text();
       })
-      .then((html) => {
-        const doc = new DOMParser().parseFromString(html, "text/html");
-        return doc;
-      })
-      .finally(() => {
-        fetchController = null;
-      });
+      .then((html) => new DOMParser().parseFromString(html, "text/html"));
   };
 
-  // Update footer, badge, and empty state from remote doc (no list swap)
+  // Update footer, badge, and empty state from remote doc
   const syncMeta = (doc) => {
     const remoteDrawer = doc.querySelector(".js-cart-drawer");
     if (!remoteDrawer) return;
@@ -72,11 +108,24 @@ export const cartDrawerSystem = () => {
       localEmpty.innerHTML = remoteEmpty.innerHTML;
     }
 
-    // Header badge
+    // Header badge (desktop)
     const remoteWidget = doc.querySelector(".js-cart-widget-amount");
     const localWidget = document.querySelector(".js-cart-widget-amount");
     if (remoteWidget && localWidget) {
       localWidget.textContent = remoteWidget.textContent;
+    }
+
+    // Header badge (mobile)
+    const localBadge = document.querySelector(".js-cart-widget-badge");
+    if (localBadge && remoteWidget) {
+      const countText = remoteWidget.textContent.replace(/\D/g, "");
+      const count = parseInt(countText, 10) || 0;
+      if (count > 0) {
+        localBadge.textContent = count;
+        localBadge.hidden = false;
+      } else {
+        localBadge.hidden = true;
+      }
     }
 
     if (typeof lucide !== "undefined") lucide.createIcons();
@@ -84,7 +133,7 @@ export const cartDrawerSystem = () => {
 
   // Full refresh: replaces items list + meta
   const refreshCart = () => {
-    fetchRemoteDrawer()
+    fetchPage()
       .then((doc) => {
         if (!doc) return;
         const remoteDrawer = doc.querySelector(".js-cart-drawer");
@@ -98,20 +147,7 @@ export const cartDrawerSystem = () => {
 
         syncMeta(doc);
       })
-      .catch((err) => {
-        if (err.name === "AbortError") return;
-      });
-  };
-
-  // Soft refresh: only updates footer/badge (keeps current list intact)
-  const refreshMeta = () => {
-    fetchRemoteDrawer()
-      .then((doc) => {
-        if (doc) syncMeta(doc);
-      })
-      .catch((err) => {
-        if (err.name === "AbortError") return;
-      });
+      .catch(() => {});
   };
 
   // Event: backdrop click
@@ -133,6 +169,19 @@ export const cartDrawerSystem = () => {
     if (e.key === "Escape" && isOpen) closeDrawer();
   });
 
+  // Track pending removals for batched sync
+  let pendingRemovals = 0;
+  let removeSyncTimer = null;
+
+  const scheduleRemoveSync = () => {
+    clearTimeout(removeSyncTimer);
+    // Wait 1.2s after last removal to let all LS.removeItem AJAX calls complete
+    removeSyncTimer = setTimeout(() => {
+      pendingRemovals = 0;
+      refreshCart();
+    }, 1200);
+  };
+
   // Event: animated item removal
   drawer.addEventListener("click", (e) => {
     const removeBtn = e.target.closest(".js-cart-remove-btn");
@@ -150,6 +199,7 @@ export const cartDrawerSystem = () => {
     // Prevent double-click
     if (cartItem.dataset.removing) return;
     cartItem.dataset.removing = "true";
+    pendingRemovals++;
 
     // Fire server removal in background
     LS.removeItem(itemId, true);
@@ -173,7 +223,7 @@ export const cartDrawerSystem = () => {
       cartItem.style.marginBottom = "0";
     }, 200);
 
-    // After collapse, clean up DOM + sync
+    // After collapse, clean up DOM + schedule sync
     setTimeout(() => {
       cartItem.remove();
 
@@ -185,10 +235,27 @@ export const cartDrawerSystem = () => {
         if (footer) footer.style.display = "none";
       }
 
-      // Only sync footer/badge — list is already correct
-      refreshMeta();
+      // Debounced: wait for all rapid removals to settle, then full sync
+      scheduleRemoveSync();
     }, 450);
   });
+
+  // Observe platform updates to desktop badge and mirror to mobile badge
+  const desktopBadge = document.querySelector(".js-cart-widget-amount");
+  const mobileBadge = document.querySelector(".js-cart-widget-badge");
+  if (desktopBadge && mobileBadge) {
+    const badgeObserver = new MutationObserver(() => {
+      const countText = desktopBadge.textContent.replace(/\D/g, "");
+      const count = parseInt(countText, 10) || 0;
+      if (count > 0) {
+        mobileBadge.textContent = count;
+        mobileBadge.hidden = false;
+      } else {
+        mobileBadge.hidden = true;
+      }
+    });
+    badgeObserver.observe(desktopBadge, { childList: true, characterData: true, subtree: true });
+  }
 
   // Register window globals
   window.openCartDrawer = openDrawer;

@@ -124,7 +124,10 @@
               class="js-cart-drawer-toggle nav-link text-sm font-medium transition-colors duration-300 flex items-center gap-1 cursor-pointer bg-transparent border-0"
               aria-label="{{ 'Carrinho' | translate }}"
             >
-                <i data-lucide="shopping-cart" class="w-5 h-5 md:hidden"></i>
+                <span class="relative md:hidden">
+                  <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                  <span class="js-cart-widget-badge absolute -top-1.5 -right-2 bg-fg text-bg text-[0.625rem] font-bold leading-none min-w-4 h-4 flex items-center justify-center rounded-full px-1" {% if cart.items_count == 0 %}hidden{% endif %}>{{ cart.items_count }}</span>
+                </span>
                 <span class="hidden md:inline">Carrinho</span>
                 <span class="js-cart-widget-amount hidden md:inline">({{ cart.items_count }})</span>
             </button>

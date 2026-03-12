@@ -104,6 +104,7 @@ export const toastSystem = () => {
     toast.style.alignItems = "flex-start";
     toast.style.maxWidth = "320px";
     toast.style.width = "auto";
+    toast.style.cursor = "pointer";
 
     var imageMarkup = image
       ? '<img src="' + escapeHtml(image) + '" alt="' + escapeHtml(name || "") + '" style="width:56px;height:56px;object-fit:cover;border-radius:6px;flex-shrink:0">'
@@ -137,7 +138,16 @@ export const toastSystem = () => {
         '<i data-lucide="x" style="width:14px;height:14px"></i>' +
       "</button>";
 
-    return mount();
+    const mountedToast = mount();
+
+    // Click on product toast body opens cart drawer (excluding close button)
+    mountedToast.addEventListener("click", (e) => {
+      if (e.target.closest(".js-toast-close")) return;
+      closeToast(mountedToast);
+      window.openCartDrawer?.();
+    });
+
+    return mountedToast;
   };
 
   const closeAllToasts = () => {

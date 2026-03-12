@@ -151,7 +151,7 @@
 
   :root, :host {
     --font-heading: var(--font-headings);
-    --z-toast: 90;
+    --z-toast: 80;
     --z-modal: 100;
     --transition-duration-150: .15s;
     --transition-duration-200: .2s;
@@ -455,6 +455,14 @@
     inset-inline: calc(var(--spacing) * 0);
   }
 
+  .-top-1 {
+    top: calc(var(--spacing) * -1);
+  }
+
+  .-top-1\.5 {
+    top: calc(var(--spacing) * -1.5);
+  }
+
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
@@ -473,6 +481,10 @@
 
   .top-full {
     top: 100%;
+  }
+
+  .-right-2 {
+    right: calc(var(--spacing) * -2);
   }
 
   .right-0 {
@@ -545,6 +557,10 @@
 
   .z-80 {
     z-index: 80;
+  }
+
+  .z-90 {
+    z-index: 90;
   }
 
   .z-9999 {
@@ -1152,6 +1168,10 @@
     min-width: calc(var(--spacing) * 0);
   }
 
+  .min-w-4 {
+    min-width: calc(var(--spacing) * 4);
+  }
+
   .min-w-16 {
     min-width: calc(var(--spacing) * 16);
   }
@@ -1488,41 +1508,31 @@
     border-color: var(--color-black);
   }
 
-  .border-black\/6 {
-    border-color: #0000000f;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .border-black\/6 {
-      border-color: color-mix(in oklab, var(--color-black) 6%, transparent);
-    }
-  }
-
-  .border-black\/8 {
-    border-color: #00000014;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .border-black\/8 {
-      border-color: color-mix(in oklab, var(--color-black) 8%, transparent);
-    }
-  }
-
-  .border-black\/12 {
-    border-color: #0000001f;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .border-black\/12 {
-      border-color: color-mix(in oklab, var(--color-black) 12%, transparent);
-    }
-  }
-
   .border-fg {
     border-color: var(--color-fg);
   }
 
-  .border-secondary, .border-secondary\/20 {
+  .border-secondary, .border-secondary\/6 {
+    border-color: var(--color-secondary);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-secondary\/6 {
+      border-color: color-mix(in oklab, var(--color-secondary) 6%, transparent);
+    }
+  }
+
+  .border-secondary\/12 {
+    border-color: var(--color-secondary);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-secondary\/12 {
+      border-color: color-mix(in oklab, var(--color-secondary) 12%, transparent);
+    }
+  }
+
+  .border-secondary\/20 {
     border-color: var(--color-secondary);
   }
 
@@ -2012,6 +2022,10 @@
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
 
+  .text-\[0\.625rem\] {
+    font-size: .625rem;
+  }
+
   .text-\[0\.8125rem\] {
     font-size: .8125rem;
   }
@@ -2051,6 +2065,11 @@
   .leading-\[120\%\] {
     --tw-leading: 120%;
     line-height: 120%;
+  }
+
+  .leading-none {
+    --tw-leading: 1;
+    line-height: 1;
   }
 
   .leading-relaxed {
@@ -2622,9 +2641,18 @@
 }
 
 .js-new-header[data-state="active"] {
+  background-color: var(--background-color);
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .js-new-header[data-state="active"] {
+    background-color: color-mix(in srgb, var(--background-color) 70%, transparent);
+  }
+}
+
+.js-new-header[data-state="active"] {
   -webkit-backdrop-filter: blur(.5rem);
   backdrop-filter: blur(.5rem);
-  background-color: #fffff6b3;
 }
 
 .js-new-header[data-state="active"] .nav-link, .js-new-header[data-state="active"] .advertising-bar, .js-new-header[data-state="active"] .advertising-bar a, .js-new-header[data-state="active"] .advertising-bar span {
@@ -2882,21 +2910,55 @@
 }
 
 .js-cart-drawer[data-state="open"] .js-cart-drawer-backdrop {
-  background: #00000026;
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .js-cart-drawer-backdrop {
-  transition: background .3s;
+  -webkit-backdrop-filter: blur();
+  transition: -webkit-backdrop-filter .3s, backdrop-filter .3s;
 }
 
 .js-cart-drawer-panel {
   box-shadow: var(--shadow-xl);
+  -webkit-backdrop-filter: blur(.5rem);
+  overscroll-behavior: contain;
   transition: transform .3s cubic-bezier(.4, 0, .2, 1);
   transform: translateX(100%);
 }
 
+.js-ajax-cart-list {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 .js-cart-drawer[data-state="open"] .js-cart-drawer-panel {
   transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+  .js-cart-drawer-panel {
+    background-color: var(--background-color);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .js-cart-drawer-panel {
+      background-color: color-mix(in srgb, var(--background-color) 70%, transparent);
+    }
+  }
+
+  .js-cart-drawer-panel {
+    -webkit-backdrop-filter: blur(.5rem);
+  }
+}
+
+.js-cart-input-spinner {
+  width: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+.js-cart-drawer-footer {
+  -webkit-backdrop-filter: blur(.5rem);
 }
 
 @media (max-width: 767px) {
