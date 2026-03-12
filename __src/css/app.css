@@ -389,7 +389,6 @@
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-xl);
   backdrop-filter: blur(0.5rem);
-  -webkit-backdrop-filter: blur(0.5rem);
   overscroll-behavior: contain;
 }
 
@@ -406,7 +405,6 @@
   .js-cart-drawer-panel {
     background-color: color-mix(in srgb, var(--background-color) 70%, transparent);
     backdrop-filter: blur(0.5rem);
-    -webkit-backdrop-filter: blur(0.5rem);
   }
 }
 

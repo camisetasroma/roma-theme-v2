@@ -43,6 +43,8 @@ export const cartDrawerSystem = () => {
 
     const scrollPos = window.scrollY;
 
+    window.setHeaderMenuActive?.(true);
+
     drawer.dataset.state = "open";
 
     document.body.style.overflow = "hidden";
@@ -75,6 +77,7 @@ export const cartDrawerSystem = () => {
     document.body.style.width = "";
     document.body.style.top = "";
     window.scrollTo(0, scrollY);
+    window.setHeaderMenuActive?.(false);
   };
 
   // Simple fetch that does NOT abort previous requests

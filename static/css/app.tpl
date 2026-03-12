@@ -2921,6 +2921,7 @@
 .js-cart-drawer-panel {
   box-shadow: var(--shadow-xl);
   -webkit-backdrop-filter: blur(.5rem);
+  backdrop-filter: blur(.5rem);
   overscroll-behavior: contain;
   transition: transform .3s cubic-bezier(.4, 0, .2, 1);
   transform: translateX(100%);
@@ -2948,6 +2949,7 @@
 
   .js-cart-drawer-panel {
     -webkit-backdrop-filter: blur(.5rem);
+    backdrop-filter: blur(.5rem);
   }
 }
 

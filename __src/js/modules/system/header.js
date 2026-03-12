@@ -16,7 +16,8 @@ export const headerAnimations = () => {
     );
 
     // Simulate scroll on advertising bar - moves up with page scroll
-    if (advertisingBar && adBarHeight > 0) {
+    // Skip when overlay is active (body lock makes scrollY unreliable)
+    if (!isMenuActive && advertisingBar && adBarHeight > 0) {
       const translateY = Math.min(scrollY, adBarHeight);
       advertisingBar.style.transform = `translateY(-${translateY}px)`;
       advertisingBar.style.marginBottom = `-${translateY}px`;
