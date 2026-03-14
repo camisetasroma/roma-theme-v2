@@ -960,6 +960,14 @@
     aspect-ratio: 4 / 5;
   }
 
+  .h-1 {
+    height: calc(var(--spacing) * 1);
+  }
+
+  .h-1\.5 {
+    height: calc(var(--spacing) * 1.5);
+  }
+
   .h-3 {
     height: calc(var(--spacing) * 3);
   }
@@ -1610,8 +1618,14 @@
     background-color: var(--color-fg-muted);
   }
 
-  .bg-secondary {
+  .bg-secondary, .bg-secondary\/10 {
     background-color: var(--color-secondary);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-secondary\/10 {
+      background-color: color-mix(in oklab, var(--color-secondary) 10%, transparent);
+    }
   }
 
   .bg-transparent {
@@ -2967,6 +2981,20 @@
   .js-cart-drawer-panel {
     max-width: 100% !important;
   }
+}
+
+@keyframes progress-complete {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .7;
+  }
+}
+
+.js-cart-progress-complete {
+  animation: 1.5s ease-in-out progress-complete;
 }
 
 @property --tw-translate-x {

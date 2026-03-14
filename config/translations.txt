@@ -1101,6 +1101,26 @@ pt "Ver mais produtos"
 en "View more products"
 es_mx "Ver más productos"
 
+es "Faltam {1} itens para {2}% Off"
+pt "Faltam {1} itens para {2}% Off"
+en "{1} more items for {2}% Off"
+es_mx "Faltan {1} artículos para {2}% Off"
+
+es "¡Conseguiste {1}% Off!"
+pt "Você ganhou {1}% Off!"
+en "You got {1}% Off!"
+es_mx "¡Conseguiste {1}% Off!"
+
+es "Faltam {1} para frete grátis"
+pt "Faltam {1} para frete grátis"
+en "{1} away from free shipping"
+es_mx "Faltan {1} para envío gratis"
+
+es "¡Tenés envío gratis!"
+pt "Frete grátis conquistado!"
+en "You got free shipping!"
+es_mx "¡Tienes envío gratis!"
+
 --- Contact ---
 
 es "Contactanos"

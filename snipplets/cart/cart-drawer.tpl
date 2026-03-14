@@ -119,7 +119,9 @@
 
       {# Footer - total + CTA (inside form so submit triggers checkout) #}
       <div class="js-cart-drawer-footer js-visible-on-cart-filled sticky bottom-0 px-5 py-4" {% if not cart.items %}style="display:none"{% endif %}>
-        <div class="flex justify-between items-center mb-3">
+        {# Progress bars (free shipping + progressive discounts) #}
+        {% snipplet "cart/cart-drawer-progress-bars.tpl" %}
+        <div class="flex justify-between items-center mb-1">
           <span class="text-sm font-medium text-secondary">
             {{ "Subtotal" | translate }}
           </span>
@@ -127,6 +129,20 @@
             {{ cart.subtotal | money }}
           </span>
         </div>
+        {# Payment discount - platform component with accent color styling #}
+        {% if settings.payment_discount_price %}
+          {{ component('payment-discount-price', {
+              visibility_condition: true,
+              location: 'cart',
+              container_classes: 'text-sm font-semibold text-right mb-3',
+            })
+          }}
+        {% else %}
+          <div class="js-payment-discount-price-cart-container" style="display:none">
+            <span class="js-payment-discount-price-cart"></span>
+            <span class="js-payment-discount-name-cart"></span>
+          </div>
+        {% endif %}
         <input
           type="submit"
           name="go_to_checkout"

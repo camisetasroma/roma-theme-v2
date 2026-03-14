@@ -1241,6 +1241,38 @@ Carrito de compras
 		description = Mostrar el calculador de costos de envío y locales físicos en el carrito
 	subtitle
 		subtitle = <a target='_blank' href='/admin/shipping/'>Agregar medios de envío o locales físicos</a>
+	title
+		title = Barras de progresso do carrinho
+	checkbox
+		name = cart_free_shipping_bar
+		description = Mostrar barra de progresso para frete grátis no carrinho
+	checkbox
+		name = cart_discount_bar
+		description = Mostrar barra de descontos progressivos no carrinho
+	text
+		name = cart_discount_tier_1_qty
+		description = Quantidade de itens para o 1º nível de desconto
+		placeholder = Ex.: 5
+	text
+		name = cart_discount_tier_1_pct
+		description = Porcentagem de desconto do 1º nível
+		placeholder = Ex.: 10
+	text
+		name = cart_discount_tier_2_qty
+		description = Quantidade de itens para o 2º nível de desconto
+		placeholder = Ex.: 10
+	text
+		name = cart_discount_tier_2_pct
+		description = Porcentagem de desconto do 2º nível
+		placeholder = Ex.: 15
+	text
+		name = cart_discount_tier_3_qty
+		description = Quantidade de itens para o 3º nível de desconto
+		placeholder = Ex.: 20
+	text
+		name = cart_discount_tier_3_pct
+		description = Porcentagem de desconto do 3º nível
+		placeholder = Ex.: 20
 
 Pie de página
 	meta

@@ -320,11 +320,13 @@ export const cartDrawerSystem = () => {
       cartItem.style.marginBottom = "0";
     }, 200);
 
-    // After collapse, clean up DOM + schedule sync
+    // After collapse, hide item visually but keep in DOM so platform JS
+    // can still reference it during its AJAX callback (avoids null .style errors).
+    // refreshCart() will replace the full list HTML later.
     setTimeout(() => {
-      cartItem.remove();
+      cartItem.style.display = "none";
 
-      const remaining = drawer.querySelectorAll(".js-cart-item");
+      const remaining = drawer.querySelectorAll(".js-cart-item:not([style*='display: none'])");
       if (remaining.length === 0) {
         const emptyState = drawer.querySelector(".js-empty-ajax-cart");
         if (emptyState) emptyState.style.display = "";
@@ -335,6 +337,19 @@ export const cartDrawerSystem = () => {
       // Debounced: wait for all rapid removals to settle, then full sync
       scheduleRemoveSync();
     }, 450);
+  });
+
+  // Refresh progress bars after quantity +/- clicks inside drawer.
+  // Listens on the drawer for clicks on .js-cart-quantity-btn, then waits
+  // for the platform AJAX to finish before refreshing.
+  let quantitySyncTimer = null;
+  drawer.addEventListener("click", (e) => {
+    if (!e.target.closest(".js-cart-quantity-btn")) return;
+    if (pendingRemovals > 0) return;
+    clearTimeout(quantitySyncTimer);
+    quantitySyncTimer = setTimeout(() => {
+      refreshCart();
+    }, 2000);
   });
 
   // Observe platform updates to desktop badge and mirror to mobile badge

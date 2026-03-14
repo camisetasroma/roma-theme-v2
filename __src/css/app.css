@@ -425,3 +425,14 @@
     max-width: 100% !important;
   }
 }
+
+/* ===== CART PROGRESS BARS ===== */
+
+@keyframes progress-complete {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.js-cart-progress-complete {
+  animation: progress-complete 1.5s ease-in-out 1;
+}
