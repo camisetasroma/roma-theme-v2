@@ -31,7 +31,7 @@
         {% if cart.items %}
           {% for item in cart.items %}
             {# .js-cart-item + data-item-id required by platform for LS.removeItem/LS.changeQuantity #}
-            <div class="js-cart-item flex gap-3 py-3 border-b border-secondary/6" data-item-id="{{ item.id }}" data-store="cart-item-{{ item.product.id }}" data-component="cart.line-item">
+            <div class="js-cart-item flex gap-3 py-3 border-b border-secondary/6" data-item-id="{{ item.id }}" data-item-name="{{ item.short_name }}" data-store="cart-item-{{ item.product.id }}" data-component="cart.line-item">
               {# Item image #}
               <a href="{{ item.url }}" class="shrink-0">
                 <img

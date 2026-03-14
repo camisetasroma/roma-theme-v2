@@ -134,23 +134,117 @@ export const cartDrawerSystem = () => {
     if (typeof lucide !== "undefined") lucide.createIcons();
   };
 
+  // Detect items present locally but missing from remote (removed by backend due to stock)
+  const detectRemovedItems = (localList, remoteDoc) => {
+    const localItems = localList.querySelectorAll(".js-cart-item[data-item-id]");
+    const remoteDrawer = remoteDoc.querySelector(".js-cart-drawer");
+    const remoteIds = new Set();
+    if (remoteDrawer) {
+      remoteDrawer.querySelectorAll(".js-cart-item[data-item-id]").forEach((el) => {
+        remoteIds.add(el.dataset.itemId);
+      });
+    }
+
+    const removed = [];
+    localItems.forEach((el) => {
+      if (!remoteIds.has(el.dataset.itemId)) {
+        removed.push({
+          id: el.dataset.itemId,
+          name: el.dataset.itemName || "",
+          element: el,
+        });
+      }
+    });
+    return removed;
+  };
+
+  // Animate out removed items (same pattern as manual removal lines 210-227)
+  const animateRemovedItems = (items) => {
+    return new Promise((resolve) => {
+      if (items.length === 0) return resolve();
+
+      items.forEach((item) => {
+        const el = item.element;
+        const h = el.offsetHeight;
+        el.style.overflow = "hidden";
+        el.style.maxHeight = h + "px";
+        el.style.transition = "opacity 0.2s ease-out, transform 0.2s ease-out";
+        el.style.opacity = "0";
+        el.style.transform = "translateX(40px)";
+
+        setTimeout(() => {
+          el.style.transition = "max-height 0.25s ease-in-out, padding 0.25s ease-in-out, border-width 0.25s ease-in-out";
+          el.style.maxHeight = "0";
+          el.style.paddingTop = "0";
+          el.style.paddingBottom = "0";
+          el.style.borderWidth = "0";
+          el.style.marginTop = "0";
+          el.style.marginBottom = "0";
+        }, 200);
+      });
+
+      setTimeout(resolve, 450);
+    });
+  };
+
+  let isRefreshing = false;
+
   // Full refresh: replaces items list + meta
   const refreshCart = () => {
+    if (isRefreshing) return;
+    isRefreshing = true;
+
     fetchPage()
       .then((doc) => {
-        if (!doc) return;
+        if (!doc) {
+          isRefreshing = false;
+          return;
+        }
         const remoteDrawer = doc.querySelector(".js-cart-drawer");
-        if (!remoteDrawer) return;
+        if (!remoteDrawer) {
+          isRefreshing = false;
+          return;
+        }
 
         const remoteList = remoteDrawer.querySelector(".js-ajax-cart-list");
         const localList = drawer.querySelector(".js-ajax-cart-list");
-        if (remoteList && localList) {
-          localList.innerHTML = remoteList.innerHTML;
+        if (!remoteList || !localList) {
+          isRefreshing = false;
+          return;
         }
 
-        syncMeta(doc);
+        const removedItems = detectRemovedItems(localList, doc);
+
+        if (removedItems.length > 0) {
+          // Animate out removed items, then replace HTML and notify user
+          animateRemovedItems(removedItems).then(() => {
+            localList.innerHTML = remoteList.innerHTML;
+            syncMeta(doc);
+            isRefreshing = false;
+
+            // Toast feedback
+            if (removedItems.length === 1) {
+              window.showToast?.({
+                message: "\"" + removedItems[0].name + "\" foi removido do carrinho por estar esgotado",
+                icon: "alert-circle",
+              });
+            } else {
+              window.showToast?.({
+                message: removedItems.length + " produtos foram removidos do carrinho por estarem esgotados",
+                icon: "alert-circle",
+              });
+            }
+          });
+        } else {
+          // No items removed — direct replacement (current behavior)
+          localList.innerHTML = remoteList.innerHTML;
+          syncMeta(doc);
+          isRefreshing = false;
+        }
       })
-      .catch(() => {});
+      .catch(() => {
+        isRefreshing = false;
+      });
   };
 
   // Event: backdrop click
