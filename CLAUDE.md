@@ -62,7 +62,7 @@ __src/js/modules/category/        # category-page-only modules (dropdown, infini
                                    #   filters, sorting)
 ```
 
-Rules that the existing code follows strictly (see `.claude/architecture-map.md` for the full,
+Rules that the existing code follows strictly (see `docs/architecture-map.md` for the full,
 exhaustive contract — it documents every module, every `js-*` class contract, and every
 `window.*` global in detail):
 
@@ -111,29 +111,29 @@ snipplets/<domain>/     # reusable components organized by domain (header, home,
 - `defaults.txt`, `translations.txt`, `variants.txt`, `data.json` — defaults, i18n strings, theme
   variants, and compiled asset metadata respectively.
 
-## The `.claude/` workflow (research → plan → implement)
+## The `docs/` workflow (research → plan → implement)
 
 This project uses a deliberate, staged workflow for non-trivial feature work, driven by three
 prompt templates and one standing contract:
 
-- **`.claude/architecture-map.md`** — the authoritative, exhaustive architecture contract
+- **`docs/architecture-map.md`** — the authoritative, exhaustive architecture contract
   (invariants coded A1-A14, data-flow D1-D3, state S1-S5, library rules L1-L6, forbidden patterns
   F1-F10). It takes priority over any feature request if they conflict. Read this file for anything
   beyond the summary above — it is kept current and is far more detailed.
-- **`.claude/research-prompt.md`** → produces `.claude/researches/<feature-slug>.md`: a scoped,
+- **`docs/research-prompt.md`** → produces `docs/researches/<feature-slug>.md`: a scoped,
   no-code analysis of a feature request against the architecture contract (affected domains,
   applicable invariants, risk level). No implementation planning happens here.
-- **`.claude/plan-prompt.md`** → produces `.claude/plans/<feature-slug>.md`: a layered, phased
+- **`docs/plan-prompt.md`** → produces `docs/plans/<feature-slug>.md`: a layered, phased
   implementation plan derived strictly from the research file. Still no code.
-- **`.claude/implemetation-prompt.md`** → actually writes code, strictly within the approved plan's
+- **`docs/implemetation-prompt.md`** → actually writes code, strictly within the approved plan's
   phases, after checking the codebase for 2+ similar existing implementations to match their
   pattern. Ends with a compliance report against the invariants.
-- **`.claude/update-architecture.md`** → an audit mode that diffs the architecture contract against
-  real implementation and writes a report to `.claude/architecture-drift-reports/`, strengthening or
+- **`docs/update-architecture.md`** → an audit mode that diffs the architecture contract against
+  real implementation and writes a report to `docs/architecture-drift-reports/`, strengthening or
   relaxing invariants as needed.
 
 When asked to implement a nontrivial feature or fix in this repo, prefer following this
-research → plan → implement staging (checking `.claude/researches/` and `.claude/plans/` for
+research → plan → implement staging (checking `docs/researches/` and `docs/plans/` for
 related prior work first) rather than jumping straight to code. Feature specs in this workflow are
 typically written in Portuguese.
 

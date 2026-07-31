@@ -1,0 +1,5 @@
+- Para entender o sistema de pastas: https://docs.nuvemshop.com.br/help/estructura-de-pastas
+- Para entender as configurações: https://docs.nuvemshop.com.br/help/config
+- Para enmtender os arquivos estaticos: https://docs.nuvemshop.com.br/help/config
+- Para entender o layout: https://docs.nuvemshop.com.br/help/layouts
+- Para entender o snipplets originais do projeto: https://docs.nuvemshop.com.br/help/snipplets

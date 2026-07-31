@@ -1,0 +1,1 @@
+- Documentação do systema de toast: https://github.com/apvarun/toastify-js
