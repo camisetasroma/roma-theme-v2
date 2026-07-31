@@ -1,0 +1,438 @@
+@import "tailwindcss";
+
+@theme {
+  /* ===== COLORS ===== */
+  --color-bg: var(--background-color);
+  --color-fg: var(--primary-color);
+  --color-secondary: var(--text-color);
+  
+  /* Shades derivadas das cores principais */
+  --color-bg-subtle: color-mix(in srgb, var(--background-color) 95%, var(--primary-color) 5%);
+  --color-fg-muted: color-mix(in srgb, var(--primary-color) 60%, var(--background-color) 40%);
+  
+  /* ===== TYPOGRAPHY ===== */
+  /* Font Families */
+  --font-heading: var(--font-headings);
+  --font-sans: var(--font-body);
+  
+  /* Font Sizes (escala tipo-modular) */
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2.25rem;     /* 36px */
+  --font-size-5xl: 3rem;        /* 48px */
+  --font-size-6xl: 3.75rem;     /* 60px */
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* ===== SHADOWS ===== */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-none: 0 0 #0000;
+  
+  /* ===== Z-INDEX ===== */
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+  --z-cart-drawer: 90;
+  --z-toast: 80;
+  --z-modal: 100;
+  
+  /* ===== TRANSITIONS ===== */
+  --transition-duration-75: 75ms;
+  --transition-duration-100: 100ms;
+  --transition-duration-150: 150ms;
+  --transition-duration-200: 200ms;
+  --transition-duration-300: 300ms;
+  --transition-duration-500: 500ms;
+  --transition-duration-700: 700ms;
+  --transition-duration-1000: 1000ms;
+}
+
+/* ===== NEW HEADER STYLES ===== */
+
+/* Estado Transparente (padrão) */
+.js-new-header[data-state="transparent"] {
+    background-color: transparent;
+}
+
+.js-new-header[data-state="transparent"] .nav-link,
+.js-new-header[data-state="transparent"] .advertising-bar,
+.js-new-header[data-state="transparent"] .advertising-bar a,
+.js-new-header[data-state="transparent"] .advertising-bar span {
+    color: var(--background-color);
+}
+
+.js-new-header[data-state="transparent"] .logo-text {
+    color: var(--background-color) !important;
+}
+
+.js-new-header[data-state="transparent"] .logo-text svg path {
+    fill: var(--background-color);
+}
+
+/* Estado Ativo (scroll ou interação) */
+.js-new-header[data-state="active"] {
+    background-color: color-mix(in srgb, var(--background-color) 70%, transparent);
+    backdrop-filter: blur(0.5rem);
+}
+
+.js-new-header[data-state="active"] .nav-link,
+.js-new-header[data-state="active"] .advertising-bar,
+.js-new-header[data-state="active"] .advertising-bar a,
+.js-new-header[data-state="active"] .advertising-bar span {
+    color: var(--primary-color);
+}
+
+.js-new-header[data-state="active"] .logo-text {
+    color: var(--primary-color) !important;
+}
+
+/* ===== SEARCH OVERLAY STYLES ===== */
+
+.js-search-overlay[data-state="open"] {
+  pointer-events: auto;
+}
+
+.js-search-overlay[data-state="closed"] {
+  pointer-events: none;
+}
+
+/* Smooth transitions for search panel */
+.js-search-panel {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevent input zoom on iOS */
+.js-search-input {
+  font-size: 16px !important;
+}
+
+@media (min-width: 768px) {
+  .js-search-input {
+    font-size: 16px !important;
+  }
+}
+
+/* Remove native X button from search input (Chrome, Safari, Edge) */
+.js-search-input::-webkit-search-cancel-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* ===== TOAST NOTIFICATION STYLES ===== */
+
+.js-toast-container [data-state] {
+  pointer-events: auto;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.js-toast-container [data-state="entering"] {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.js-toast-container [data-state="visible"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.js-toast-container [data-state="exiting"] {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+/* ===== MODAL SYSTEM STYLES ===== */
+
+.js-gaius-modal-container[data-state="closed"] {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.js-gaius-modal-container[data-state="open"] {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.js-gaius-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: opacity 300ms ease;
+}
+
+.js-gaius-modal-content {
+  position: relative;
+  background: var(--background-color);
+  color: var(--primary-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-xl);
+  max-width: 480px;
+  width: calc(100% - 32px);
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.js-gaius-modal-container[data-state="closed"] .js-gaius-modal-content {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.js-gaius-modal-container[data-state="open"] .js-gaius-modal-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== MODAL DRAWER MODE ===== */
+
+.js-gaius-modal-container[data-state="closed"] .js-gaius-modal-drawer {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.js-gaius-modal-container[data-state="open"] .js-gaius-modal-drawer {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.js-gaius-modal-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  border-radius: 0;
+  max-height: 100vh;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.js-gaius-modal-drawer .js-gaius-modal-body {
+  height: calc(100% - 57px);
+}
+
+@media (min-width: 768px) {
+  .js-gaius-modal-drawer {
+    max-width: 420px;
+  }
+}
+
+/* Price filter override */
+.js-price-filter-wrapper .filter-input-price-container {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  margin-right: 0;
+  margin-bottom: 8px;
+}
+
+.js-price-filter-wrapper .filter-input-price-container label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 4px;
+}
+
+.js-price-filter-wrapper .filter-input-price {
+  width: 80px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-color);
+  background: rgba(0, 0, 0, 0.05);
+  outline: none;
+}
+
+.js-price-filter-wrapper .filter-input-price:focus {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.js-price-filter-wrapper .js-price-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-color);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background 150ms ease;
+}
+
+.js-price-filter-wrapper .js-price-filter-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.js-gaius-modal-body .filters-container,
+.js-gaius-modal-body [data-store="filters-group"] {
+  position: relative;
+}
+
+/* ===== FOOTER STYLES ===== */
+
+/* Powered by Nuvemshop - herdar cor primária */
+.powered-by-wrapper svg {
+    @apply h-4.5;
+    width: auto;
+    fill: var(--primary-color);
+}
+
+.powered-by-wrapper svg path {
+    fill: var(--primary-color);
+}
+
+/* Footer logo SVG - respeitar max-height */
+.footer-logo-svg svg {
+    max-height: inherit;
+    height: auto;
+    width: auto;
+}
+
+.footer-logo-svg svg path{
+    fill: var(--primary-color);
+}
+
+/* ===== PROMO MARQUEE BAR ===== */
+
+.promo-marquee-section {
+    width: 100%;
+}
+
+.promo-marquee-track {
+    animation: marquee-scroll 30s linear infinite;
+    will-change: transform;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%);
+    }
+}
+
+/* Pause on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .promo-marquee-track {
+        animation: none;
+    }
+}
+
+/* ============================
+   MENU - minimal custom CSS
+   (only what Tailwind can't do)
+   ============================ */
+
+/* Accordion icon toggle via aria-expanded */
+.js-menu-accordion-toggle[aria-expanded="true"] .js-icon-closed { display: none; }
+.js-menu-accordion-toggle[aria-expanded="true"] .js-icon-open { display: block; }
+
+/* Carousel: Swiper container */
+.js-menu-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== CART DRAWER STYLES ===== */
+
+.js-cart-drawer[data-state="closed"] {
+  pointer-events: none;
+}
+
+.js-cart-drawer[data-state="open"] {
+  pointer-events: auto;
+}
+
+.js-cart-drawer[data-state="open"] .js-cart-drawer-backdrop {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.js-cart-drawer-backdrop {
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  transition: backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease;
+}
+
+.js-cart-drawer-panel {
+  transform: translateX(100%);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(0.5rem);
+  overscroll-behavior: contain;
+}
+
+.js-ajax-cart-list {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.js-cart-drawer[data-state="open"] .js-cart-drawer-panel {
+  transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+  .js-cart-drawer-panel {
+    background-color: color-mix(in srgb, var(--background-color) 70%, transparent);
+    backdrop-filter: blur(0.5rem);
+  }
+}
+
+/* Prevent layout shift when platform shows/hides the spinner */
+.js-cart-input-spinner {
+  position: absolute;
+  width: 0;
+  overflow: hidden;
+}
+
+.js-cart-drawer-footer {
+    backdrop-filter: blur(0.5rem);
+    -webkit-backdrop-filter: blur(0.5rem);
+}
+
+@media (max-width: 767px) {
+  .js-cart-drawer-panel {
+    max-width: 100% !important;
+  }
+}
+
+/* ===== CART PROGRESS BARS ===== */
+
+@keyframes progress-complete {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.js-cart-progress-complete {
+  animation: progress-complete 1.5s ease-in-out 1;
+}

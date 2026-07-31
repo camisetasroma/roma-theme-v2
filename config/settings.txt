@@ -2,24 +2,35 @@ Colores de tu marca
 	meta
 		icon = paint-brush
 		advanced = false
+	title
+		title = Colores principales
 	color
 		name = primary_color
-		description = Color principal
+		description = Color principal (Textos destaque)
 	subtitle
-		subtitle = <div class='js-color-description'>Aplica a los botones.</div>
+		subtitle = <div class='js-color-description'>Aplica a títulos, botones y elementos destacados.</div>
 	color
 		name = accent_color
-		description = Color de acento
+		description = Color de acento (Promocional)
 	subtitle
-		subtitle = <div class='js-color-description'>Aplica a promociones y a mensajes de descuento, envío gratis y cuotas sin interés.</div>
+		subtitle = <div class='js-color-description'>Aplica a promociones, mensajes de descuento, envío gratis y cuotas sin interés.</div>
 	title
-		title = Colores de contraste
-	color
-		name = background_color
-		description = Color de fondo
+		title = Colores de texto
 	color
 		name = text_color
-		description = Color de textos
+		description = Color de texto principal
+	subtitle
+		subtitle = <div class='js-color-description'>Color base para todo el contenido de texto.</div>
+	color
+		name = text_muted_color
+		description = Color de texto secundario
+	subtitle
+		subtitle = <div class='js-color-description'>Textos menos destacados, descripciones, etiquetas.</div>
+	title
+		title = Colores de fondo
+	color
+		name = background_color
+		description = Color de fondo principal
 	description
 		description = Para facilitar la lectura, asegurate de que los colores contrasten entre sí.
 	title
@@ -28,21 +39,30 @@ Colores de tu marca
 		description = Ideales para restablecer los colores por defecto del diseño.
 	palettes
 		palettes
+			palette_custom
+				primary_color = #CB2C30
+				accent_color = #2DCC57
+				text_color = #410911
+				text_muted_color = #80807B
+				background_color = #FFFFF6
 			palette_1
 				primary_color = #000000
-				background_color = #FFFFFF
-				text_color = #000000
 				accent_color = #808E25
+				text_color = #000000
+				text_muted_color = #666666
+				background_color = #FFFFFF
 			palette_2
 				primary_color = #F29466
-				background_color = #F9F9F9
-				text_color = #CC8563
 				accent_color = #F29466
+				text_color = #CC8563
+				text_muted_color = #999999
+				background_color = #F9F9F9
 			palette_3
 				primary_color = #86C2B4
-				background_color = #FFF9EE
-				text_color = #0F5672
 				accent_color = #86C2B4
+				text_color = #0F5672
+				text_muted_color = #7A8B91
+				background_color = #FFF9EE
 	subtitle
 		subtitle = <a target='_blank' href='https://ayuda.tiendanube.com/es_ES/124497-colores-de-tu-marca/como-cambiar-los-colores-de-mi-diseno/?utm_source=admin-desktop&utm_medium=feature-page&utm_campaign=help'>¿Cómo cambio los colores de mi diseño?</a>
 		
@@ -54,6 +74,7 @@ Tipo de letra
 		name = font_headings
 		description = Títulos de páginas y banners
 		values
+			"larken", sans-serif = Larken
 			"Almarai", sans-serif = Almarai
 			"Archivo", sans-serif = Archivo
 			"Archivo Black", sans-serif = Archivo Black
@@ -137,6 +158,7 @@ Tipo de letra
 		name = font_rest
 		description = Texto en el resto del sitio
 		values
+			"larken", sans-serif = Larken
 			"Almarai", sans-serif = Almarai
 			"Archivo", sans-serif = Archivo
 			"Archivo Black", sans-serif = Archivo Black
@@ -241,19 +263,353 @@ Encabezado
 	checkbox
 		name = ad_bar
 		description = Mostrar barra de anuncio
+	description
+		description = Configure até 3 mensagens que irão rotacionar automaticamente
+	subtitle
+		subtitle = MENSAGEM 1
 	i18n_input
 		name = ad_text
 		description = Mensaje
 	i18n_input
 		name = ad_url
 		description = Link (opcional)
+	subtitle
+		subtitle = MENSAGEM 2 (opcional)
+	i18n_input
+		name = ad_text_2
+		description = Mensaje
+	i18n_input
+		name = ad_url_2
+		description = Link (opcional)
+	subtitle
+		subtitle = MENSAGEM 3 (opcional)
+	i18n_input
+		name = ad_text_3
+		description = Mensaje
+	i18n_input
+		name = ad_url_3
+		description = Link (opcional)
 
+Menú de navegación
+	meta
+		icon = bars
+		advanced = true
+	title
+		title = Menús
+	menu
+		name = menu_principal
+		description = Menú principal (aparece en el header)
+	title
+		title = Items destacados
+	i18n_input
+		name = menu_highlighted_items
+		description = Nombres de items para destacar en rojo (separados por coma)
+	description
+		description = Ej: Ofertas, Promoções, Sale
+	title
+		title = Carrusel de categorías
+	description
+		description = Configure hasta 6 categorías para mostrar en el menú expandido
+	subtitle
+		subtitle = CATEGORÍA 1
+	image
+		original = menu_category_01.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_01_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_01_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_01_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 2
+	image
+		original = menu_category_02.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_02_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_02_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_02_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 3
+	image
+		original = menu_category_03.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_03_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_03_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_03_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 4
+	image
+		original = menu_category_04.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_04_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_04_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_04_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 5
+	image
+		original = menu_category_05.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_05_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_05_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_05_url
+		description = Link de la categoría
+	subtitle
+		subtitle = CATEGORÍA 6
+	image
+		original = menu_category_06.jpg
+		title = Imagen de la categoría (JPG, PNG)
+		width = 400
+		height = 500
+	i18n_input
+		name = menu_category_06_title
+		description = Nombre de la categoría
+	i18n_input
+		name = menu_category_06_button
+		description = Texto del botón (Ej: Ver Tudo)
+	i18n_input
+		name = menu_category_06_url
+		description = Link de la categoría
+
+Logotipo
+	meta
+		icon = image
+		advanced = true
+	title
+		title = Logo para menu inativo
+	textarea
+		name = logo_inactive_svg
+		description = Código SVG do logo (prioridade sobre imagem)
+	image
+		name = logo_inactive
+		original = logo_inactive.png
+		title = Cargar logo para menú inactivo (PNG, JPG, SVG)
+	description
+		description = Logo mostrada cuando el menú hamburguesa está cerrado
+	title
+		title = Logo para menu activo
+	textarea
+		name = logo_active_svg
+		description = Código SVG do logo (prioridade sobre imagem)
+	image
+		name = logo_active
+		original = logo_active.png
+		title = Cargar logo para menú abierto (PNG, JPG, SVG)
+	description
+		description = Logo mostrada cuando el menú hamburguesa está abierto
+	title
+		title = Logo para rodapé
+	textarea
+		name = logo_footer_svg
+		description = Código SVG do logo (prioridade sobre imagem)
+	image
+		name = logo_footer
+		original = logo_footer.png
+		title = Cargar logo para rodapé (PNG, JPG, SVG)
+	description
+		description = Logo mostrada en el pie de página. Se houver SVG acima, a imagem será ignorada.
 
 Página de inicio
 	meta
 		icon = home
 		advanced = true
 		default = home_order_position
+	collapse
+		title = Barra Promocional
+		backto = home_order_position
+	subtitle
+		subtitle = Configure até 4 textos promocionais
+	i18n_input
+		name = promo_marquee_text_1
+		description = Texto 1 (obrigatório)
+	i18n_input
+		name = promo_marquee_text_2
+		description = Texto 2 (opcional)
+	i18n_input
+		name = promo_marquee_text_3
+		description = Texto 3 (opcional)
+	i18n_input
+		name = promo_marquee_text_4
+		description = Texto 4 (opcional)
+	subtitle
+		subtitle = Cores
+	dropdown
+		name = promo_marquee_bg_color
+		description = Cor de fundo
+		values
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+			accent = Cor de acento
+	dropdown
+		name = promo_marquee_text_color
+		description = Cor do texto
+		values
+			white = Branco
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+	collapse
+		title = Hero Banner
+		backto = home_order_position
+	subtitle
+		subtitle = Imagem para computadores (obrigatória)
+	image
+		original = hero_banner_desktop.jpg
+		title = Cargar imagen desktop (JPG, PNG)
+		width = 1920
+		height = 820
+	subtitle
+		subtitle = Imagem para celulares (opcional)
+	description
+		description = Se não subir uma imagem para celular, será usada a imagem do desktop
+	image
+		original = hero_banner_mobile.jpg
+		title = Cargar imagen mobile (JPG, PNG)
+		width = 820
+		height = 600
+	subtitle
+		subtitle = Textos e Link
+	i18n_input
+		name = hero_banner_subtitle
+		description = Texto de apoio (ex: Peças Limitadas)
+	i18n_input
+		name = hero_banner_title
+		description = Título principal (ex: Linha Jeans)
+	i18n_input
+		name = hero_banner_button_text
+		description = Texto do botão (ex: Confira)
+	i18n_input
+		name = hero_banner_button_url
+		description = Link do botão
+	subtitle
+		subtitle = Cores
+	dropdown
+		name = hero_banner_text_color
+		description = Cor dos textos
+		values
+			white = Branco
+			primary = Cor principal
+			background = Cor de fundo
+	collapse
+		title = Hero Banner 2
+		backto = home_order_position
+	subtitle
+		subtitle = Imagem para computadores (obrigatória)
+	image
+		original = hero_banner_2_desktop.jpg
+		title = Cargar imagen desktop (JPG, PNG)
+		width = 1920
+		height = 820
+	subtitle
+		subtitle = Imagem para celulares (opcional)
+	description
+		description = Se não subir uma imagem para celular, será usada a imagem do desktop
+	image
+		original = hero_banner_2_mobile.jpg
+		title = Cargar imagen mobile (JPG, PNG)
+		width = 820
+		height = 600
+	subtitle
+		subtitle = Textos e Link
+	i18n_input
+		name = hero_banner_2_subtitle
+		description = Texto de apoio (ex: Peças Limitadas)
+	i18n_input
+		name = hero_banner_2_title
+		description = Título principal (ex: Linha Jeans)
+	i18n_input
+		name = hero_banner_2_button_text
+		description = Texto do botão (ex: Confira)
+	i18n_input
+		name = hero_banner_2_button_url
+		description = Link do botão
+	subtitle
+		subtitle = Cores
+	dropdown
+		name = hero_banner_2_text_color
+		description = Cor dos textos
+		values
+			white = Branco
+			primary = Cor principal
+			background = Cor de fundo
+	title
+		title = Slide 2 (opcional)
+	description
+		description = Adicione um segundo slide para criar um carrossel no Hero Banner 2
+	subtitle
+		subtitle = Imagem para computadores
+	image
+		original = hero_banner_2_slide2_desktop.jpg
+		title = Cargar imagen desktop (JPG, PNG)
+		width = 1920
+		height = 820
+	subtitle
+		subtitle = Imagem para celulares (opcional)
+	image
+		original = hero_banner_2_slide2_mobile.jpg
+		title = Cargar imagen mobile (JPG, PNG)
+		width = 820
+		height = 600
+	subtitle
+		subtitle = Textos e Link
+	i18n_input
+		name = hero_banner_2_slide2_subtitle
+		description = Texto de apoio (ex: Peças Limitadas)
+	i18n_input
+		name = hero_banner_2_slide2_title
+		description = Título principal (ex: Linha Jeans)
+	i18n_input
+		name = hero_banner_2_slide2_button_text
+		description = Texto do botão (ex: Confira)
+	i18n_input
+		name = hero_banner_2_slide2_button_url
+		description = Link do botão
+	subtitle
+		subtitle = Cores
+	dropdown
+		name = hero_banner_2_slide2_text_color
+		description = Cor dos textos
+		values
+			white = Branco
+			primary = Cor principal
+			background = Cor de fundo
 	collapse
 		title = Carrusel de imágenes
 		backto = home_order_position
@@ -447,6 +803,59 @@ Página de inicio
 	subtitle
 		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Elegí cuáles vas a destacar</a>
 	collapse
+		title = Carrossel de produtos
+		backto = home_order_position
+	description
+		description = Configure até 3 abas de produtos para exibir no carrossel da página de inicio.
+		name = product_carousel_description
+	subtitle
+		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Escolha os produtos de cada aba</a>
+	i18n_input
+		description = Título da seção
+		name = product_carousel_title
+	i18n_input
+		description = Nome da Aba 1
+		name = product_carousel_tab_1_label
+	i18n_input
+		description = Nome da Aba 2
+		name = product_carousel_tab_2_label
+	i18n_input
+		description = Nome da Aba 3
+		name = product_carousel_tab_3_label
+	subtitle
+		subtitle = Aparência
+	dropdown
+		name = product_carousel_bg
+		description = Cor de fundo da seção
+		values
+			none = Sem fundo
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+			accent = Cor de acento
+	collapse
+		title = Grid de produtos
+		backto = home_order_position
+	description
+		description = Exibe os 4 primeiros produtos destacados em um grid 2x2 na página de inicio.
+		name = product_grid_description
+	subtitle
+		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Escolha os produtos destacados</a>
+	i18n_input
+		description = Título da seção
+		name = product_grid_title
+	subtitle
+		subtitle = Aparência
+	dropdown
+		name = product_grid_bg
+		description = Cor de fundo da seção
+		values
+			none = Sem fundo
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+			accent = Cor de acento
+	collapse
 		title = Módulos de imagen y texto
 		backto = home_order_position
 	description
@@ -555,12 +964,115 @@ Página de inicio
 		name = home_news_box
 		description = Permitir que tus clientes se registren para recibir novedades desde el pop-up (Opcional)
 	collapse
+		title = Banner Grupo VIP
+		backto = home_order_position
+	subtitle
+		subtitle = Imagem de fundo
+	image
+		original = vip_group_bg.jpg
+		title = Cargar imagen de fondo (JPG, PNG)
+		width = 1920
+		height = 600
+	subtitle
+		subtitle = Textos
+	i18n_input
+		name = vip_group_title
+		description = Título (ex: Grupo VIP)
+	i18n_input
+		name = vip_group_subtitle
+		description = Subtítulo (ex: Mais do que descontos...)
+	subtitle
+		subtitle = Conteúdo HTML customizado
+	description
+		description = Insira código HTML para personalizar o conteúdo (textos, ícones, listas, etc.)
+	textarea
+		name = vip_group_custom_html
+		description = Código HTML personalizado
+	subtitle
+		subtitle = Botão
+	i18n_input
+		name = vip_group_button_text
+		description = Texto do botão (ex: Acesse o Grupo)
+	i18n_input
+		name = vip_group_button_url
+		description = Link do botão
+	collapse
+		title = FAQ - Perguntas Frequentes
+		backto = home_order_position
+	subtitle
+		subtitle = Título da seção
+	i18n_input
+		name = faq_title
+		description = Título (ex: Perguntas Frequentes)
+	subtitle
+		subtitle = Aparência
+	dropdown
+		name = faq_bg
+		description = Cor de fundo da seção
+		values
+			none = Sem fundo
+			primary = Cor principal
+			secondary = Cor de texto
+			background = Cor de fundo
+			accent = Cor de acento
+	subtitle
+		subtitle = PERGUNTA 1
+	i18n_input
+		name = faq_question_1
+		description = Pergunta
+	textarea
+		name = faq_answer_1
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 2
+	i18n_input
+		name = faq_question_2
+		description = Pergunta
+	textarea
+		name = faq_answer_2
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 3
+	i18n_input
+		name = faq_question_3
+		description = Pergunta
+	textarea
+		name = faq_answer_3
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 4
+	i18n_input
+		name = faq_question_4
+		description = Pergunta
+	textarea
+		name = faq_answer_4
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 5
+	i18n_input
+		name = faq_question_5
+		description = Pergunta
+	textarea
+		name = faq_answer_5
+		description = Resposta (HTML permitido)
+	subtitle
+		subtitle = PERGUNTA 6
+	i18n_input
+		name = faq_question_6
+		description = Pergunta
+	textarea
+		name = faq_answer_6
+		description = Resposta (HTML permitido)
+	collapse
 		title = Página de inicio
 		backto = _top
 	section_order
 		name = home_order_position
 		start_index = 0
 		sections
+			promo_marquee = Barra Promocional
+			hero_banner = Hero Banner
+			hero_banner_2 = Hero Banner 2
 			slider = Carrusel de imágenes
 			welcome = Mensaje institucional
 			products = Productos destacados
@@ -568,6 +1080,10 @@ Página de inicio
 			categories = Banners de categorías
 			modules = Módulos de imagen y texto
 			video = Video
+			product_carousel = Carrossel de produtos
+			product_grid = Grid de produtos
+			vip_group = Banner Grupo VIP
+			faq = FAQ - Perguntas Frequentes
 			instafeed = Publicaciones de Instagram
 	link
 		text = Pop-up promocional
@@ -725,20 +1241,189 @@ Carrito de compras
 		description = Mostrar el calculador de costos de envío y locales físicos en el carrito
 	subtitle
 		subtitle = <a target='_blank' href='/admin/shipping/'>Agregar medios de envío o locales físicos</a>
+	title
+		title = Barras de progresso do carrinho
+	checkbox
+		name = cart_free_shipping_bar
+		description = Mostrar barra de progresso para frete grátis no carrinho
+	checkbox
+		name = cart_discount_bar
+		description = Mostrar barra de descontos progressivos no carrinho
+	text
+		name = cart_discount_tier_1_qty
+		description = Quantidade de itens para o 1º nível de desconto
+		placeholder = Ex.: 5
+	text
+		name = cart_discount_tier_1_pct
+		description = Porcentagem de desconto do 1º nível
+		placeholder = Ex.: 10
+	text
+		name = cart_discount_tier_2_qty
+		description = Quantidade de itens para o 2º nível de desconto
+		placeholder = Ex.: 10
+	text
+		name = cart_discount_tier_2_pct
+		description = Porcentagem de desconto do 2º nível
+		placeholder = Ex.: 15
+	text
+		name = cart_discount_tier_3_qty
+		description = Quantidade de itens para o 3º nível de desconto
+		placeholder = Ex.: 20
+	text
+		name = cart_discount_tier_3_pct
+		description = Porcentagem de desconto do 3º nível
+		placeholder = Ex.: 20
 
 Pie de página
 	meta
 		icon = arrow-down
 		advanced = true
 	title
-		title = Menúes
+		title = Logo de apoyo
+	textarea
+		name = logo_support_svg
+		description = Código SVG do logo (prioridade sobre imagem)
+	image
+		name = logo_support
+		original = logo_support.png
+		title = Cargar logo de apoyo (PNG, JPG, SVG)
+	description
+		description = Logo opcional debajo de las columnas del footer. Se houver SVG acima, a imagem será ignorada.
+	title
+		title = Columna Contacto (Redes Sociales)
 	subtitle
-		subtitle = Elegí el menú para el final de la página (footer). Si aún no configuraste ninguno, podés hacerlo <a target='_blank' href='/admin/navigation/?ref=submenu'>desde acá</a>
+		subtitle = WHATSAPP
+	i18n_input
+		name = footer_social_whatsapp_url
+		description = Link do WhatsApp
 	subtitle
-		subtitle = <a target='_blank' href='https://ayuda.tiendanube.com/es_AR/123259-menues/como-cambiar-el-menu-inferior-de-mi-tienda'>¿Cómo cambio el menú inferior de mi tienda?</a>
-	menu
-		name = footer_menu
-		description = ¿Qué menú vas a mostrar al final de la página?
+		subtitle = INSTAGRAM
+	i18n_input
+		name = footer_social_instagram_url
+		description = Link do Instagram
+	subtitle
+		subtitle = FACEBOOK
+	i18n_input
+		name = footer_social_facebook_url
+		description = Link do Facebook
+	subtitle
+		subtitle = YOUTUBE
+	i18n_input
+		name = footer_social_youtube_url
+		description = Link do YouTube
+	subtitle
+		subtitle = PINTEREST
+	i18n_input
+		name = footer_social_pinterest_url
+		description = Link do Pinterest
+	subtitle
+		subtitle = LINKEDIN
+	i18n_input
+		name = footer_social_linkedin_url
+		description = Link do LinkedIn
+	subtitle
+		subtitle = TIKTOK
+	i18n_input
+		name = footer_social_tiktok_url
+		description = Link do TikTok
+	title
+		title = Columna Suporte
+	i18n_input
+		name = footer_support_title
+		description = Titulo de la columna
+	subtitle
+		subtitle = LINK 1
+	i18n_input
+		name = footer_support_link_1_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_1_url
+		description = URL
+	subtitle
+		subtitle = LINK 2
+	i18n_input
+		name = footer_support_link_2_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_2_url
+		description = URL
+	subtitle
+		subtitle = LINK 3
+	i18n_input
+		name = footer_support_link_3_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_3_url
+		description = URL
+	subtitle
+		subtitle = LINK 4
+	i18n_input
+		name = footer_support_link_4_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_4_url
+		description = URL
+	subtitle
+		subtitle = LINK 5
+	i18n_input
+		name = footer_support_link_5_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_5_url
+		description = URL
+	subtitle
+		subtitle = LINK 6
+	i18n_input
+		name = footer_support_link_6_text
+		description = Texto
+	i18n_input
+		name = footer_support_link_6_url
+		description = URL
+	title
+		title = Columna Sobre
+	i18n_input
+		name = footer_about_title
+		description = Titulo de la columna
+	subtitle
+		subtitle = LINK 1
+	i18n_input
+		name = footer_about_link_1_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_1_url
+		description = URL
+	subtitle
+		subtitle = LINK 2
+	i18n_input
+		name = footer_about_link_2_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_2_url
+		description = URL
+	subtitle
+		subtitle = LINK 3
+	i18n_input
+		name = footer_about_link_3_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_3_url
+		description = URL
+	subtitle
+		subtitle = LINK 4
+	i18n_input
+		name = footer_about_link_4_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_4_url
+		description = URL
+	subtitle
+		subtitle = LINK 5
+	i18n_input
+		name = footer_about_link_5_text
+		description = Texto
+	i18n_input
+		name = footer_about_link_5_url
+		description = URL
 	title
 		title = Medios de envío
 	checkbox_global
@@ -749,17 +1434,6 @@ Pie de página
 	checkbox_global
 		name = payments_show
 		description = Mostrar medios de pago en tu tienda
-	title
-		title = Suscripción al newsletter desde el footer
-	checkbox
-		name = news_show
-		description = Permitir que tus clientes se registren para recibir novedades desde el Pié de Página
-	i18n_input
-		name = news_title
-		description = Elegí el título para la sección 'Newsletter' en el footer
-	i18n_input
-		name = news_text
-		description = ¡Escribí algo para que tus clientes se suscriban a tu newsletter!
 	title
 		title = Sellos personalizados en el footer
 	description

@@ -5,12 +5,14 @@
         <link rel="dns-prefetch" href="{{ store_resource_hints }}" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://use.typekit.net" crossorigin />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{{ page_title }}</title>
         <meta name="description" content="{{ page_description }}" />
         <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest] | google_fonts_url('300, 400, 700') }}" />
+        <link rel="preload" as="style" href="https://use.typekit.net/hsg1eqr.css" />
         <link rel="preload" href="{{ 'css/style-colors.scss.tpl' | static_url }}" as="style" />
 
         {# Preload LCP home, category and product page elements #}
@@ -38,10 +40,18 @@
 
             {% include "static/css/style-critical.tpl" %}
         </style>
+        <style>
+            {% include "static/css/app.tpl" %}
+        </style>
 
         {# Colors and fonts used from settings.txt and defined on theme customization #}
 
         {{ 'css/style-colors.scss.tpl' | static_url | static_inline }}
+
+        {# Adobe Typekit fonts - async loading #}
+
+        <link rel="preload" href="https://use.typekit.net/hsg1eqr.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://use.typekit.net/hsg1eqr.css"></noscript>
 
         {# Load async styling not mandatory for first meaningfull paint #}
 
@@ -82,7 +92,7 @@
         {{ component('structured-data') }}
 
     </head>
-    <body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}">
+    <body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}" data-cart-url="{{ store.cart_url }}">
         {# Facebook comments on product page #}
 
         {% if template == 'product' %}
@@ -103,15 +113,25 @@
 
         {# Header = Advertising + Nav + Logo + Search + Ajax Cart #}
 
+        {# New Header #}
+        {% snipplet "header/header-new.tpl" %}
+
+        {# Old header - mantido para referência, remover depois
         {% snipplet "header/header.tpl" %}
+        #}
+
+        {# Toast notifications #}
+        {% snipplet "notification/toast.tpl" %}
+
+        {# Modal system #}
+        {% snipplet "notification/modal.tpl" %}
+
+        {# Cart drawer #}
+        {% snipplet "cart/cart-drawer.tpl" %}
 
         {# Page content #}
 
         {% template_content %}
-
-        {# Modals overlay #}
-
-        <div class="js-modal-overlay modal-overlay" style="display: none;"></div>
 
         {# Quickshop modal #}
 
@@ -177,6 +197,16 @@
         {# Store external codes added from admin #}
 
         {{ component('assorted-js', {}) }}
+
+        {# Lucide Icons - local file #}
+
+        {{ 'js/lucide.min.js' | static_url | script_tag }}
+
+        <script>
+            lucide.createIcons();
+        </script>
+
+        {{ 'js/gaius-v1773520867940.js' | static_url | script_tag }}
 
     </body>
 </html>

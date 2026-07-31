@@ -50,6 +50,23 @@
 --- --- Social
 
 
+--- Menu Navigation ---
+
+es "Ver Todo"
+pt "Ver Tudo"
+en "See All"
+es_mx "Ver Todo"
+
+es "Cerrar"
+pt "Fechar"
+en "Close"
+es_mx "Cerrar"
+
+es "Menu"
+pt "Menu"
+en "Menu"
+es_mx "Menú"
+
 --- General ---
 
 es "Si"
@@ -1083,6 +1100,26 @@ es "Ver más productos"
 pt "Ver mais produtos"
 en "View more products"
 es_mx "Ver más productos"
+
+es "Faltam {1} itens para {2}% Off"
+pt "Faltam {1} itens para {2}% Off"
+en "{1} more items for {2}% Off"
+es_mx "Faltan {1} artículos para {2}% Off"
+
+es "¡Conseguiste {1}% Off!"
+pt "Você ganhou {1}% Off!"
+en "You got {1}% Off!"
+es_mx "¡Conseguiste {1}% Off!"
+
+es "Faltam {1} para frete grátis"
+pt "Faltam {1} para frete grátis"
+en "{1} away from free shipping"
+es_mx "Faltan {1} para envío gratis"
+
+es "¡Tenés envío gratis!"
+pt "Frete grátis conquistado!"
+en "You got free shipping!"
+es_mx "¡Tienes envío gratis!"
 
 --- Contact ---
 
@@ -2669,6 +2706,46 @@ es_mx "<div class='js-color-description'>Aplica a promociones, mensajes de descu
 es_co "<div class='js-color-description'>Aplica a promociones, mensajes de descuento, envío gratis y a cuotas sin interés.</div>"
 es_cl "<div class='js-color-description'>Aplica a promociones, mensajes de descuento, envío gratis y a cuotas sin interés.</div>"
 
+es "Colores principales"
+pt "Cores principais"
+en "Main colors"
+es_mx "Colores principales"
+
+es "Colores de texto"
+pt "Cores de texto"
+en "Text colors"
+es_mx "Colores de texto"
+
+es "Color de texto principal"
+pt "Cor de texto principal"
+en "Main text color"
+es_mx "Color de texto principal"
+
+es "<div class='js-color-description'>Color base para todo el contenido de texto.</div>"
+pt "<div class='js-color-description'>Cor base para todo o conteúdo de texto.</div>"
+en "<div class='js-color-description'>Base color for all text content.</div>"
+es_mx "<div class='js-color-description'>Color base para todo el contenido de texto.</div>"
+
+es "Color de texto secundario"
+pt "Cor de texto secundário"
+en "Secondary text color"
+es_mx "Color de texto secundario"
+
+es "<div class='js-color-description'>Textos menos destacados, descripciones, etiquetas.</div>"
+pt "<div class='js-color-description'>Textos menos destacados, descrições, rótulos.</div>"
+en "<div class='js-color-description'>Less prominent texts, descriptions, labels.</div>"
+es_mx "<div class='js-color-description'>Textos menos destacados, descripciones, etiquetas.</div>"
+
+es "Colores de fondo"
+pt "Cores de fundo"
+en "Background colors"
+es_mx "Colores de fondo"
+
+es "Color de fondo principal"
+pt "Cor de fundo principal"
+en "Main background color"
+es_mx "Color de fondo principal"
+
 es "Combinaciones predeterminadas"
 pt "Combinações pré-definidas"
 en "Default combinations"
@@ -2842,7 +2919,55 @@ es "Ubicación del logo"
 pt "Posição do logo"
 es_mx "Ubicación del logo"
 
+es "Logotipo"
+pt "Logotipo"
+en "Logo"
+es_mx "Logotipo"
 
+es "Logo para menu inativo"
+pt "Logo para menu inativo"
+en "Logo for inactive menu"
+es_mx "Logo para menú inactivo"
+
+es "Cargar logo para menú inactivo (PNG, JPG, SVG)"
+pt "Carregar logo para menu inativo (PNG, JPG, SVG)"
+en "Upload logo for inactive menu (PNG, JPG, SVG)"
+es_mx "Cargar logo para menú inactivo (PNG, JPG, SVG)"
+
+es "Logo mostrada cuando el menú hamburguesa está cerrado"
+pt "Logo exibida quando o menu hamburguer está fechado"
+en "Logo displayed when the hamburger menu is closed"
+es_mx "Logo mostrada cuando el menú hamburguesa está cerrado"
+
+es "Logo para menu activo"
+pt "Logo para menu ativo"
+en "Logo for active menu"
+es_mx "Logo para menú activo"
+
+es "Cargar logo para menú abierto (PNG, JPG, SVG)"
+pt "Carregar logo para menu aberto (PNG, JPG, SVG)"
+en "Upload logo for open menu (PNG, JPG, SVG)"
+es_mx "Cargar logo para menú abierto (PNG, JPG, SVG)"
+
+es "Logo mostrada cuando el menú hamburguesa está abierto"
+pt "Logo exibida quando o menu hamburguer está aberto"
+en "Logo displayed when the hamburger menu is open"
+es_mx "Logo mostrada cuando el menú hamburguesa está abierto"
+
+es "Logo para rodapé"
+pt "Logo para rodapé"
+en "Logo for footer"
+es_mx "Logo para pie de página"
+
+es "Cargar logo para rodapé (PNG, JPG, SVG)"
+pt "Carregar logo para rodapé (PNG, JPG, SVG)"
+en "Upload logo for footer (PNG, JPG, SVG)"
+es_mx "Cargar logo para pie de página (PNG, JPG, SVG)"
+
+es "Logo mostrada en el pie de página"
+pt "Logo exibida no rodapé"
+en "Logo displayed in the footer"
+es_mx "Logo mostrada en el pie de página"
 
 es "Color de fondo del encabezado"
 pt "Cor de fundo do cabeçalho"
@@ -3026,6 +3151,18 @@ en "Spaced and curved lines design"
 es_mx "Diseño con espacios y bordes curvos"
 
 --- --- Home
+
+--- --- Product Carousel ---
+Anterior
+es "Anterior"
+pt "Anterior"
+en "Previous"
+es_mx "Anterior"
+Siguiente
+es "Siguiente"
+pt "Próximo"
+en "Next"
+es_mx "Siguiente"
 
 es "Mensaje de bienvenida en la página de inicio"
 pt "Mensagem de boas vindas na página inicial"
@@ -3789,6 +3926,111 @@ es "Logo de AFIP"
 pt "Logo da AFIP"
 en "AFIP logo"
 es_mx "Logo de AFIP"
+
+es "Contato"
+pt "Contato"
+en "Contact"
+es_mx "Contacto"
+
+es "Suporte"
+pt "Suporte"
+en "Support"
+es_mx "Soporte"
+
+es "Sobre"
+pt "Sobre"
+en "About"
+es_mx "Acerca de"
+
+es "Título da coluna de suporte"
+pt "Título da coluna de suporte"
+en "Support column title"
+es_mx "Título de la columna de soporte"
+
+es "Título da coluna sobre"
+pt "Título da coluna sobre"
+en "About column title"
+es_mx "Título de la columna acerca de"
+
+es "Texto do link"
+pt "Texto do link"
+en "Link text"
+es_mx "Texto del enlace"
+
+es "URL do link"
+pt "URL do link"
+en "Link URL"
+es_mx "URL del enlace"
+
+es "Código SVG do logo (prioridade sobre imagem)"
+pt "Código SVG do logo (prioridade sobre imagem)"
+en "Logo SVG code (priority over image)"
+es_mx "Código SVG del logo (prioridad sobre imagen)"
+
+es "Logo de apoio"
+pt "Logo de apoio"
+en "Support logo"
+es_mx "Logo de apoyo"
+
+es "Columna Suporte"
+pt "Coluna Suporte"
+en "Support Column"
+es_mx "Columna Soporte"
+
+es "Columna Sobre"
+pt "Coluna Sobre"
+en "About Column"
+es_mx "Columna Acerca de"
+
+es "Titulo de la columna"
+pt "Título da coluna"
+en "Column title"
+es_mx "Título de la columna"
+
+es "Redes Sociais no Rodapé"
+pt "Redes Sociais no Rodapé"
+en "Social Networks in Footer"
+es_mx "Redes Sociales en el Pie de Página"
+
+es "Link do WhatsApp"
+pt "Link do WhatsApp"
+en "WhatsApp link"
+es_mx "Enlace de WhatsApp"
+
+es "Link do Instagram"
+pt "Link do Instagram"
+en "Instagram link"
+es_mx "Enlace de Instagram"
+
+es "Link do Facebook"
+pt "Link do Facebook"
+en "Facebook link"
+es_mx "Enlace de Facebook"
+
+es "Link do YouTube"
+pt "Link do YouTube"
+en "YouTube link"
+es_mx "Enlace de YouTube"
+
+es "Link do Pinterest"
+pt "Link do Pinterest"
+en "Pinterest link"
+es_mx "Enlace de Pinterest"
+
+es "Link do LinkedIn"
+pt "Link do LinkedIn"
+en "LinkedIn link"
+es_mx "Enlace de LinkedIn"
+
+es "Link do TikTok"
+pt "Link do TikTok"
+en "TikTok link"
+es_mx "Enlace de TikTok"
+
+es "Texto"
+pt "Texto"
+en "Text"
+es_mx "Texto"
 
 --- --- CSS
 

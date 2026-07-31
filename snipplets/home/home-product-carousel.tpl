@@ -1,0 +1,127 @@
+{# Product Carousel with Category Tabs #}
+
+{% set has_tab_1 = sections.carousel_tab_1.products is not empty %}
+{% set has_tab_2 = sections.carousel_tab_2.products is not empty %}
+{% set has_tab_3 = sections.carousel_tab_3.products is not empty %}
+{% set has_any_tab = has_tab_1 or has_tab_2 or has_tab_3 %}
+
+{% set carousel_bg_map = {
+    'none': 'transparent',
+    'primary': 'var(--primary-color)',
+    'secondary': 'var(--text-color)',
+    'background': 'var(--background-color)',
+    'accent': 'var(--accent-color)'
+} %}
+{% set carousel_bg_value = carousel_bg_map[settings.product_carousel_bg] | default('transparent') %}
+
+{% if has_any_tab %}
+<section class="js-product-carousel section-product-carousel px-4 md:px-16 py-8" data-store="home-product-carousel" style="background-color: {{ carousel_bg_value }}">
+
+    {# Header: Title + Dropdown #}
+    <div class="flex items-center gap-3 mb-6">
+        {% if settings.product_carousel_title %}
+            <h2 class="text-secondary font-heading text-[32px] font-extrabold leading-[80%]">
+                {{ settings.product_carousel_title }}
+            </h2>
+        {% endif %}
+
+        {# Category Dropdown Select #}
+        {% set tab_count = 0 %}
+        {% if has_tab_1 %}{% set tab_count = tab_count + 1 %}{% endif %}
+        {% if has_tab_2 %}{% set tab_count = tab_count + 1 %}{% endif %}
+        {% if has_tab_3 %}{% set tab_count = tab_count + 1 %}{% endif %}
+
+        {% if tab_count > 1 %}
+            <div class="js-carousel-dropdown relative">
+                {# Trigger button #}
+                <button class="js-carousel-dropdown-trigger flex h-8 items-center gap-1 [background:rgba(0,0,0,0.05)] px-3 py-1 rounded-lg text-secondary font-sans text-sm font-medium cursor-pointer" type="button" aria-expanded="false">
+                    <span class="js-carousel-dropdown-label">
+                        {% if has_tab_1 %}
+                            {{ settings.product_carousel_tab_1_label }}
+                        {% elseif has_tab_2 %}
+                            {{ settings.product_carousel_tab_2_label }}
+                        {% else %}
+                            {{ settings.product_carousel_tab_3_label }}
+                        {% endif %}
+                    </span>
+                    <i data-lucide="chevron-down" class="js-carousel-dropdown-icon w-4 h-4 text-secondary transition-transform duration-200"></i>
+                </button>
+                {# Options list #}
+                <ul class="js-carousel-dropdown-list hidden absolute top-full left-0 mt-1 min-w-full [background:rgba(255,255,246,0.7)] backdrop-blur-sm rounded-lg shadow-md overflow-hidden z-20">
+                    {% if has_tab_1 %}
+                        <li class="js-carousel-dropdown-option px-3 py-2 text-secondary font-sans text-base cursor-pointer hover:bg-black/5" data-value="tab-1" data-selected="true">
+                            {{ settings.product_carousel_tab_1_label }}
+                        </li>
+                    {% endif %}
+                    {% if has_tab_2 %}
+                        <li class="js-carousel-dropdown-option px-3 py-2 text-secondary font-sans text-base cursor-pointer hover:bg-black/5" data-value="tab-2">
+                            {{ settings.product_carousel_tab_2_label }}
+                        </li>
+                    {% endif %}
+                    {% if has_tab_3 %}
+                        <li class="js-carousel-dropdown-option px-3 py-2 text-secondary font-sans text-base cursor-pointer hover:bg-black/5" data-value="tab-3">
+                            {{ settings.product_carousel_tab_3_label }}
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    {# Carousel Containers - one per tab #}
+    {% if has_tab_1 %}
+    <div class="js-carousel-tab js-carousel-tab-1" data-tab="tab-1">
+        <div class="js-swiper-product-carousel-1 swiper-container">
+            <div class="swiper-wrapper">
+                {% for product in sections.carousel_tab_1.products %}
+                    {% include 'snipplets/grid/item-card.tpl' with { 'item_class': 'swiper-slide' } %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if has_tab_2 %}
+    <div class="js-carousel-tab js-carousel-tab-2 hidden" data-tab="tab-2">
+        <div class="js-swiper-product-carousel-2 swiper-container">
+            <div class="swiper-wrapper">
+                {% for product in sections.carousel_tab_2.products %}
+                    {% include 'snipplets/grid/item-card.tpl' with { 'item_class': 'swiper-slide' } %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if has_tab_3 %}
+    <div class="js-carousel-tab js-carousel-tab-3 hidden" data-tab="tab-3">
+        <div class="js-swiper-product-carousel-3 swiper-container">
+            <div class="swiper-wrapper">
+                {% for product in sections.carousel_tab_3.products %}
+                    {% include 'snipplets/grid/item-card.tpl' with { 'item_class': 'swiper-slide' } %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {# Controls: Seeds (pagination) left + Arrows right #}
+    <div class="js-carousel-controls flex items-center justify-between mt-4">
+        {# Seed pagination indicators #}
+        <div class="js-carousel-pagination flex items-center gap-2">
+            {# Seeds are dynamically generated by JS based on active swiper #}
+        </div>
+
+        {# Navigation arrows #}
+        <div class="flex items-center gap-2">
+            <button class="js-carousel-prev flex w-8 h-8 justify-center items-center cursor-pointer" aria-label="{{ 'Anterior' | translate }}">
+                <i data-lucide="arrow-left" class="w-5 h-5 text-secondary"></i>
+            </button>
+            <button class="js-carousel-next flex w-8 h-8 justify-center items-center cursor-pointer" aria-label="{{ 'Siguiente' | translate }}">
+                <i data-lucide="arrow-right" class="w-5 h-5 text-secondary"></i>
+            </button>
+        </div>
+    </div>
+
+</section>
+{% endif %}

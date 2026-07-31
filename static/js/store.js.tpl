@@ -146,7 +146,6 @@ DOMContentLoaded.addEventOrExecute(() => {
             {# Offset to show legal footer #}
 
             const cookieBannerHeight = jQueryNuvem(".js-notification-cookie-banner").outerHeight();
-            footer.css("paddingBottom", cookieBannerHeight + 10 + "px");
 
             {# Whatsapp button position #}
             if (window.innerWidth < 768) {
@@ -458,7 +457,7 @@ DOMContentLoaded.addEventOrExecute(() => {
                 $search_suggests.hide();
             }
         }, {
-            snipplet: 'header/header-search-results.tpl'
+            snipplet: 'header/header-search-results-new.tpl'
         });
 
         if (window.innerWidth > 768) {
@@ -852,7 +851,7 @@ DOMContentLoaded.addEventOrExecute(() => {
 
     {% set has_item_slider = settings.product_item_slider %}
 
-    {% if template == 'category' or template == 'search' %}
+    {% if template == 'search' %}
 
         {# /* // Product item slider */ #}
 
@@ -2025,6 +2024,9 @@ DOMContentLoaded.addEventOrExecute(() => {
                     if (isCrossSelling) {
                         jQueryNuvem('#js-cross-selling-modal .js-modal-close').trigger('click');
                     }
+
+                    {# Notify cart drawer of cart update #}
+                    window.onCartUpdate?.();
                 }
                 var callback_error = function(){
                     {# Restore real button visibility in case of error #}

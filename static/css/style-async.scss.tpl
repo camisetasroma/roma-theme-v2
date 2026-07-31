@@ -26,9 +26,6 @@ style.css
   #Header and nav
     // Nav
     // Search
-  #Footer
-    // Nav
-    // Newsletter
   #Home page
     // Instafeed
     // Banners
@@ -42,7 +39,6 @@ style.css
 
     // Min width 768px
       //// Components
-      //// Footer
   #Critical path utilities
 
 ==============================================================================*/#}
@@ -65,7 +61,7 @@ style.css
 
 {# /* // Mixins */ #}
 
-{# This mixin adds browser prefixes to a CSS property #}
+{# /* This mixin adds browser prefixes to a CSS property */ #}
 
 @mixin prefix($property, $value, $prefixes: ()) {
   @each $prefix in $prefixes {
@@ -410,19 +406,6 @@ textarea{
     padding: 10px 15px 10px 25px;
     font-size: 20px;
   }
-  &-footer{
-    padding: 10px 0;
-    clear: both;
-  }
-  &-with-fixed-footer {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    .modal-scrollable-area {
-      height: 100%;
-      overflow: auto;
-    }
-  }
   &-full {
     width: 100%;
   }
@@ -578,10 +561,6 @@ textarea{
 .card-header {
 	padding: 15px 15px 0 15px;
 	margin-bottom: 0;
-}
-
-.card-footer {
-	padding: 0 15px 15px 15px;
 }
 
 {# /* // Captcha */ #}
@@ -786,63 +765,6 @@ textarea{
   margin: 0 10px;
   font-size: 14px;
 }
-
-{#/*============================================================================
-  #Footer
-==============================================================================*/#}
-
-footer {
-  margin-top: 20px;
-  padding: 30px 0; 
-}
-
-{# /* // Nav */ #}
-
-.footer-menu {
-  list-style: none;
-  .footer-menu-item{
-  }
-}
-
-{# /* // Newsletter */ #}
-
-.newsletter {
-  form {
-    position: relative;
-    .newsletter-btn {
-      position: absolute;
-      top: 0;
-      right: 0px;
-      padding: 10px;
-    }
-  } 
-}
-
-.footer-payments-shipping-logos{
-  img {
-    width: auto;
-    max-height: 35px;
-    margin: 2px;
-    padding: 5px;
-    border: 1px solid #eaeaea;
-  }
-}
-
-.powered-by-text {
-  display: inline-block; }
-
-.powered-by-logo {
-  display: inline-block;
-  width: 160px;
-}
-
-.footer-logo {
-  img {
-    max-width: 100px;
-    margin: 2px;
-    padding: 5px;
-  }
-}    
    
 {#/*============================================================================
   #Home Page
@@ -1295,16 +1217,6 @@ footer {
     white-space: normal;
     .tab{
       float: left;
-    }
-  }
-
-  {# /* //// Footer */ #}
-
-  .footer-menu {
-    list-style: none;
-    .footer-menu-item{  
-      display: inline-block;
-      padding: 0 15px;
     }
   }
 }

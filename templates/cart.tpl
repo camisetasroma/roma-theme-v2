@@ -34,8 +34,9 @@
                 {% endif %}
             {% endif %}
             <div id="error-ajax-stock" style="display: none;">
-                <div class="alert alert-warning">
-                    {{ "¡Uy! No tenemos más stock de este producto para agregarlo al carrito. Si querés podés" | translate }}<a href="{{ store.products_url }}" class="btn-link ml-1">{{ "ver otros acá" | translate }}</a>
+                <div class="flex items-center gap-3 px-4 py-3 rounded-lg border border-secondary/12 bg-bg text-secondary text-sm my-3">
+                    <i data-lucide="alert-circle" class="w-5 h-5 shrink-0 opacity-60"></i>
+                    <p class="m-0">{{ "¡Uy! No tenemos más stock de este producto para agregarlo al carrito. Si querés podés" | translate }}<a href="{{ store.products_url }}" class="text-secondary underline ml-1">{{ "ver otros acá" | translate }}</a></p>
                 </div>
             </div>
             <div class="cart-row">
