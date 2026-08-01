@@ -16,10 +16,15 @@ export const menuSystem = () => {
     if (!menuMobile) return;
     isMobileMenuOpen = true;
     menuMobile.hidden = false;
-    document.body.style.overflow = "hidden";
-    window.setHeaderMenuActive?.(true);
 
-   
+    const scrollPos = window.scrollY;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+    document.body.style.top = "-" + scrollPos + "px";
+
+    window.setHeaderMenuActive?.(true);
 
     reinitIcons();
     requestAnimationFrame(initMenuCarousel);
@@ -29,7 +34,15 @@ export const menuSystem = () => {
     if (!menuMobile) return;
     isMobileMenuOpen = false;
     menuMobile.hidden = true;
+
+    const scrollY = Math.abs(parseInt(document.body.style.top || "0", 10));
     document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.width = "";
+    document.body.style.top = "";
+    window.scrollTo(0, scrollY);
+
     window.setHeaderMenuActive?.(false);
   };
 
