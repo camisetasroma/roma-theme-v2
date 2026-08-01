@@ -33,7 +33,7 @@ Roma Theme V2 is a custom Nuvemshop e-commerce storefront theme. It operates as 
 ### Template Layer
 - **`layouts/layout.tpl`**: Master layout. Controls `<head>`, script loading order, global snipplets (header, footer, quickshop, whatsapp). Contains the gaius bundle `<script>` reference.
 - **`templates/*.tpl`**: Page-level templates injected via `{% template_content %}`.
-- **`snipplets/`**: Reusable components organized by domain (header, home, navigation, grid, product, cart, shipping, forms, svg, social, etc.).
+- **`snipplets/`**: Reusable components organized by domain (header, home, navigation, grid, product, cart, shipping, forms, svg, social, etc.). `snipplets/cart/cart-drawer-progress-bars.tpl` (free shipping + progressive discount bars) is included by `cart-drawer.tpl:123` via `{% snipplet %}`.
 
 ### Configuration Layer (`config/`)
 - **`settings.txt`**: Theme customization options exposed in Nuvemshop admin. Drives template conditionals and design tokens.
@@ -89,7 +89,7 @@ Modules MUST NOT import from sibling modules. Any new `window.*` global MUST be 
 
 **A7** — The bundle filename MUST follow the pattern `gaius-v{epoch}.js` where `{epoch}` is `Date.now()` at build time. The `pre-build.js` script updates this in exactly two files: `esbuild.config.mjs` (line containing `outfile:`) and `layouts/layout.tpl` (the `script_tag` reference), using the regex `/gaius-v\d+\.js/g`. Both files MUST contain exactly one match for this regex at all times.
 
-**A8** — Theme-dependent colors MUST NEVER be hardcoded. Platform color CSS custom properties (`--background-color`, `--primary-color`, `--text-color`) are injected via `style-colors.scss.tpl`. The Tailwind `@theme` block in `app.css` MUST map these to semantic tokens: `--color-bg`, `--color-fg`, `--color-secondary`, `--color-bg-subtle`, `--color-fg-muted`. All CSS and JS MUST use either the `@theme` tokens (via Tailwind classes like `bg-bg`, `text-fg`) or the platform CSS variables directly.
+**A8** — Theme-dependent colors MUST NEVER be hardcoded. Platform color CSS custom properties (`--background-color`, `--primary-color`, `--text-color`, `--accent-color`) are injected via `style-colors.scss.tpl` (`--accent-color` from `settings.accent_color`, line 20/33). The Tailwind `@theme` block in `app.css` MUST map `--background-color`/`--primary-color`/`--text-color` to semantic tokens: `--color-bg`, `--color-fg`, `--color-secondary`, `--color-bg-subtle`, `--color-fg-muted`. `--accent-color` is NOT mapped into `@theme` — it is consumed directly as `var(--accent-color)` in templates (e.g. `home-product-grid.tpl`, `home-promo-marquee.tpl`, `home-product-carousel.tpl`, `home-faq.tpl`, `cart-drawer-progress-bars.tpl`, `checkout.scss.tpl`). All CSS and JS MUST use either the `@theme` tokens (via Tailwind classes like `bg-bg`, `text-fg`) or the platform CSS variables directly.
 
 **Permitted exceptions**: `rgba(0, 0, 0, *)` and `rgba(255, 255, 255, *)` are permitted ONLY as semi-transparent overlays for universal contrast effects (subtle surfaces, backdrop filters, scrollbar tracks). These use absolute black/white intentionally because they MUST provide consistent contrast regardless of theme colors.
 
@@ -182,7 +182,7 @@ JS MAY use `fetch()` to load server-rendered pages for pagination/infinite-scrol
 - `category-filters.js`: stateless (delegates to `window.openModal`)
 - `category-sorting.js`: stateless (state is in DOM via `hidden` and `aria-expanded`)
 - `item-card-quickbuy.js`: `currentOpen` (HTMLElement|null)
-- `cart-drawer.js`: `pendingRemovals` (number), `removeSyncTimer` (timeout|null), `badgeObserver` (MutationObserver|null)
+- `cart-drawer.js`: `pendingRemovals` (number), `removeSyncTimer` (timeout|null), `badgeObserver` (MutationObserver|null), `quantitySyncTimer` (timeout|null — debounces `refreshCart()` 2s after a `.js-cart-quantity-btn` click, so progress bars re-render with updated cart totals)
 
 No module persists state to `localStorage`, `sessionStorage`, or cookies.
 
@@ -213,7 +213,7 @@ Any new cross-module signal MUST: (1) be defined as `window.functionName = funct
 
 **T1** — All user-facing customization MUST be defined in `config/settings.txt` and accessed via `{{ settings.SETTING_NAME }}` in templates. NEVER hardcode values that the admin should be able to change (text, colors, toggle visibility, URLs, images).
 
-**T2** — Color customization flows through a strict chain: `settings.txt` (defines color pickers) → admin panel (user picks colors) → `style-colors.scss.tpl` (generates `--background-color`, `--primary-color`, `--text-color`, etc.) → `app.css` `@theme` block (maps to `--color-bg`, `--color-fg`, `--color-secondary`, `--color-bg-subtle`, `--color-fg-muted`) → Tailwind utility classes in templates (e.g., `bg-bg`, `text-fg`, `text-secondary`). Hardcoding theme-dependent hex/rgba values anywhere in the chain is FORBIDDEN. Semi-transparent overlays using `rgba(0,0,0,*)` or `rgba(255,255,255,*)` are permitted (see A8). **KNOWN BUGS** (4 hardcoded values pending fix — see A8 for full list). These are errors to be corrected, NOT acceptable patterns.
+**T2** — Color customization flows through a strict chain: `settings.txt` (defines color pickers, including `accent_color`) → admin panel (user picks colors) → `style-colors.scss.tpl` (generates `--background-color`, `--primary-color`, `--text-color`, `--accent-color`, etc.) → EITHER `app.css` `@theme` block (maps `--background-color`/`--primary-color`/`--text-color` to `--color-bg`, `--color-fg`, `--color-secondary`, `--color-bg-subtle`, `--color-fg-muted`, then to Tailwind utility classes like `bg-bg`, `text-fg`, `text-secondary`) OR direct `var(--accent-color)` usage in template inline styles (`--accent-color` has no `@theme` token equivalent — it is consumed as-is). Hardcoding theme-dependent hex/rgba values anywhere in the chain is FORBIDDEN. Semi-transparent overlays using `rgba(0,0,0,*)` or `rgba(255,255,255,*)` are permitted (see A8). **KNOWN BUGS** (4 hardcoded values pending fix — see A8 for full list). These are errors to be corrected, NOT acceptable patterns.
 
 **T3** — Font customization: `settings.font_headings` and `settings.font_rest` are loaded via Google Fonts in `layout.tpl:14,37`. The `@theme` block maps `--font-headings` → `--font-heading` and `--font-body` → `--font-sans`. **INCONSISTENCY**: The settings use `font_rest` but the CSS variable consumed in `@theme` is `--font-body` (not `--font-rest`). The mapping from `settings.font_rest` → `--font-body` CSS variable happens inside `style-colors.scss.tpl` (platform-managed). This is correct behavior but the naming mismatch (`font_rest` in settings vs `--font-body` in CSS) is a source of confusion.
 
@@ -279,7 +279,7 @@ Any new cross-module signal MUST: (1) be defined as `window.functionName = funct
 - `product-carousel.js`: `.js-product-carousel`, `.js-carousel-dropdown`, `.js-carousel-dropdown-trigger`, `.js-carousel-dropdown-label`, `.js-carousel-dropdown-list`, `.js-carousel-dropdown-icon`, `.js-carousel-dropdown-option`, `.js-carousel-tab`, `.js-carousel-pagination`, `.js-carousel-prev`, `.js-carousel-next`, `.js-carousel-controls`, `.js-carousel-seed`, `.js-swiper-product-carousel-{1,2,3}`
 - `modal.js`: `.js-gaius-modal-container`, `.js-gaius-modal-content`, `.js-gaius-modal-overlay`, `.js-gaius-modal-close`, `.js-gaius-modal-body`, `.js-gaius-modal-drawer`
 - `toast.js`: `.js-toast-container`, `.js-toast-close`
-- `cart-drawer.js`: `.js-cart-drawer`, `.js-cart-drawer-backdrop`, `.js-cart-drawer-close`, `.js-cart-drawer-panel`, `.js-cart-drawer-toggle`, `.js-cart-drawer-footer`, `.js-cart-drawer-checkout`, `.js-ajax-cart-panel`, `.js-ajax-cart-list`, `.js-cart-item`, `.js-cart-quantity-btn`, `.js-cart-quantity-input`, `.js-cart-input-spinner`, `.js-cart-item-subtotal`, `.js-cart-remove-btn`, `.js-empty-ajax-cart`, `.js-cart-widget-amount`, `.js-cart-widget-badge`, `.js-new-header` (cross-reference), `[data-item-id]`, `[data-remove-item-id]`, `[data-removing]`
+- `cart-drawer.js`: `.js-cart-drawer`, `.js-cart-drawer-backdrop`, `.js-cart-drawer-close`, `.js-cart-drawer-panel`, `.js-cart-drawer-toggle`, `.js-cart-drawer-footer`, `.js-cart-drawer-checkout`, `.js-ajax-cart-panel`, `.js-ajax-cart-list`, `.js-cart-item`, `.js-cart-quantity-btn`, `.js-cart-quantity-input`, `.js-cart-input-spinner`, `.js-cart-item-subtotal`, `.js-cart-remove-btn`, `.js-empty-ajax-cart`, `.js-cart-widget-amount`, `.js-cart-widget-badge`, `.js-cart-progress-complete` (template-conditional, set by `cart-drawer-progress-bars.tpl` when a bar reaches 100% — NOT controlled by `cart-drawer.js`, only styled/animated in CSS; listed here for cart-context completeness), `.js-new-header` (cross-reference), `[data-item-id]`, `[data-remove-item-id]`, `[data-removing]`
 - `category-dropdown.js`: `.js-category-dropdown`, `.js-category-dropdown-trigger`, `.js-category-dropdown-list`, `.js-category-dropdown-icon`
 - `category-infinite-scroll.js`: `.js-category-grid`, `.js-category-load-more`, `.js-category-load-more-btn`, `.js-category-scroll-spinner`, `[data-product-id]`, `[data-is-last]`, `[data-next-url]`
 - `category-filters.js`: `.js-category-filter-trigger`, `.js-category-filter-content`, `[data-filter-title]`
@@ -288,7 +288,7 @@ Any new cross-module signal MUST: (1) be defined as `window.functionName = funct
 
 Removing or renaming ANY `js-*` class from a template REQUIRES updating the corresponding JS module.
 
-**R4** — CSS in `app.css` targets `js-*` prefixed classes for state-driven styling. These selectors are: `.js-new-header[data-state=...]`, `.js-search-overlay[data-state=...]`, `.js-search-panel`, `.js-search-input`, `.js-menu-accordion-toggle[aria-expanded=...]`, `.js-menu-carousel-track`, `.js-menu-carousel`, `.js-menu-carousel-scrollbar`, `.js-menu-carousel-scrollbar-thumb`, `.js-toast-container [data-state=...]`, `.js-gaius-modal-container[data-state=...]`, `.js-gaius-modal-overlay`, `.js-gaius-modal-content`, `.js-gaius-modal-drawer`, `.js-gaius-modal-body`, `.js-cart-drawer[data-state=...]`, `.js-cart-drawer-backdrop`, `.js-cart-drawer-panel`, `.js-price-filter-wrapper *`, `.js-category-filter-content *`. Renaming ANY of these classes REQUIRES updating BOTH `app.css` AND the corresponding JS module AND the template that renders the element.
+**R4** — CSS in `app.css` targets `js-*` prefixed classes for state-driven styling. These selectors are: `.js-new-header[data-state=...]`, `.js-search-overlay[data-state=...]`, `.js-search-panel`, `.js-search-input`, `.js-menu-accordion-toggle[aria-expanded=...]`, `.js-menu-carousel-track`, `.js-menu-carousel`, `.js-menu-carousel-scrollbar`, `.js-menu-carousel-scrollbar-thumb`, `.js-toast-container [data-state=...]`, `.js-gaius-modal-container[data-state=...]`, `.js-gaius-modal-overlay`, `.js-gaius-modal-content`, `.js-gaius-modal-drawer`, `.js-gaius-modal-body`, `.js-cart-drawer[data-state=...]`, `.js-cart-drawer-backdrop`, `.js-cart-drawer-panel`, `.js-cart-progress-complete` (triggers `@keyframes progress-complete` one-shot animation, `app.css:431-439`; class is applied by the template, not by JS), `.js-price-filter-wrapper *`, `.js-category-filter-content *`. Renaming ANY of these classes REQUIRES updating BOTH `app.css` AND the corresponding JS module AND the template that renders the element.
 
 **R5** — The custom bundle (`gaius-v*.js`) loads AFTER `lucide.min.js` (both are sync `<script>` tags in `layout.tpl`). This is a hard dependency: `hero-banner-2-carousel.js`, `product-carousel.js`, `menu.js`, `modal.js`, `toast.js`, `cart-drawer.js`, and `category-infinite-scroll.js` all call `lucide.createIcons()`.
 
@@ -331,6 +331,7 @@ The toast and modal systems are active and functional:
 - `__src/js/modules/system/cart-drawer.js` — exports `cartDrawerSystem`, registers `window.openCartDrawer`, `window.closeCartDrawer`, `window.onCartUpdate`
 - `snipplets/notification/modal.tpl` and `snipplets/notification/toast.tpl` — exist and are included in `layout.tpl`
 - `snipplets/cart/cart-drawer.tpl` — exists and is included in `layout.tpl`
+- `snipplets/cart/cart-drawer-progress-bars.tpl` — free shipping + progressive discount progress bars, included by `cart-drawer.tpl:123`
 - Z-index tokens `--z-toast: 90` and `--z-modal: 100` in `@theme` are consumed by the modal and toast CSS in `app.css`
 
 ### RISK 2: Hardcoded Colors — BUGS Pending Fix (HIGH)
@@ -366,7 +367,7 @@ A4  — static/ = build outputs + vendored files. NEVER edit gaius-v*.js or app.
 A5  — Cross-module communication ONLY via window.* (11 globals: setHeaderMenuActive, openModal, closeModal, showToast, showProductToast, closeToast, closeAllToasts, openCartDrawer, closeCartDrawer, onCartUpdate, initQuickbuyDropdowns)
 A6  — Call lucide.createIcons() after any innerHTML with <i data-lucide="..."> markup
 A7  — Bundle filename: gaius-v{Date.now()}.js, synced by pre-build.js in esbuild.config.mjs + layout.tpl
-A8  — Theme-dependent colors NEVER hardcoded. rgba(0,0,0,*) and rgba(255,255,255,*) overlays permitted. 4 bugs pending fix
+A8  — Theme-dependent colors NEVER hardcoded. Platform vars: --background-color, --primary-color, --text-color, --accent-color. rgba(0,0,0,*) and rgba(255,255,255,*) overlays permitted. 4 bugs pending fix
 A9  — data-state pattern: header (transparent|active), search (open|closed), toast (entering|visible|exiting), modal (open|closed), cart-drawer (open|closed)
 A10 — Template includes via {% snipplet %} or {% include %}, organized by domain folder. New snipplets MUST NEVER be placed at snipplets/ root
 A11 — Home sections: router in home-section-switch.tpl, keyed by settings.home_order_position_0..12
@@ -380,7 +381,7 @@ S3  — UI state: hidden attr > data-state attr > aria-expanded > classList togg
 L5  — Custom JS: vanilla JS ONLY. Zero jQuery ($, jQueryNuvem) in __src/js/
 L6  — LS.* APIs: ONLY from store.js.tpl, template <script> blocks, or cart modules (LS.removeItem/LS.addItem only)
 R1  — No horizontal imports between sibling modules. index.js is the ONLY importer
-R3  — js-* classes = binding contract between templates and JS. Full registry in Section 8, R3
+R3  — js-* classes = binding contract between templates and JS. Full registry in Section 8, R3. Includes .js-cart-progress-complete (template-conditional, not JS-controlled)
 F4  — NEVER hardcode theme-dependent colors. rgba(0,0,0,*)/rgba(255,255,255,*) overlays permitted
 F5  — NEVER add new snipplets/svg/. Lucide is canonical. SVG snipplet only if icon missing in Lucide
 ```
