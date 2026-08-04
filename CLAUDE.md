@@ -111,31 +111,37 @@ snipplets/<domain>/     # reusable components organized by domain (header, home,
 - `defaults.txt`, `translations.txt`, `variants.txt`, `data.json` — defaults, i18n strings, theme
   variants, and compiled asset metadata respectively.
 
-## The `docs/` workflow (research → plan → implement)
+## Development workflow: spec-driven implementation
 
-This project uses a deliberate, staged workflow for non-trivial feature work, driven by three
-prompt templates and one standing contract:
+**This is the required workflow for any nontrivial feature or fix in this repo.** It replaced an
+older research-prompt.md → plan-prompt.md → implemetation-prompt.md prompt-template scheme (those
+files no longer exist) with a persistent, staged spec system:
 
 - **`docs/architecture-map.md`** — the authoritative, exhaustive architecture contract
   (invariants coded A1-A14, data-flow D1-D3, state S1-S5, library rules L1-L6, forbidden patterns
-  F1-F10). It takes priority over any feature request if they conflict. Read this file for anything
-  beyond the summary above — it is kept current and is far more detailed.
-- **`docs/research-prompt.md`** → produces `docs/researches/<feature-slug>.md`: a scoped,
-  no-code analysis of a feature request against the architecture contract (affected domains,
-  applicable invariants, risk level). No implementation planning happens here.
-- **`docs/plan-prompt.md`** → produces `docs/plans/<feature-slug>.md`: a layered, phased
-  implementation plan derived strictly from the research file. Still no code.
-- **`docs/implemetation-prompt.md`** → actually writes code, strictly within the approved plan's
-  phases, after checking the codebase for 2+ similar existing implementations to match their
-  pattern. Ends with a compliance report against the invariants.
-- **`docs/update-architecture.md`** → an audit mode that diffs the architecture contract against
+  F1-F10). It takes priority over any spec or feature request if they conflict. Read this file for
+  anything beyond the summary above — it is kept current and is far more detailed.
+- **`docs/specs/<feature-slug>/plan.md`** — a layered plan for a feature, produced through
+  conversation (not a slash command): context, affected domains/files, risk zones, and the list of
+  specs the plan is broken into. Never implemented directly.
+- **`docs/specs/<feature-slug>/NN-<name>.md`** — one small, independently implementable slice of
+  the plan, with explicit scope, acceptance criteria, applicable invariant codes, and pattern
+  references. See `docs/specs/README.md` for the exact anatomy and front-matter.
+- **`/implement-spec`** (`.claude/skills/implement-spec/SKILL.md`) — implements exactly one spec
+  file per invocation: validates against the architecture contract, matches 2+ existing similar
+  implementations, implements strictly within the declared scope, runs `npm run build` if `__src/`
+  changed, checks off acceptance criteria, updates the spec's `status`, and ends with a compliance
+  report. Never commits — that stays the `/pr` skill's job, run after manual validation in the
+  Nuvemshop preview.
+- **`docs/update-architecture.md`** — an audit mode that diffs the architecture contract against
   real implementation and writes a report to `docs/architecture-drift-reports/`, strengthening or
-  relaxing invariants as needed.
+  relaxing invariants as needed. Unrelated to the spec workflow itself.
 
-When asked to implement a nontrivial feature or fix in this repo, prefer following this
-research → plan → implement staging (checking `docs/researches/` and `docs/plans/` for
-related prior work first) rather than jumping straight to code. Feature specs in this workflow are
-typically written in Portuguese.
+Flow: plan a feature (check `docs/specs/` for related prior work first) → write `plan.md` + numbered
+specs → run `/implement-spec` once per spec, reviewing between each → once every spec is `done`,
+hand off to `/pr`. `docs/researches/` and `docs/plans/` hold history from the old workflow and are
+kept for reference only — new work goes in `docs/specs/`. Specs and plans are typically written in
+Portuguese.
 
 ## Known issues (tracked in architecture-map.md, not yet fixed)
 
