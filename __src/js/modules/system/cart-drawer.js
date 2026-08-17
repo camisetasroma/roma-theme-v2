@@ -90,6 +90,88 @@ export const cartDrawerSystem = () => {
       .then((html) => new DOMParser().parseFromString(html, "text/html"));
   };
 
+  // Sync every `.js-cart-progress-bars` instance on the page from the remote doc.
+  //
+  // The bars come from the SHARED snipplet `cart/cart-drawer-progress-bars.tpl`,
+  // rendered twice on a PDP: inside the drawer footer AND inside the sticky buy
+  // bar. Both copies are built from the same server-side cart state, so the
+  // document already fetched by `refreshCart()` carries the updated markup for
+  // every instance — no extra request and no client-side reimplementation of the
+  // promo rules (money format, translations, discount tiers) is needed.
+  //
+  // Fields are copied one by one (width / label / complete flag) instead of
+  // replacing innerHTML, so the CSS width transition actually animates and the
+  // one-shot `js-cart-progress-complete` animation only re-fires when a bar
+  // really crosses into the completed state.
+  const syncProgressBars = (doc) => {
+    const localRoots = document.querySelectorAll(".js-cart-progress-bars");
+    if (!localRoots.length) return;
+
+    // The drawer copy is the canonical one; fall back to any instance.
+    const remoteRoot =
+      doc.querySelector(".js-cart-drawer .js-cart-progress-bars") ||
+      doc.querySelector(".js-cart-progress-bars");
+
+    let injected = false;
+
+    localRoots.forEach((localRoot) => {
+      // Server stopped rendering bars entirely (settings turned off)
+      if (!remoteRoot) {
+        if (localRoot.children.length) localRoot.innerHTML = "";
+        return;
+      }
+
+      remoteRoot.querySelectorAll(".js-cart-progress-bar[data-progress-bar]").forEach((remoteBar) => {
+        const key = remoteBar.dataset.progressBar;
+        const localBar = localRoot.querySelector(".js-cart-progress-bar[data-progress-bar='" + key + "']");
+
+        // Bar exists remotely but not locally — clone the server markup as-is
+        if (!localBar) {
+          localRoot.appendChild(document.importNode(remoteBar, true));
+          injected = true;
+          return;
+        }
+
+        const remoteLabel = remoteBar.querySelector(".js-cart-progress-label");
+        const localLabel = localBar.querySelector(".js-cart-progress-label");
+        if (remoteLabel && localLabel) {
+          if (localLabel.innerHTML !== remoteLabel.innerHTML) {
+            localLabel.innerHTML = remoteLabel.innerHTML;
+          }
+          // className carries the conditional `font-medium` completed state
+          if (localLabel.className !== remoteLabel.className) {
+            localLabel.className = remoteLabel.className;
+          }
+        }
+
+        const remoteFill = remoteBar.querySelector(".js-cart-progress-fill");
+        const localFill = localBar.querySelector(".js-cart-progress-fill");
+        if (remoteFill && localFill) {
+          const width = remoteFill.style.width;
+          if (width && localFill.style.width !== width) {
+            localFill.style.width = width;
+          }
+
+          const isComplete = remoteFill.classList.contains("js-cart-progress-complete");
+          if (isComplete !== localFill.classList.contains("js-cart-progress-complete")) {
+            localFill.classList.toggle("js-cart-progress-complete", isComplete);
+          }
+        }
+      });
+
+      // Bar rendered locally but no longer server-side
+      localRoot.querySelectorAll(".js-cart-progress-bar[data-progress-bar]").forEach((localBar) => {
+        const key = localBar.dataset.progressBar;
+        if (!remoteRoot.querySelector(".js-cart-progress-bar[data-progress-bar='" + key + "']")) {
+          localBar.remove();
+        }
+      });
+    });
+
+    // Cloned bars still carry raw <i data-lucide="..."> placeholders
+    if (injected && typeof lucide !== "undefined") lucide.createIcons();
+  };
+
   // Update footer, badge, and empty state from remote doc
   const syncMeta = (doc) => {
     const remoteDrawer = doc.querySelector(".js-cart-drawer");
@@ -130,6 +212,11 @@ export const cartDrawerSystem = () => {
         localBadge.hidden = true;
       }
     }
+
+    // Runs AFTER the footer swap above (which already re-rendered the drawer's
+    // own copy) so every remaining instance — notably the PDP sticky buy bar —
+    // ends up on the same cart state.
+    syncProgressBars(doc);
 
     if (typeof lucide !== "undefined") lucide.createIcons();
   };
@@ -188,28 +275,43 @@ export const cartDrawerSystem = () => {
   };
 
   let isRefreshing = false;
+  let refreshQueued = false;
+
+  // Ends the in-flight refresh. A refresh requested while another was running
+  // (two fast add-to-cart clicks) is replayed once here, otherwise the second
+  // cart state would never reach the progress bars.
+  const endRefresh = () => {
+    isRefreshing = false;
+    if (refreshQueued) {
+      refreshQueued = false;
+      refreshCart();
+    }
+  };
 
   // Full refresh: replaces items list + meta
   const refreshCart = () => {
-    if (isRefreshing) return;
+    if (isRefreshing) {
+      refreshQueued = true;
+      return;
+    }
     isRefreshing = true;
 
     fetchPage()
       .then((doc) => {
         if (!doc) {
-          isRefreshing = false;
+          endRefresh();
           return;
         }
         const remoteDrawer = doc.querySelector(".js-cart-drawer");
         if (!remoteDrawer) {
-          isRefreshing = false;
+          endRefresh();
           return;
         }
 
         const remoteList = remoteDrawer.querySelector(".js-ajax-cart-list");
         const localList = drawer.querySelector(".js-ajax-cart-list");
         if (!remoteList || !localList) {
-          isRefreshing = false;
+          endRefresh();
           return;
         }
 
@@ -220,7 +322,7 @@ export const cartDrawerSystem = () => {
           animateRemovedItems(removedItems).then(() => {
             localList.innerHTML = remoteList.innerHTML;
             syncMeta(doc);
-            isRefreshing = false;
+            endRefresh();
 
             // Toast feedback
             if (removedItems.length === 1) {
@@ -239,11 +341,11 @@ export const cartDrawerSystem = () => {
           // No items removed — direct replacement (current behavior)
           localList.innerHTML = remoteList.innerHTML;
           syncMeta(doc);
-          isRefreshing = false;
+          endRefresh();
         }
       })
       .catch(() => {
-        isRefreshing = false;
+        endRefresh();
       });
   };
 
@@ -339,17 +441,32 @@ export const cartDrawerSystem = () => {
     }, 450);
   });
 
-  // Refresh progress bars after quantity +/- clicks inside drawer.
-  // Listens on the drawer for clicks on .js-cart-quantity-btn, then waits
-  // for the platform AJAX to finish before refreshing.
+  // Refresh progress bars after quantity changes inside drawer.
+  // Waits for the platform AJAX (LS.plusQuantity/LS.minusQuantity/LS.changeQuantity)
+  // to finish before refetching the page.
   let quantitySyncTimer = null;
-  drawer.addEventListener("click", (e) => {
-    if (!e.target.closest(".js-cart-quantity-btn")) return;
+
+  const scheduleQuantitySync = () => {
     if (pendingRemovals > 0) return;
     clearTimeout(quantitySyncTimer);
     quantitySyncTimer = setTimeout(() => {
       refreshCart();
     }, 2000);
+  };
+
+  // +/- buttons (inline onclick → LS.plusQuantity/LS.minusQuantity)
+  drawer.addEventListener("click", (e) => {
+    if (!e.target.closest(".js-cart-quantity-btn")) return;
+    scheduleQuantitySync();
+  });
+
+  // Typed quantity: store.js.tpl binds "focusout" on .js-cart-quantity-input and
+  // fires LS.changeQuantity. Value 0 is skipped on purpose — that path opens the
+  // platform's delete confirm and is handled by the removal flow instead.
+  drawer.addEventListener("focusout", (e) => {
+    const input = e.target.closest && e.target.closest(".js-cart-quantity-input");
+    if (!input) return;
+    if (parseInt(input.value, 10) > 0) scheduleQuantitySync();
   });
 
   // Observe platform updates to desktop badge and mirror to mobile badge

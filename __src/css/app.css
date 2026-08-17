@@ -9,6 +9,15 @@
   /* Shades derivadas das cores principais */
   --color-bg-subtle: color-mix(in srgb, var(--background-color) 95%, var(--primary-color) 5%);
   --color-fg-muted: color-mix(in srgb, var(--primary-color) 60%, var(--background-color) 40%);
+
+  /* Preenchimento padrão dos controles pequenos da PDP (pills de variante,
+     stepper de quantidade, input/botão de frete). No Figma é rgba(0,0,0,0.05);
+     aqui derivamos da cor de texto do tema para não hardcodar cor. */
+  --color-control: color-mix(in srgb, var(--text-color) 5%, transparent);
+
+  /* Verde "limão" do design system — destaque de parcelamento/pix.
+     Constante de marca do Figma, não vem das configurações do admin. */
+  --color-highlight: #2dcc57;
   
   /* ===== TYPOGRAPHY ===== */
   /* Font Families */
@@ -435,4 +444,72 @@
 
 .js-cart-progress-complete {
   animation: progress-complete 1.5s ease-in-out 1;
+}
+
+/* ===== PRODUCT GALLERY ZOOM STYLES ===== */
+
+.js-product-gallery-zoom[data-state="closed"] {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.js-product-gallery-zoom[data-state="open"] {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.js-product-gallery-zoom-backdrop {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.js-product-gallery-zoom-content {
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.js-product-gallery-zoom[data-state="closed"] .js-product-gallery-zoom-content {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.js-product-gallery-zoom[data-state="open"] .js-product-gallery-zoom-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.js-product-gallery-zoom-swiper .swiper-slide {
+  height: 100%;
+}
+
+/* ===== PRODUCT STICKY BUY BAR STYLES ===== */
+
+.js-product-sticky-buy-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-40);
+  background-color: color-mix(in srgb, var(--background-color) 85%, transparent);
+  backdrop-filter: blur(0.75rem);
+  -webkit-backdrop-filter: blur(0.75rem);
+}
+
+@media (min-width: 1024px) {
+  .js-product-sticky-buy-bar {
+    position: static;
+    z-index: auto;
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* ===== PRODUCT VARIANTS STYLES ===== */
+
+.js-product-variant-swatch[data-selected="true"] {
+  outline: 2px solid var(--text-color);
+  outline-offset: 2px;
 }

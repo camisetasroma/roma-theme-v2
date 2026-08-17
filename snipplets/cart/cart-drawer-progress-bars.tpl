@@ -1,3 +1,18 @@
+{# Barras de progresso promocionais (frete grátis + desconto progressivo).
+
+   Snipplet COMPARTILHADO: é renderizado dentro do rodapé do cart drawer
+   (`cart-drawer.tpl`) e também dentro da sticky buy bar da PDP
+   (`product-sticky-buy-bar.tpl`). Os dois blocos saem do mesmo estado de
+   carrinho no servidor, então o HTML das duas cópias é sempre idêntico.
+
+   `.js-cart-progress-bars` é a âncora de sincronização usada por
+   `cart-drawer.js` (`syncProgressBars`) para atualizar TODAS as instâncias da
+   página depois de adicionar/remover item ou mudar quantidade, sem reload.
+   A classe `contents` (display: contents) tira o wrapper do fluxo de layout,
+   para que os dois contextos (rodapé em bloco e coluna flex da PDP) continuem
+   renderizando exatamente como antes de existir o wrapper. #}
+<div class="js-cart-progress-bars contents">
+
 {# Progress bar: Free Shipping #}
 {% if settings.cart_free_shipping_bar and cart.free_shipping.min_price_free_shipping.min_price_raw %}
   {% set fs_min = cart.free_shipping.min_price_free_shipping.min_price_raw %}
@@ -15,17 +30,13 @@
     {% set fs_remaining = fs_min - fs_subtotal %}
   {% endif %}
 
-  <div class="flex flex-col gap-1 mb-3">
+  <div class="js-cart-progress-bar flex flex-col gap-1 mb-3" data-progress-bar="free-shipping">
     <div class="flex justify-between items-center text-xs text-secondary">
-      {% if fs_completed %}
-        <span class="font-medium">{{ "¡Tenés envío gratis!" | translate }}</span>
-      {% else %}
-        <span>{{ "Faltam {1} para frete grátis" | translate(fs_remaining | money) }}</span>
-      {% endif %}
+      <span class="js-cart-progress-label{% if fs_completed %} font-medium{% endif %}">{% if fs_completed %}{{ "¡Tenés envío gratis!" | translate }}{% else %}{{ "Faltam {1} para frete grátis" | translate(fs_remaining | money) }}{% endif %}</span>
       <i data-lucide="truck" class="w-3.5 h-3.5 opacity-60"></i>
     </div>
     <div class="h-1.5 rounded-full bg-secondary/10 overflow-hidden">
-      <div class="h-full rounded-full transition-all duration-300 {% if fs_completed %}js-cart-progress-complete{% endif %}" style="width: {{ fs_progress }}%; background-color: var(--accent-color)"></div>
+      <div class="js-cart-progress-fill h-full rounded-full transition-all duration-300 {% if fs_completed %}js-cart-progress-complete{% endif %}" style="width: {{ fs_progress }}%; background-color: var(--accent-color)"></div>
     </div>
   </div>
 {% endif %}
@@ -85,17 +96,15 @@
     {% set remaining_items = target_qty - total_items %}
   {% endif %}
 
-  <div class="flex flex-col gap-1 mb-3">
+  <div class="js-cart-progress-bar flex flex-col gap-1 mb-3" data-progress-bar="discount">
     <div class="flex justify-between items-center text-xs text-secondary">
-      {% if discount_completed %}
-        <span class="font-medium">{{ "¡Conseguiste {1}% Off!" | translate(achieved_pct) }}</span>
-      {% else %}
-        <span>{{ "Faltam {1} itens para {2}% Off" | translate(remaining_items, target_pct) }}</span>
-      {% endif %}
+      <span class="js-cart-progress-label{% if discount_completed %} font-medium{% endif %}">{% if discount_completed %}{{ "¡Conseguiste {1}% Off!" | translate(achieved_pct) }}{% else %}{{ "Faltam {1} itens para {2}% Off" | translate(remaining_items, target_pct) }}{% endif %}</span>
       <i data-lucide="tag" class="w-3.5 h-3.5 opacity-60"></i>
     </div>
     <div class="h-1.5 rounded-full bg-secondary/10 overflow-hidden">
-      <div class="h-full rounded-full transition-all duration-300 {% if discount_completed %}js-cart-progress-complete{% endif %}" style="width: {{ discount_progress }}%; background-color: var(--accent-color)"></div>
+      <div class="js-cart-progress-fill h-full rounded-full transition-all duration-300 {% if discount_completed %}js-cart-progress-complete{% endif %}" style="width: {{ discount_progress }}%; background-color: var(--accent-color)"></div>
     </div>
   </div>
 {% endif %}
+
+</div>
