@@ -21,10 +21,12 @@
     "watch:js": "node esbuild.config.mjs --watch",
     "build:js": "node pre-build.js && node esbuild.config.mjs",
     "dev": "concurrently \"npm run watch:css\" \"npm run watch:js\"",
-    "build": "npm run build:css && npm run build:js"
+    "build": "npm run build:css && npm run build:js",
+    "ftp:deploy": "node --env-file=.env scripts/ftp-deploy.mjs"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.18",
+    "basic-ftp": "^6.2.0",
     "concurrently": "^9.2.1",
     "esbuild": "0.27.2",
     "tailwindcss": "^4.1.18"

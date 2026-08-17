@@ -851,10 +851,15 @@ pt "ou mais"
 en "or more"
 es_mx "o más"
 
+es "Cantidad máxima disponible"
+pt "Quantidade máxima disponível"
+en "Maximum available quantity"
+es_mx "Cantidad máxima disponible"
+
 --- --- CTA
 
 es "Agregar al carrito"
-pt "Comprar"
+pt "Adicionar ao carrinho"
 en "Add to cart"
 es_mx "Agregar al carrito"
 

@@ -33,3 +33,16 @@ import { productCarousel } from "./modules/home/product-carousel";
 
 productCarousel();
 heroBanner2Carousel();
+
+//Product
+import { productGallery } from "./modules/product/product-gallery";
+import { productGalleryZoom } from "./modules/product/product-gallery-zoom";
+import { productVariants } from "./modules/product/product-variants";
+import { productAddToCart } from "./modules/product/product-add-to-cart";
+import { productAccordion } from "./modules/product/product-accordion";
+
+productGallery();
+productGalleryZoom();
+productVariants();
+productAddToCart();
+productAccordion();

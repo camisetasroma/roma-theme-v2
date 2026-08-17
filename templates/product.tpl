@@ -1,11 +1,11 @@
 {# Payments details #}
 <div id="single-product" class="js-has-new-shipping js-product-detail js-product-container js-shipping-calculator-container" data-variants="{{product.variants_object | json_encode }}" data-store="product-detail">
-    <div class="container">
-        <div class="row section-single-product">
-            <div class="col-12 col-md-7 px-0 px-md-3" data-store="product-image-{{ product.id }}">
+    <div class="px-4 md:px-16 lg:px-0 lg:max-w-[1440px] lg:mx-auto">
+        <div class="flex flex-col lg:flex-row lg:items-start">
+            <div class="w-full lg:w-[876px]" data-store="product-image-{{ product.id }}">
             	{% include 'snipplets/product/product-image.tpl' %}
             </div>
-            <div class="col" data-store="product-info-{{ product.id }}">
+            <div class="w-full lg:w-[564px]" data-store="product-info-{{ product.id }}">
             	{% include 'snipplets/product/product-form.tpl' %}
             </div>
         </div>
@@ -13,7 +13,7 @@
             <div class="fb-comments section-fb-comments" data-href="{{ product.social_url }}" data-num-posts="5" data-width="100%"></div>
         {% endif %}
         <div id="reviewsapp"></div>
-    </div>  
+    </div>
 </div>
 
 {# Related products #}
