@@ -226,7 +226,18 @@ paddings de página).
    não é tocado por esta feature.
 10. **10-cleanup-e-arquitetura** — remoção de resíduos Bootstrap/Fancybox,
     atualização de `docs/architecture-map.md`. Não depende mais da spec 09
-    e não audita `product-related.tpl` (fora de escopo).
+    e não audita `product-related.tpl` (fora de escopo). Passa a depender
+    também das specs 11 e 12.
+11. **11-barra-de-compra-mobile** — reimplementa a barra fixa de compra do
+    mobile fiel ao Figma `addCartContainer` (node `52:1686`, 116px: botão
+    auto-width à direita do preço, badges como texto verde-limão inline,
+    progresso compacto) e corrige a cor do botão para `bg-secondary`, a
+    mesma do checkout do cart drawer. Surgiu da validação da spec 07 no
+    preview: desktop aprovado, mobile com ~250px de barra fixa por ter
+    desviado do desenho.
+12. **12-fundo-da-pagina** — a PDP passa a renderizar sobre
+    `--background-color` (token `bg-bg`) em vez do branco padrão do
+    navegador, como a categoria já faz. Pedido do usuário na validação.
 
 Cada spec é implementada e validada individualmente via `/implement-spec`,
 na ordem acima (respeitando `depends_on` de cada uma).

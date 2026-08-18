@@ -1,17 +1,16 @@
 ---
 feature: pagina-de-produto
 spec: 07-barra-fixa-de-compra
-status: pending
+status: done
 depends_on: ["01-fundacao-layout-e-preco", "04-selecao-de-variantes", "05-quantidade"]
 ---
 
-<!-- Implementação completa e `npm run build` ok. Status segue "pending"
-(mesmo motivo das specs 02/03/04): falta validar no preview real da
-Nuvemshop (encaixe pixel-a-pixel do backdrop-blur/posicionamento
-responsivo, fetch de add-to-cart de fato adicionando o item, toast +
-cart-drawer atualizando, badges de parcelamento/pix com dados reais de
-produto, estados contact/catalog/nostock). Marcar "done" após essa
-validação manual. -->
+<!-- Validado no preview real da Nuvemshop em 2026-08-18: aprovado no
+desktop (bloco em fluxo na coluna direita). No mobile, a barra fixa ficou
+alta demais — as duas barras de progresso promocionais comem muito
+viewport. Isso NÃO reabre esta spec: os critérios de aceite aqui foram
+cumpridos, e o redesenho da versão mobile é tratado na spec
+`11-barra-de-compra-mobile`. -->
 
 ## Objetivo
 
