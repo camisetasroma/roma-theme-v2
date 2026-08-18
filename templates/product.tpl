@@ -1,3 +1,10 @@
+{# The page paints its own background: `body` sets no background-color anywhere
+   in the theme (style-critical.tpl only sets margin/font-size), so without this
+   wrapper the PDP falls back to the browser white instead of the theme's
+   --background-color. Wraps the related-products section too, so no white strip
+   is left below #single-product. #}
+<div class="bg-bg">
+
 {# Payments details #}
 <div id="single-product" class="js-has-new-shipping js-product-detail js-product-container js-shipping-calculator-container" data-variants="{{product.variants_object | json_encode }}" data-store="product-detail">
     <div class="px-4 md:px-16 lg:px-0 lg:max-w-[1440px] lg:mx-auto">
@@ -18,3 +25,5 @@
 
 {# Related products #}
 {% include 'snipplets/product/product-related.tpl' %}
+
+</div>
