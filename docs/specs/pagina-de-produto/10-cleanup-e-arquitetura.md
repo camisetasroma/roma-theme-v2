@@ -11,6 +11,8 @@ depends_on:
     "06-calculadora-de-frete",
     "07-barra-fixa-de-compra",
     "08-accordions",
+    "11-barra-de-compra-mobile",
+    "12-fundo-da-pagina",
   ]
 ---
 

@@ -1,16 +1,15 @@
 ---
 feature: pagina-de-produto
 spec: 03-modal-zoom-fotos
-status: pending
+status: done
 depends_on: ["02-galeria-de-fotos"]
 ---
 
-<!-- Implementação completa e npm run build ok. Status segue "pending" (não
-"done") pelo mesmo motivo da spec 02: falta validar visualmente no preview
-real da Nuvemshop (abertura do overlay, swipe entre fotos, fechamento por
-Esc/botão/scroll lock, e confirmar que o vídeo do produto ainda abre via
-Fancybox depois da remoção de data-fancybox das fotos). Marcar "done" após
-essa validação manual. -->
+<!-- Validado parcialmente no preview real: a validação visual do overlay
+ficou inconclusiva, mas por decisão do usuário (2026-08-18) a spec foi
+aceita como "done" para não travar o avanço da feature. Se aparecer
+problema no zoom em produção, tratar como bug novo, não reabrindo esta
+spec. -->
 
 ## Objetivo
 

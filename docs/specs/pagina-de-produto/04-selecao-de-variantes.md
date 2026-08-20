@@ -1,16 +1,13 @@
 ---
 feature: pagina-de-produto
 spec: 04-selecao-de-variantes
-status: pending
+status: done
 depends_on: ["01-fundacao-layout-e-preco", "02-galeria-de-fotos"]
 ---
 
-<!-- Implementação completa e npm run build ok. Status segue "pending" (não
-"done") pelo mesmo motivo das specs 02/03: falta validar visualmente no
-preview real da Nuvemshop (encaixe pixel-a-pixel das pills/swatches com o
-Figma "SizeOptions"/"TextButton", comportamento de clique/seleção, troca de
-foto ao trocar de variante numa foto real). Marcar "done" após essa
-validação manual. -->
+<!-- Validado no preview real da Nuvemshop em 2026-08-18: seleção de
+variantes funcionando (clique/seleção, troca de foto, add-to-cart com a
+variante correta). -->
 
 ## Objetivo
 
